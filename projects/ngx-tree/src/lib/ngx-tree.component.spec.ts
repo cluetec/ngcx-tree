@@ -8,8 +8,8 @@ describe('NgxTreeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NgxTreeComponent ]
-    })
+    imports: [NgxTreeComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(NgxTreeComponent);

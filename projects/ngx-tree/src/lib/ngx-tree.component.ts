@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'lib-ngx-tree',
-  template: `
+    selector: 'lib-ngx-tree',
+    template: `
     <p>
       ngx-tree works!
     </p>
   `,
-  styles: [
-  ]
+    styles: [],
+    standalone: true
 })
 export class NgxTreeComponent {
 
