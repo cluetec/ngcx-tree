@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
-    selector: 'lib-ngx-tree',
+    selector: 'ngx-tree-root',
     template: `
     <p>
       ngx-tree works!
     </p>
   `,
     styles: [],
-    standalone: true
+    standalone: true,
+    imports: [CdkDrag]
 })
 export class NgxTreeComponent {
 
