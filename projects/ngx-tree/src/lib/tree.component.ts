@@ -7,6 +7,7 @@ import {
   MatTreeFlattener,
 } from '@angular/material/tree';
 import { Observable, of } from 'rxjs';
+import { mockTreeNodes } from './util/mock-tree-nodes';
 import { TreeConfig, TreeFlatNode, TreeNode } from './util/models';
 
 @Component({
@@ -16,7 +17,7 @@ import { TreeConfig, TreeFlatNode, TreeNode } from './util/models';
   imports: [CdkTreeModule, DragDropModule],
 })
 export class NgxTreeComponent {
-  @Input() nodes = signal<TreeNode[]>([]);
+  @Input() nodes = signal<TreeNode[]>(mockTreeNodes);
   effect() {
     this.rebuildTreeForData(this.nodes);
   }
