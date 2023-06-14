@@ -1,0 +1,38 @@
+<cdk-tree
+  cdkDropList
+  [dataSource]="dataSource"
+  [treeControl]="treeControl"
+  (cdkDropListDropped)="handleDrop($event)"
+  (cdkDropListDisabled)="(this.isDisabled)">
+  <cdk-tree-node
+    *cdkNodeDef="let node"
+    cdkDrag
+    cdkTreeNodeToggle
+    cdkTreeNodePadding
+    [cdkDragData]="node"
+    (mouseenter)="dragHover(node)"
+    (mouseleave)="dragHoverEnd()"
+    (cdkDragStarted)="dragging.set(true)"
+    (cdkDragReleased)="dragging.set(false)">
+    <button mat-icon-button disabled></button>
+    {{ node.filename }} : {{ node.type }}
+  </cdk-tree-node>
+
+  <cdk-tree-node
+    *cdkNodeDef="let node; when: hasChild"
+    cdkDrag
+    cdkTreeNodePadding
+    [cdkDragData]="node"
+    (mouseenter)="dragHover(node)"
+    (mouseleave)="dragHoverEnd()"
+    (cdkDragStarted)="dragging.set(true)"
+    (cdkDragReleased)="dragging.set(false)">
+    <button
+      cdkTreeNodeToggle
+      (click)="expansionModel.toggle(node.id)"
+      [attr.aria-label]="'Toggle ' + node.title">
+      {{ treeControl.isExpanded(node) ? 'v' : '>' }}
+    </button>
+    {{ node.title }} {{ node.description }}
+  </cdk-tree-node>
+</cdk-tree>

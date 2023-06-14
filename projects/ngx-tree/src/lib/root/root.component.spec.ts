@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxTreeComponent } from './ngx-tree.component';
+import { NgxTreeComponent } from './root.component';
 
 describe('NgxTreeComponent', () => {
   let component: NgxTreeComponent;
@@ -8,9 +8,8 @@ describe('NgxTreeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [NgxTreeComponent]
-})
-    .compileComponents();
+      imports: [NgxTreeComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NgxTreeComponent);
     component = fixture.componentInstance;
