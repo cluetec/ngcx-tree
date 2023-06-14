@@ -1,27 +1,72 @@
-# ngx-tree
+# @cluetec/ngx-tree
 
-A reusable tree component for Angular based on the Angular CDK.
+A reusable tree component for Angular based on the
+[Stackblitz example](https://stackblitz.com/edit/mat-tree-with-drag-and-drop) by
+[Jamie Perkins](https://stackblitz.com/@inorganik), using the Angular CDK Tree
+with Drag and Drop functionality. <br><br>
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Install the library: <br>`npm install @cluetec/ngx-tree` <br>
 
-## Code scaffolding
+2. Import the component. Since it is standalone, either add it directly to
+   another standlone component or import it into your existing `NgModule`:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+import { NgxTreeComponent } from '@cluetec/ngx-tree';
 
-## Build
+@Component({
+  standalone: true,
+  imports: [NgxTreeComponent],
+})
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+import { NgxTreeComponent } from '@cluetec/ngx-tree';
 
-## Running unit tests
+@NgModule({
+  declarations: [AppComponent],
+  imports: [NgxTreeComponent],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<br><br>
 
-## Running end-to-end tests
+## Config
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The component includes a model called `TreeConfig` with some basic settings.
 
-## Further help
+- `nodePadding` (default: 40, in px): The amount of left padding on each nested
+  node (the data is displayed as a flat tree).<br><br>
+- `expandDelay` (default: 1000, in ms): time before a given node expands<br><br>
+- `allowDepthChange` (default: false, boolean): whether a user can change the
+  depth of a given tree node, i.e. move between levels 1 and 2 instead of only
+  within the same level.<br><br>
+- `enableDragging` (default: true, boolean): whether a user is allowed to drag
+  and change node positions. Enabled by default, but the tree can be used as a
+  static display of data instead.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<br>
+If the user attempts to change the depth of a node, a attemptedDepthChange event is emitted as a boolean.
+
+<br><br>
+
+## Data
+
+If no data is passed to the component, it will simply display some mock data.
+Data is provided to the tree in the following format:
+
+| Property    | Type       | required              |
+| ----------- | ---------- | --------------------- |
+| id          | string     | yes                   |
+| title       | string     | yes                   |
+| description | string     | no                    |
+| children    | TreeNode[] | yes, but can be empty |
+
+<br><br>
+
+## Contributions
+
+Contributions and improvement suggestions are always welcome!
