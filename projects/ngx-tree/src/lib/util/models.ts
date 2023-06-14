@@ -1,3 +1,10 @@
+export interface TreeConfig {
+  nodePadding: number;
+  expandDelay: number;
+  allowDepthChange: boolean;
+  enableDragging: boolean;
+}
+
 export interface TreeNode {
   id: string;
   title: string;

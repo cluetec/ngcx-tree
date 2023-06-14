@@ -1,6 +1,6 @@
 {
   "name": "ngx-tree",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -29,6 +29,7 @@
     "@angular-eslint/template-parser": "^16.0.1",
     "@angular/cli": "~16.1.0",
     "@angular/compiler-cli": "^16.1.0",
+    "@types/jest": "^29.5.2",
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "jest": "^29.5.0",

@@ -7,7 +7,7 @@ import {
   MatTreeFlattener,
 } from '@angular/material/tree';
 import { Observable, of } from 'rxjs';
-import { TreeFlatNode, TreeNode } from './util/models';
+import { TreeConfig, TreeFlatNode, TreeNode } from './util/models';
 
 @Component({
   selector: 'ngx-tree',
@@ -21,9 +21,12 @@ export class NgxTreeComponent {
     this.rebuildTreeForData(this.nodes);
   }
 
-  @Input() isDisabled: boolean = false;
-  @Input() allowDepthChange: boolean = true;
-  @Input() expandDelay: number = 1000;
+  @Input() treeConfig: TreeConfig = {
+    nodePadding: 40,
+    expandDelay: 1000,
+    allowDepthChange: false,
+    enableDragging: true,
+  };
 
   @Output() attemptedDepthChange = new EventEmitter<boolean>();
 
@@ -71,7 +74,7 @@ export class NgxTreeComponent {
   hasChild = (_: number, _nodeData: TreeFlatNode) => _nodeData.expandable;
 
   validateDepthChange(event: any): void {
-    this.allowDepthChange = !event.checked;
+    this.treeConfig.allowDepthChange = !event.checked;
   }
 
   visibleNodes(): TreeNode[] {
@@ -126,7 +129,10 @@ export class NgxTreeComponent {
     const nodeAtDestFlatNode = this.treeControl.dataNodes.find(
       (n: { id: string }) => nodeAtDest.id === n.id
     );
-    if (this.allowDepthChange && nodeAtDestFlatNode!.level !== node.level) {
+    if (
+      this.treeConfig.allowDepthChange &&
+      nodeAtDestFlatNode!.level !== node.level
+    ) {
       this.attemptedDepthChange.emit(true);
       return;
     }
@@ -140,7 +146,7 @@ export class NgxTreeComponent {
       clearTimeout(this.expandTimeout);
       this.expandTimeout = setTimeout(() => {
         this.treeControl.expand(node);
-      }, this.expandDelay);
+      }, this.treeConfig.expandDelay);
     }
   }
 

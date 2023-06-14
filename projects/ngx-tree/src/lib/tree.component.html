@@ -3,25 +3,25 @@
   [dataSource]="dataSource"
   [treeControl]="treeControl"
   (cdkDropListDropped)="handleDrop($event)"
-  (cdkDropListDisabled)="(this.isDisabled)">
+  (cdkDropListDisabled)="(this.treeConfig.enableDragging)">
   <cdk-tree-node
-    *cdkNodeDef="let node"
+    *cdkTreeNodeDef="let node"
     cdkDrag
     cdkTreeNodeToggle
-    cdkTreeNodePadding
+    (cdkTreeNodePadding)="(this.treeConfig.nodePadding)"
     [cdkDragData]="node"
     (mouseenter)="dragHover(node)"
     (mouseleave)="dragHoverEnd()"
     (cdkDragStarted)="dragging.set(true)"
     (cdkDragReleased)="dragging.set(false)">
-    <button mat-icon-button disabled></button>
+    <button></button>
     {{ node.filename }} : {{ node.type }}
   </cdk-tree-node>
 
   <cdk-tree-node
-    *cdkNodeDef="let node; when: hasChild"
+    *cdkTreeNodeDef="let node; when: hasChild"
     cdkDrag
-    cdkTreeNodePadding
+    (cdkTreeNodePadding)="(this.treeConfig.nodePadding)"
     [cdkDragData]="node"
     (mouseenter)="dragHover(node)"
     (mouseleave)="dragHoverEnd()"
@@ -33,6 +33,6 @@
       [attr.aria-label]="'Toggle ' + node.title">
       {{ treeControl.isExpanded(node) ? 'v' : '>' }}
     </button>
-    {{ node.title }} {{ node.description }}
+    {{ node.title }} {{ node.description ?? '' }}
   </cdk-tree-node>
 </cdk-tree>

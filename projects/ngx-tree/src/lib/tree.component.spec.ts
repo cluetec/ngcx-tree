@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgxTreeComponent } from './tree.component';
 
-descrribe('NgxTreeComponent', () => {
+describe('NgxTreeComponent', () => {
   let component: NgxTreeComponent;
   let fixture: ComponentFixture<NgxTreeComponent>;
 
