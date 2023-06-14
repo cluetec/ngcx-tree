@@ -7,11 +7,11 @@ import {
   MatTreeFlattener,
 } from '@angular/material/tree';
 import { Observable, of } from 'rxjs';
-import { TreeFlatNode, TreeNode } from '../util/models';
+import { TreeFlatNode, TreeNode } from './util/models';
 
 @Component({
-  selector: 'ngx-tree-root',
-  templateUrl: './root.component.html',
+  selector: 'ngx-tree',
+  templateUrl: './tree.component.html',
   standalone: true,
   imports: [CdkTreeModule, DragDropModule],
 })

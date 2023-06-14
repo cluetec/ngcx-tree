@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxTreeComponent } from './root.component';
+import { NgxTreeComponent } from './tree.component';
 
-describe('NgxTreeComponent', () => {
+descrribe('NgxTreeComponent', () => {
   let component: NgxTreeComponent;
   let fixture: ComponentFixture<NgxTreeComponent>;
 
