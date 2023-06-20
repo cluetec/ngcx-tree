@@ -1,0 +1,12 @@
+.ngx-tree {
+  background: #068fff;
+
+  :first-child {
+    margin: 0 0 0 0.5rem;
+  }
+
+  .ngx-tree-node {
+    display: block;
+    margin: 0.5rem 0;
+  }
+}

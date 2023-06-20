@@ -1,10 +1,12 @@
 <cdk-tree
+  class="ngx-tree"
   cdkDropList
   [dataSource]="dataSource"
   [treeControl]="treeControl"
   (cdkDropListDropped)="handleDrop($event)"
   (cdkDropListDisabled)="(this.treeConfig.enableDragging)">
   <cdk-tree-node
+    class="ngx-tree-node"
     *cdkTreeNodeDef="let node"
     cdkDrag
     cdkTreeNodeToggle
@@ -14,11 +16,11 @@
     (mouseleave)="dragHoverEnd()"
     (cdkDragStarted)="dragging.set(true)"
     (cdkDragReleased)="dragging.set(false)">
-    <button></button>
     {{ node.filename }} : {{ node.type }}
   </cdk-tree-node>
 
   <cdk-tree-node
+    class="ngx-tree-node"
     *cdkTreeNodeDef="let node; when: hasChild"
     cdkDrag
     (cdkTreeNodePadding)="(this.treeConfig.nodePadding)"

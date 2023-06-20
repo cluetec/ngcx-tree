@@ -13,13 +13,14 @@ import { TreeConfig, TreeFlatNode, TreeNode } from './util/models';
 @Component({
   selector: 'ngx-tree',
   templateUrl: './tree.component.html',
+  styleUrls: ['./tree.component.scss'],
   standalone: true,
   imports: [CdkTreeModule, DragDropModule],
 })
 export class NgxTreeComponent {
   @Input() nodes = signal<TreeNode[]>(mockTreeNodes);
-  effect() {
-    this.rebuildTreeForData(this.nodes);
+  rebuildOnChange() {
+    this.rebuildTreeForData(this.nodes());
   }
 
   @Input() treeConfig: TreeConfig = {
@@ -56,6 +57,11 @@ export class NgxTreeComponent {
       this.treeControl,
       this.treeFlattener
     );
+
+    this.dataSource.data = this.nodes();
+
+    console.log(this.nodes());
+    console.log(this.dataSource);
   }
 
   transformer = (node: TreeNode, level: number): TreeFlatNode => {
