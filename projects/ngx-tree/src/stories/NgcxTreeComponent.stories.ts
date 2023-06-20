@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { CommonModule } from '@angular/common';
 import type { Meta, StoryObj } from '@storybook/angular';
@@ -13,7 +14,7 @@ const meta: Meta<NgcxTreeComponent> = {
   },
   decorators: [
     moduleMetadata({
-      imports: [CommonModule, NgcxTreeComponent, CdkTreeModule],
+      imports: [CommonModule, NgcxTreeComponent, CdkTreeModule, DragDropModule],
     }),
   ],
 };
