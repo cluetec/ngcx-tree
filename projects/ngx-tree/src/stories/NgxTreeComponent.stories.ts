@@ -3,9 +3,7 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { CommonModule } from '@angular/common';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-
-import { NgxTreeComponent } from 'ngx-tree';
-import { NgcxTreeComponent } from '../lib/ngcx-tree/ngcx-tree.component';
+import { NgxTreeComponent } from '../lib/tree.component';
 
 const meta: Meta<NgxTreeComponent> = {
   title: 'Example/NgxTreeComponent',
@@ -16,7 +14,7 @@ const meta: Meta<NgxTreeComponent> = {
   },
   decorators: [
     moduleMetadata({
-      imports: [CommonModule, NgcxTreeComponent, CdkTreeModule, DragDropModule],
+      imports: [CommonModule, NgxTreeComponent, CdkTreeModule, DragDropModule],
     }),
   ],
 };
