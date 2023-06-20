@@ -21,14 +21,16 @@
     class="example-tree-node">
     <div class="container-node">
       <div cdkDropList class="container-drop" [class.hide]="!dragging"></div>
-      <div>
-        <button
-          mat-icon-button
-          [attr.aria-label]="'Toggle ' + node.name"
-          cdkTreeNodeToggle>
-          -
-        </button>
-        {{ node.name }}
+      <div cdkDropList>
+        <div cdkDrag>
+          <button
+            mat-icon-button
+            [attr.aria-label]="'Toggle ' + node.name"
+            cdkTreeNodeToggle>
+            -
+          </button>
+          {{ node.name }}
+        </div>
       </div>
     </div>
     <div [class.example-tree-invisible]="!treeControl.isExpanded(node)">
