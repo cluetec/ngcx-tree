@@ -5,36 +5,51 @@
   [treeControl]="treeControl"
   (cdkDropListDropped)="handleDrop($event)"
   (cdkDropListDisabled)="(this.treeConfig.enableDragging)">
+  <div class="test">test</div>
   <cdk-tree-node
     class="ngx-tree-node"
     *cdkTreeNodeDef="let node"
     cdkDrag
     cdkTreeNodeToggle
-    (cdkTreeNodePadding)="(this.treeConfig.nodePadding)"
+    cdkTreeNodePadding
+    [cdkTreeNodePaddingIndent]="this.treeConfig.nodeIndent"
     [cdkDragData]="node"
     (mouseenter)="dragHover(node)"
     (mouseleave)="dragHoverEnd()"
     (cdkDragStarted)="dragging.set(true)"
     (cdkDragReleased)="dragging.set(false)">
-    {{ node.filename }} : {{ node.type }}
+    <div class="ngx-tree-node-expand-container"></div>
+    <span class="ngx-tree-node-content" [attr.aria-label]="node.title">
+      {{ node.title }} {{ node.description ?? '' }}
+    </span>
   </cdk-tree-node>
 
   <cdk-tree-node
     class="ngx-tree-node"
     *cdkTreeNodeDef="let node; when: hasChild"
     cdkDrag
-    (cdkTreeNodePadding)="(this.treeConfig.nodePadding)"
+    cdkTreeNodePadding
+    [cdkTreeNodePaddingIndent]="this.treeConfig.nodeIndent"
     [cdkDragData]="node"
     (mouseenter)="dragHover(node)"
     (mouseleave)="dragHoverEnd()"
     (cdkDragStarted)="dragging.set(true)"
     (cdkDragReleased)="dragging.set(false)">
-    <button
-      cdkTreeNodeToggle
-      (click)="expansionModel.toggle(node.id)"
-      [attr.aria-label]="'Toggle ' + node.title">
-      {{ treeControl.isExpanded(node) ? 'v' : '>' }}
-    </button>
-    {{ node.title }} {{ node.description ?? '' }}
+    <div class="ngx-tree-node-expand-container">
+      <button
+        class="ngx-tree-node-expand-button"
+        cdkTreeNodeToggle
+        (click)="expansionModel.toggle(node.id)"
+        [attr.aria-label]="'Toggle ' + node.title">
+        <fa-icon
+          class="ngx-tree-node-expand-icon-container"
+          [icon]="treeControl.isExpanded(node) ? faChevronDown : faChevronRight"
+          [attr.aria-hidden]="false"
+          [attr.aria-label]="'Toggle ' + node.title"></fa-icon>
+      </button>
+    </div>
+    <span class="ngx-tree-node-content" [attr.aria-label]="node.title"
+      >{{ node.title }} {{ node.description ?? '' }}</span
+    >
   </cdk-tree-node>
 </cdk-tree>

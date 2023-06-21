@@ -6,6 +6,11 @@ import {
   MatTreeFlatDataSource,
   MatTreeFlattener,
 } from '@angular/material/tree';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faChevronDown,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { Observable, of } from 'rxjs';
 import { mockTreeNodes } from './util/mock-tree-nodes';
 import { TreeConfig, TreeFlatNode, TreeNode } from './util/models';
@@ -15,7 +20,7 @@ import { TreeConfig, TreeFlatNode, TreeNode } from './util/models';
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss'],
   standalone: true,
-  imports: [CdkTreeModule, DragDropModule],
+  imports: [CdkTreeModule, DragDropModule, FontAwesomeModule],
 })
 export class NgxTreeComponent {
   @Input() nodes = signal<TreeNode[]>(mockTreeNodes);
@@ -24,13 +29,16 @@ export class NgxTreeComponent {
   }
 
   @Input() treeConfig: TreeConfig = {
-    nodePadding: 40,
+    nodeIndent: 20,
     expandDelay: 1000,
-    allowDepthChange: false,
+    allowDepthChange: true,
     enableDragging: true,
   };
 
   @Output() attemptedDepthChange = new EventEmitter<boolean>();
+
+  faChevronRight = faChevronRight;
+  faChevronDown = faChevronDown;
 
   public treeControl;
   private treeFlattener;
@@ -69,7 +77,7 @@ export class NgxTreeComponent {
       id: node.id,
       title: node.title,
       description: node.description,
-      expandable: !!node.children,
+      expandable: !!node.children.length,
       level,
     };
   };

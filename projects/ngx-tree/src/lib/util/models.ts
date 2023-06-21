@@ -1,5 +1,5 @@
 export interface TreeConfig {
-  nodePadding: number;
+  nodeIndent: number;
   expandDelay: number;
   allowDepthChange: boolean;
   enableDragging: boolean;

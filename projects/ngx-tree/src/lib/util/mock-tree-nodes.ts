@@ -28,7 +28,26 @@ export const mockTreeNodes: TreeNode[] = [
         id: '5',
         title: 'Lemon',
         description: 'Yellow',
-        children: [],
+        children: [
+          {
+            id: '11',
+            title: 'Lemon',
+            description: 'Funny',
+            children: [],
+          },
+          {
+            id: '12',
+            title: 'Lemon',
+            description: 'Angry',
+            children: [],
+          },
+          {
+            id: '13',
+            title: 'Lemon',
+            description: 'Sad',
+            children: [],
+          },
+        ],
       },
       {
         id: '6',
