@@ -6,10 +6,9 @@ export interface TreeConfig {
 }
 
 export interface TreeNode {
-  id: string;
   title: string;
   description?: string;
-  children: TreeNode[];
+  children?: TreeNode[];
 }
 
 export interface TreeFlatNode {

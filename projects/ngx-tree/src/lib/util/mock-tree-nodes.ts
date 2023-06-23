@@ -1,84 +1,30 @@
 import { TreeNode } from './models';
 
-export const mockTreeNodes: TreeNode[] = [
+export const TREE_DATA: TreeNode[] = [
   {
-    id: '1',
-    title: 'Apple',
-    description: 'Red',
-    children: [],
+    title: 'Meat',
   },
   {
-    id: '2',
-    title: 'Banana',
-    description: 'Yellow',
-    children: [],
+    title: 'Fish',
   },
   {
-    id: '3',
-    title: 'Citrus',
-    description: 'Orange',
+    title: 'Fruit',
     children: [
-      {
-        id: '4',
-        title: 'Orange',
-        description: 'Orange',
-        children: [],
-      },
-      {
-        id: '5',
-        title: 'Lemon',
-        description: 'Yellow',
-        children: [
-          {
-            id: '11',
-            title: 'Lemon',
-            description: 'Funny',
-            children: [],
-          },
-          {
-            id: '12',
-            title: 'Lemon',
-            description: 'Angry',
-            children: [],
-          },
-          {
-            id: '13',
-            title: 'Lemon',
-            description: 'Sad',
-            children: [],
-          },
-        ],
-      },
-      {
-        id: '6',
-        title: 'Lime',
-        description: 'Green',
-        children: [],
-      },
+      { title: 'Apple' },
+      { title: 'Banana' },
+      { title: 'Fruit loops' },
     ],
   },
   {
-    id: '7',
-    title: 'Berry',
-    description: 'Red',
+    title: 'Vegetables',
     children: [
       {
-        id: '8',
-        title: 'Strawberry',
-        description: 'Red',
-        children: [],
+        title: 'Green',
+        children: [{ title: 'Broccoli' }, { title: 'Brussels sprouts' }],
       },
       {
-        id: '9',
-        title: 'Blueberry',
-        description: 'Blue',
-        children: [],
-      },
-      {
-        id: '10',
-        title: 'Raspberry',
-        description: 'Red',
-        children: [],
+        title: 'Orange',
+        children: [{ title: 'Pumpkins' }, { title: 'Carrots' }],
       },
     ],
   },

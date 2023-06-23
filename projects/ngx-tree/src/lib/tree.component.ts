@@ -12,7 +12,7 @@ import {
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { Observable, of } from 'rxjs';
-import { mockTreeNodes } from './util/mock-tree-nodes';
+import { TREE_DATA } from './util/mock-tree-nodes';
 import { TreeConfig, TreeFlatNode, TreeNode } from './util/models';
 
 @Component({
@@ -23,7 +23,7 @@ import { TreeConfig, TreeFlatNode, TreeNode } from './util/models';
   imports: [CdkTreeModule, DragDropModule, FontAwesomeModule],
 })
 export class NgxTreeComponent {
-  @Input() nodes = signal<TreeNode[]>(mockTreeNodes);
+  @Input() nodes = signal<TreeNode[]>(TREE_DATA);
   rebuildOnChange() {
     this.rebuildTreeForData(this.nodes());
   }
@@ -72,7 +72,7 @@ export class NgxTreeComponent {
     console.log(this.dataSource);
   }
 
-  transformer = (node: TreeNode, level: number): TreeFlatNode => {
+  transformer = (node: any, level: number): TreeFlatNode => {
     return {
       id: node.id,
       title: node.title,
@@ -84,25 +84,26 @@ export class NgxTreeComponent {
 
   private _getLevel = (node: TreeFlatNode) => node.level;
   private _isExpandable = (node: TreeFlatNode) => node.expandable;
-  private _getChildren = (node: TreeNode): Observable<TreeNode[]> =>
-    of(node.children);
+  private _getChildren = (node: any): Observable<any[]> => of(node.children);
   hasChild = (_: number, _nodeData: TreeFlatNode) => _nodeData.expandable;
 
   validateDepthChange(event: any): void {
     this.treeConfig.allowDepthChange = !event.checked;
   }
 
-  visibleNodes(): TreeNode[] {
-    const result: TreeNode[] = [];
+  visibleNodes(): any[] {
+    const result: any[] = [];
 
-    function addExpandedChildren(node: TreeNode, expanded: string[]) {
+    function addExpandedChildren(node: any, expanded: string[]) {
       result.push(node);
       if (expanded.includes(node.id)) {
-        node.children.forEach((child) => addExpandedChildren(child, expanded));
+        node.children.forEach((child: any) =>
+          addExpandedChildren(child, expanded)
+        );
       }
     }
 
-    this.dataSource.data.forEach((node: TreeNode) => {
+    this.dataSource.data.forEach((node: any) => {
       addExpandedChildren(node, this.expansionModel.selected);
     });
 
@@ -138,7 +139,7 @@ export class NgxTreeComponent {
     const node = event.item.data;
     const siblings = findNodeSiblings(changedData, node.id);
     const siblingIndex = siblings.findIndex((n) => n.id === node.id);
-    const nodeToInsert: TreeNode = siblings.splice(siblingIndex, 1)[0];
+    const nodeToInsert: any = siblings.splice(siblingIndex, 1)[0];
     if (nodeAtDest.id === nodeToInsert.id) return;
 
     const nodeAtDestFlatNode = this.treeControl.dataNodes.find(

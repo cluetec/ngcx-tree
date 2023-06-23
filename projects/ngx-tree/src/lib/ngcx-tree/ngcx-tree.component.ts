@@ -1,44 +1,33 @@
 import { ArrayDataSource } from '@angular/cdk/collections';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
-import { Component } from '@angular/core';
-
-interface FoodNode {
-  name: string;
-  children?: FoodNode[];
-}
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Fruit',
-    children: [{ name: 'Apple' }, { name: 'Banana' }, { name: 'Fruit loops' }],
-  },
-  {
-    name: 'Vegetables',
-    children: [
-      {
-        name: 'Green',
-        children: [{ name: 'Broccoli' }, { name: 'Brussels sprouts' }],
-      },
-      {
-        name: 'Orange',
-        children: [{ name: 'Pumpkins' }, { name: 'Carrots' }],
-      },
-    ],
-  },
-];
+import { Component, Input } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faBook,
+  faChevronDown,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
+import { TreeNode } from 'ngx-tree';
+import { TREE_DATA } from '../util/mock-tree-nodes';
 
 @Component({
   selector: 'cdk-tree-flat-example',
   templateUrl: 'ngcx-tree.component.html',
   styleUrls: ['ngcx-tree.component.scss'],
   standalone: true,
-  imports: [CdkTreeModule, DragDropModule],
+  imports: [CdkTreeModule, DragDropModule, FontAwesomeModule],
 })
 export class NgcxTreeComponent {
-  treeControl = new NestedTreeControl<FoodNode>((node) => node.children);
-  dataSource = new ArrayDataSource(TREE_DATA);
+  @Input() dataSource = new ArrayDataSource(TREE_DATA);
+
+  treeControl = new NestedTreeControl<TreeNode>((node) => node.children);
   dragging = false;
 
-  hasChild = (_: number, node: FoodNode) =>
+  faChevronRight = faChevronRight;
+  faChevronDown = faChevronDown;
+  faBook = faBook;
+
+  hasChild = (_: number, node: TreeNode) =>
     !!node.children && node.children.length > 0;
 }

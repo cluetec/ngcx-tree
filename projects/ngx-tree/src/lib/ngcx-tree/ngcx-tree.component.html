@@ -1,39 +1,66 @@
 <cdk-tree
+  class="tree"
   [dataSource]="dataSource"
   [treeControl]="treeControl"
   cdkDropListGroup>
-  <!-- This is the tree node template for leaf nodes -->
-  <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
-    <!-- use a disabled button to provide padding for tree leaf -->
-    <div cdkDropList>
-      <div
-        cdkDrag
-        (cdkDragStarted)="dragging = true"
-        (cdkDragReleased)="dragging = false">
-        <button mat-icon-button disabled></button>
-        {{ node.name }}
-      </div>
-    </div>
-  </cdk-nested-tree-node>
-  <!-- This is the tree node template for expandable nodes -->
-  <cdk-nested-tree-node
-    *cdkTreeNodeDef="let node; when: hasChild"
-    class="example-tree-node">
-    <div class="container-node">
-      <div cdkDropList class="container-drop" [class.hide]="!dragging"></div>
+  <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
+    <div class="tree-node-container">
       <div cdkDropList>
-        <div cdkDrag>
-          <button
-            mat-icon-button
-            [attr.aria-label]="'Toggle ' + node.name"
-            cdkTreeNodeToggle>
-            -
-          </button>
-          {{ node.name }}
+        <div
+          cdkDrag
+          (cdkDragStarted)="dragging = true"
+          (cdkDragReleased)="dragging = false">
+          <div class="tree-node-content-container">
+            <div class="tree-node-expand-container"></div>
+            <div class="tree-node-icon-container">
+              <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
+            </div>
+            <div class="tree-node-content">
+              {{ node.title }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+  </cdk-nested-tree-node>
+
+  <cdk-nested-tree-node
+    *cdkTreeNodeDef="let node; when: hasChild"
+    class="tree-node">
+    <div class="tree-node-container">
+      <div
+        cdkDropList
+        class="tree-node-drop-zone"
+        [class.hide]="!dragging"></div>
+      <div cdkDropList class="test">
+        <div cdkDrag>
+          <div class="tree-node-content-container">
+            <div class="tree-node-expand-container">
+              <button
+                class="tree-node-expand"
+                cdkTreeNodeToggle
+                [attr.aria-label]="'Toggle ' + node.title">
+                <fa-icon
+                  [icon]="
+                    treeControl.isExpanded(node)
+                      ? faChevronDown
+                      : faChevronRight
+                  "
+                  size="xs"
+                  [attr.aria-hidden]="false"></fa-icon>
+              </button>
+            </div>
+            <div class="tree-node-icon-container">
+              <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
+            </div>
+            <div class="tree-node-content">
+              {{ node.title }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [class.tree-node-invisible]="!treeControl.isExpanded(node)">
       <ng-container cdkTreeNodeOutlet></ng-container>
     </div>
   </cdk-nested-tree-node>
