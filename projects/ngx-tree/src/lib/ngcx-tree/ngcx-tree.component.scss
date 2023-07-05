@@ -1,5 +1,6 @@
 .tree {
   font-family: Arial, Helvetica, sans-serif;
+  height: auto;
 }
 
 .tree ul,
@@ -22,6 +23,17 @@
   display: none;
 }
 
+.tree-node-children-container {
+  ::before {
+    content: '';
+    position: absolute;
+    border-left: 1px dotted grey;
+    height: 100%;
+    top: 0px;
+    left: 25px;
+  }
+}
+
 .tree-node-container {
   display: flex;
   flex-direction: row;
@@ -29,14 +41,14 @@
   align-items: center;
   position: relative;
 
-  ::before {
-    content: '';
-    position: absolute;
-    border-left: 1px dotted grey;
-    height: 100%;
-    top: -5px;
-    left: 25px;
-  }
+  // ::before {
+  //   content: '';
+  //   position: absolute;
+  //   border-left: 1px dotted grey;
+  //   height: 100%;
+  //   top: -5px;
+  //   left: 25px;
+  // };
 
   .cdk-drag {
     display: flex;

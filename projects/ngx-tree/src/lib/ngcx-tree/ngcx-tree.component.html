@@ -5,11 +5,13 @@
   cdkDropListGroup>
   <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
     <div class="tree-node-container">
-      <div cdkDropList>
+      <div cdkDropList [cdkDropListData]="node">
         <div
           cdkDrag
+          [cdkDragData]="node"
           (cdkDragStarted)="dragging = true"
-          (cdkDragReleased)="dragging = false">
+          (cdkDragReleased)="dragging = false"
+          (cdkDragDropped)="handleDrop($event)">
           <div class="tree-node-content-container">
             <div class="tree-node-expand-container"></div>
             <div class="tree-node-icon-container">
@@ -32,8 +34,13 @@
         cdkDropList
         class="tree-node-drop-zone"
         [class.hide]="!dragging"></div>
-      <div cdkDropList class="test">
-        <div cdkDrag>
+      <div cdkDropList [cdkDropListData]="node">
+        <div
+          cdkDrag
+          [cdkDragData]="node"
+          (cdkDragStarted)="dragging = true"
+          (cdkDragReleased)="dragging = false"
+          (cdkDragDropped)="handleDrop($event)">
           <div class="tree-node-content-container">
             <div class="tree-node-expand-container">
               <button
@@ -60,8 +67,10 @@
         </div>
       </div>
     </div>
-    <div [class.tree-node-invisible]="!treeControl.isExpanded(node)">
-      <ng-container cdkTreeNodeOutlet></ng-container>
+    <div
+      [class.tree-node-invisible]="!treeControl.isExpanded(node)"
+      class="tree-node-children-container">
+      <div cdkTreeNodeOutlet></div>
     </div>
   </cdk-nested-tree-node>
 </cdk-tree>
