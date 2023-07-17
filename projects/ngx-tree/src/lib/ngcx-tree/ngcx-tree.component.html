@@ -12,6 +12,9 @@
           (cdkDragStarted)="dragging = true"
           (cdkDragReleased)="dragging = false"
           (cdkDragDropped)="handleDrop($event)">
+          <div class="example-custom-placeholder" *cdkDragPlaceholder>
+            aaaaaaaaaa
+          </div>
           <div class="tree-node-content-container">
             <div class="tree-node-expand-container"></div>
             <div class="tree-node-icon-container">
@@ -29,18 +32,24 @@
   <cdk-nested-tree-node
     *cdkTreeNodeDef="let node; when: hasChild"
     class="tree-node">
-    <div class="tree-node-container">
+    <div class="tree-node-container" [class.dragging]="dragging">
       <div
         cdkDropList
+        [cdkDropListData]="node"
         class="tree-node-drop-zone"
         [class.hide]="!dragging"></div>
       <div cdkDropList [cdkDropListData]="node">
         <div
           cdkDrag
+          [cdkDragDisabled]="true"
           [cdkDragData]="node"
           (cdkDragStarted)="dragging = true"
           (cdkDragReleased)="dragging = false"
           (cdkDragDropped)="handleDrop($event)">
+          <div *cdkDragPreview>xxxx</div>
+          <div class="example-custom-placeholder" *cdkDragPlaceholder>
+            sdfsdsdf
+          </div>
           <div class="tree-node-content-container">
             <div class="tree-node-expand-container">
               <button

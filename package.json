@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "provide:link": "cd dist/ngx-tree && npm link",
-    "storybook": "ng run ngx-tree:storybook",
+    "storybook": "ng run ngx-tree:storybook --https --ssl-cert %AUDIT_DEV_ENVIRONMENT%/localenv/platform.mqa.crt --ssl-key %AUDIT_DEV_ENVIRONMENT%/localenv/platform.mqa.key",
     "build-storybook": "ng run ngx-tree:build-storybook"
   },
   "private": true,
