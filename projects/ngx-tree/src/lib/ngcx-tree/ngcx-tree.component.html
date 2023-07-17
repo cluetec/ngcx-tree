@@ -5,16 +5,17 @@
   cdkDropListGroup>
   <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
     <div class="tree-node-container">
-      <div cdkDropList [cdkDropListData]="node">
+      <div
+        cdkDropList
+        [cdkDropListData]="node"
+        [cdkDropListEnterPredicate]="evenPredicate(undefined)">
         <div
           cdkDrag
           [cdkDragData]="node"
           (cdkDragStarted)="dragging = true"
           (cdkDragReleased)="dragging = false"
           (cdkDragDropped)="handleDrop($event)">
-          <div class="example-custom-placeholder" *cdkDragPlaceholder>
-            aaaaaaaaaa
-          </div>
+          <div class="small-horizontal-tree-line"></div>
           <div class="tree-node-content-container">
             <div class="tree-node-expand-container"></div>
             <div class="tree-node-icon-container">
@@ -36,8 +37,9 @@
       <div
         cdkDropList
         [cdkDropListData]="node"
-        class="tree-node-drop-zone"
-        [class.hide]="!dragging"></div>
+        class="tree-node-container-drop-zone"
+        [class.hide]="!dragging"
+        [cdkDropListEnterPredicate]="evenPredicate(node)"></div>
       <div cdkDropList [cdkDropListData]="node">
         <div
           cdkDrag
@@ -46,11 +48,10 @@
           (cdkDragStarted)="dragging = true"
           (cdkDragReleased)="dragging = false"
           (cdkDragDropped)="handleDrop($event)">
-          <div *cdkDragPreview>xxxx</div>
-          <div class="example-custom-placeholder" *cdkDragPlaceholder>
-            sdfsdsdf
-          </div>
-          <div class="tree-node-content-container">
+          <div
+            class="tree-node-content-container"
+            [class.first]="node.isFirstChild"
+            [class.last]="node.isLastChild">
             <div class="tree-node-expand-container">
               <button
                 class="tree-node-expand"
@@ -66,6 +67,7 @@
                   [attr.aria-hidden]="false"></fa-icon>
               </button>
             </div>
+            <div class="small-horizontal-tree-line"></div>
             <div class="tree-node-icon-container">
               <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
             </div>
@@ -77,7 +79,7 @@
       </div>
     </div>
     <div
-      [class.tree-node-invisible]="!treeControl.isExpanded(node)"
+      *ngIf="treeControl.isExpanded(node)"
       class="tree-node-children-container">
       <div cdkTreeNodeOutlet></div>
     </div>
