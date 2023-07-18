@@ -33,12 +33,24 @@
       bottom: 0px;
       left: 25px;
     }
-
     .small-horizontal-tree-line {
       width: 5px;
       position: absolute;
       left: 25px;
       border-top: 1px dotted grey;
+    }
+  }
+
+  .tree-node-content-container {
+    &.first {
+      &::before {
+        top: 10px;
+      }
+    }
+    &.last {
+      &::before {
+        bottom: 10px;
+      }
     }
   }
 }

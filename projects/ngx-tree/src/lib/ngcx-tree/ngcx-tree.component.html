@@ -17,8 +17,12 @@
           (cdkDragReleased)="dragging = false"
           (cdkDragDropped)="handleDrop($event)">
           <div class="small-horizontal-tree-line"></div>
-          <div class="tree-node-content-container">
+          <div
+            class="tree-node-content-container"
+            [class.first]="node.isFirstChild"
+            [class.last]="node.isLastChild">
             <div class="tree-node-expand-container"></div>
+            <div class="small-horizontal-tree-line"></div>
             <div class="tree-node-icon-container">
               <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
             </div>

@@ -7,7 +7,13 @@ import {
 } from '@angular/cdk/drag-drop';
 import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faBook,
@@ -24,7 +30,7 @@ import { TreeNode } from '../util/models';
   standalone: true,
   imports: [CdkTreeModule, DragDropModule, FontAwesomeModule, CommonModule],
 })
-export class NgcxTreeComponent implements OnChanges {
+export class NgcxTreeComponent implements OnChanges, OnInit {
   @Input() nodes = TREE_DATA;
 
   dataSource: ArrayDataSource<TreeNodeWrapper> = new ArrayDataSource([]);
@@ -34,33 +40,40 @@ export class NgcxTreeComponent implements OnChanges {
   faChevronRight = faChevronRight;
   faChevronDown = faChevronDown;
   faBook = faBook;
+  ngOnInit(): void {
+    const improvedNodes = this.improveNodes(this.nodes);
+    this.dataSource = new ArrayDataSource(improvedNodes);
+  }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('improvedNodes');
     if (changes['nodes']) {
-      const improvedNodes = this.improveNodes(this.nodes);
-      this.dataSource = new ArrayDataSource(improvedNodes);
-      console.log(improvedNodes);
+      this.ngOnInit();
     }
   }
 
-  improveNodes(nodes: TreeNode[], parent?: TreeNodeWrapper): TreeNodeWrapper[] {
-    return nodes.map((node) => {
+  improveNodes(
+    nodes: TreeNode[],
+    parent?: TreeNodeWrapper,
+    depth: number = 0
+  ): TreeNodeWrapper[] {
+    const childCount = nodes.length;
+    return nodes.map((node, idx) => {
       const nodeWrapper: TreeNodeWrapper = {
         node: node,
-        isFirst: true,
-        isLast: true,
+        isFirstChild: idx === 0,
+        isLastChild: idx === childCount - 1,
         parent: parent,
+        depth: depth,
+        children: [],
       };
       nodeWrapper.children = node.children
-        ? this.improveNodes(node.children, nodeWrapper)
+        ? this.improveNodes(node.children, nodeWrapper, depth + 1)
         : [];
       return nodeWrapper;
     });
   }
 
-  hasChild = (_: number, node: TreeNode) =>
-    !!node.children && node.children.length > 0;
+  hasChild = (_: number, node: TreeNodeWrapper) => node.children.length > 0;
 
   evenPredicate(parent?: TreeNodeWrapper) {
     return (
@@ -99,8 +112,9 @@ export class NgcxTreeComponent implements OnChanges {
 
 export interface TreeNodeWrapper {
   node: TreeNode;
-  isFirst: boolean;
-  isLast: boolean;
-  children?: TreeNodeWrapper[];
+  isFirstChild: boolean;
+  isLastChild: boolean;
+  children: TreeNodeWrapper[];
+  depth: number;
   parent?: TreeNodeWrapper;
 }
