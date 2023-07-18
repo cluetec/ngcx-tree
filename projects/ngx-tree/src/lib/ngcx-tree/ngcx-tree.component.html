@@ -1,5 +1,6 @@
 <cdk-tree
   class="tree"
+  *ngIf="dataSource"
   [dataSource]="dataSource"
   [treeControl]="treeControl"
   cdkDropListGroup>
@@ -22,7 +23,7 @@
               <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
             </div>
             <div class="tree-node-content">
-              {{ node.title }}
+              {{ node.node.title }}
             </div>
           </div>
         </div>
@@ -72,7 +73,7 @@
               <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
             </div>
             <div class="tree-node-content">
-              {{ node.title }}
+              {{ node.node.title }}
             </div>
           </div>
         </div>

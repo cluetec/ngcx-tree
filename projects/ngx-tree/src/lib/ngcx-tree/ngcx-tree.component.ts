@@ -14,8 +14,8 @@ import {
   faChevronDown,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
-import { TreeNode } from 'ngx-tree';
 import { TREE_DATA } from '../util/mock-tree-nodes';
+import { TreeNode } from '../util/models';
 
 @Component({
   selector: 'cdk-tree-flat-example',
@@ -27,22 +27,51 @@ import { TREE_DATA } from '../util/mock-tree-nodes';
 export class NgcxTreeComponent implements OnChanges {
   @Input() nodes = TREE_DATA;
 
-  dataSource = new ArrayDataSource(this.nodes);
-  treeControl = new NestedTreeControl<TreeNode>((node) => node.children);
+  dataSource: ArrayDataSource<TreeNodeWrapper> = new ArrayDataSource([]);
+  treeControl = new NestedTreeControl<TreeNodeWrapper>((node) => node.children);
   dragging = false;
 
   faChevronRight = faChevronRight;
   faChevronDown = faChevronDown;
   faBook = faBook;
+
   ngOnChanges(changes: SimpleChanges) {
-    this.dataSource = new ArrayDataSource(this.nodes);
+    console.log('improvedNodes');
+    if (changes['nodes']) {
+      const improvedNodes = this.improveNodes(this.nodes);
+      this.dataSource = new ArrayDataSource(improvedNodes);
+      console.log(improvedNodes);
+    }
   }
+
+  improveNodes(nodes: TreeNode[], parent?: TreeNodeWrapper): TreeNodeWrapper[] {
+    return nodes.map((node) => {
+      const nodeWrapper: TreeNodeWrapper = {
+        node: node,
+        isFirst: true,
+        isLast: true,
+        parent: parent,
+      };
+      nodeWrapper.children = node.children
+        ? this.improveNodes(node.children, nodeWrapper)
+        : [];
+      return nodeWrapper;
+    });
+  }
+
   hasChild = (_: number, node: TreeNode) =>
     !!node.children && node.children.length > 0;
 
-  evenPredicate(parent?: TreeNode) {
-    return (drag: CdkDrag<TreeNode>, drop: CdkDropList<TreeNode>): boolean => {
-      console.log(parent?.title, drag.data.title, drop.data.title);
+  evenPredicate(parent?: TreeNodeWrapper) {
+    return (
+      drag: CdkDrag<TreeNodeWrapper>,
+      drop: CdkDropList<TreeNodeWrapper>
+    ): boolean => {
+      console.log(
+        parent?.node.title,
+        drag.data.node.title,
+        drop.data.node.title
+      );
       // console.log(treeControl.getLevel(node));
       return !!parent;
     };
@@ -66,4 +95,12 @@ export class NgcxTreeComponent implements OnChanges {
     //   );
     // }
   }
+}
+
+export interface TreeNodeWrapper {
+  node: TreeNode;
+  isFirst: boolean;
+  isLast: boolean;
+  children?: TreeNodeWrapper[];
+  parent?: TreeNodeWrapper;
 }
