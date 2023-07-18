@@ -17,7 +17,6 @@ import {
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TreeNode, TreeNodeWrapper } from '../ngcx-tree-models';
-import { NgcxDefaultTreeNodeComponent } from './ngcx-default-tree-node/ngcx-default-tree-node.component';
 import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component';
 
 @Component({
@@ -36,7 +35,7 @@ import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component
 export class NgcxTreeComponent implements OnChanges, OnInit {
   @Input() nodes?: TreeNode[];
 
-  @Input() treeNodeComponent: Type<any> = NgcxDefaultTreeNodeComponent;
+  @Input() treeNodeContentComponent?: Type<any>;
 
   dataSource: ArrayDataSource<TreeNodeWrapper> = new ArrayDataSource([]);
   treeControl = new NestedTreeControl<TreeNodeWrapper>((node) => node.children);

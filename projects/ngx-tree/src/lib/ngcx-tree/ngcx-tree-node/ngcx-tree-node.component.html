@@ -21,6 +21,7 @@
     <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
   </div>
   <div class="tree-node-content">
+    <span *ngIf="!treeNodeContentComponent">{{ nodeWrapper.node.title }}</span>
     <ng-container #ref></ng-container>
   </div>
 </div>
