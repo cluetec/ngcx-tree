@@ -17,7 +17,6 @@ import {
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TreeNode, TreeNodeWrapper } from '../ngcx-tree-models';
-import { TREE_DATA } from '../ngcx-tree-test/mock-tree-nodes';
 import { NgcxDefaultTreeNodeComponent } from './ngcx-default-tree-node/ngcx-default-tree-node.component';
 import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component';
 
@@ -35,7 +34,7 @@ import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component
   ],
 })
 export class NgcxTreeComponent implements OnChanges, OnInit {
-  @Input() nodes = TREE_DATA;
+  @Input() nodes?: TreeNode[];
 
   @Input() treeNodeComponent: Type<any> = NgcxDefaultTreeNodeComponent;
 
@@ -44,7 +43,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   dragging = false;
 
   ngOnInit(): void {
-    const improvedNodes = this.improveNodes(this.nodes);
+    const improvedNodes = this.improveNodes(this.nodes ?? []);
     this.dataSource = new ArrayDataSource(improvedNodes);
   }
 

@@ -24,12 +24,12 @@
     top: 5px;
   }
   &.last:not(.expanded)::before {
-    bottom: 15px;
+    bottom: 14px;
   }
 }
 
 .tree-node-children-container.last::before {
-  bottom: 15px;
+  bottom: 14px;
 }
 
 .cdk-drag-preview {

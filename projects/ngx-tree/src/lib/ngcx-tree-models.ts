@@ -6,8 +6,7 @@ export interface TreeConfig {
 }
 
 export interface TreeNode {
-  title: string;
-  description?: string;
+  title?: string;
   children?: TreeNode[];
 }
 

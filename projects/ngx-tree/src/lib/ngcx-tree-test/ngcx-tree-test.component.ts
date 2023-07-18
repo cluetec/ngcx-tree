@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgcxTreeComponent } from '../ngcx-tree/ngcx-tree.component';
+import { TREE_DATA } from './mock-tree-nodes';
 
 @Component({
   selector: 'ngcx-tree-test',
@@ -9,6 +10,8 @@ import { NgcxTreeComponent } from '../ngcx-tree/ngcx-tree.component';
   imports: [NgcxTreeComponent],
 })
 export class NgcxTreeTestComponent implements OnInit {
+  nodes = TREE_DATA;
+
   constructor() {}
 
   ngOnInit() {}
