@@ -11,11 +11,11 @@
         [cdkDropListData]="node"
         class="tree-node-container-drop-zone"
         [class.hide]="!dragging"
-        [cdkDropListEnterPredicate]="allowDropInto"></div> -->
+        [cdkDropListEnterPredicate]="internalAllowDrop"></div> -->
       <div
         cdkDropList
         [cdkDropListData]="node"
-        [cdkDropListEnterPredicate]="allowDrop">
+        [cdkDropListEnterPredicate]="internalAllowDrop()">
         <div
           cdkDrag
           [cdkDragData]="node"
@@ -46,7 +46,7 @@
       <div
         cdkDropList
         [cdkDropListData]="node"
-        [cdkDropListEnterPredicate]="allowDrop">
+        [cdkDropListEnterPredicate]="internalAllowDrop()">
         <div
           cdkDrag
           [cdkDragDisabled]="true"

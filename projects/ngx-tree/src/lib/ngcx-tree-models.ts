@@ -1,8 +1,11 @@
 export interface TreeConfig {
-  nodeIndent: number;
-  expandDelay: number;
-  allowDepthChange: boolean;
-  enableDragging: boolean;
+  enableDragging?: boolean;
+
+  allowDrop?: (
+    drag: TreeNodeWrapper,
+    parentNode?: TreeNodeWrapper,
+    atNode?: TreeNodeWrapper
+  ) => boolean;
 }
 
 export interface TreeNode {

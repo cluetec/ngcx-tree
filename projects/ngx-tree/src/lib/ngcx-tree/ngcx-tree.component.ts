@@ -16,7 +16,7 @@ import {
   Type,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TreeNode, TreeNodeWrapper } from '../ngcx-tree-models';
+import { TreeConfig, TreeNode, TreeNodeWrapper } from '../ngcx-tree-models';
 import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component';
 
 @Component({
@@ -34,6 +34,7 @@ import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component
 })
 export class NgcxTreeComponent implements OnChanges, OnInit {
   @Input() nodes?: TreeNode[];
+  @Input() config?: TreeConfig;
 
   @Input() treeNodeContentComponent?: Type<any>;
 
@@ -42,7 +43,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   dragging = false;
 
   ngOnInit(): void {
-    const improvedNodes = this.improveNodes(this.nodes ?? []);
+    const improvedNodes = this.createWrapperNodes(this.nodes ?? []);
     this.dataSource = new ArrayDataSource(improvedNodes);
   }
 
@@ -52,7 +53,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     }
   }
 
-  improveNodes(
+  createWrapperNodes(
     nodes: TreeNode[],
     parent?: TreeNodeWrapper,
     depth: number = 0
@@ -68,7 +69,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
         children: [],
       };
       nodeWrapper.children = node.children
-        ? this.improveNodes(node.children, nodeWrapper, depth + 1)
+        ? this.createWrapperNodes(node.children, nodeWrapper, depth + 1)
         : [];
       return nodeWrapper;
     });
@@ -76,15 +77,17 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
 
   hasChild = (_: number, node: TreeNodeWrapper) => node.children.length > 0;
 
-  allowDrop(
+  internalAllowDrop(): (
     drag: CdkDrag<TreeNodeWrapper>,
     drop: CdkDropList<TreeNodeWrapper>
-  ): boolean {
-    console.log(drag.data.node.title, drop.data.node.title);
-    console.log(drop.data.parent);
-    console.log(drag.data.depth);
-
-    return drop.data.depth < 2;
+  ) => boolean {
+    if (this.config?.allowDrop) {
+      return (
+        drag: CdkDrag<TreeNodeWrapper>,
+        drop: CdkDropList<TreeNodeWrapper>
+      ) => this.config!.allowDrop!(drag.data, drop.data.parent, drop.data);
+    }
+    return () => true;
   }
 
   // allowDropInto(
