@@ -13,33 +13,36 @@ import {
   OnChanges,
   OnInit,
   SimpleChanges,
+  Type,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  faBook,
-  faChevronDown,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
-import { TREE_DATA } from '../util/mock-tree-nodes';
-import { TreeNode } from '../util/models';
+import { TreeNode, TreeNodeWrapper } from '../ngcx-tree-models';
+import { TREE_DATA } from '../ngcx-tree-test/mock-tree-nodes';
+import { NgcxDefaultTreeNodeComponent } from './ngcx-default-tree-node/ngcx-default-tree-node.component';
+import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component';
 
 @Component({
-  selector: 'cdk-tree-flat-example',
+  selector: 'ngcx-tree',
   templateUrl: 'ngcx-tree.component.html',
   styleUrls: ['ngcx-tree.component.scss'],
   standalone: true,
-  imports: [CdkTreeModule, DragDropModule, FontAwesomeModule, CommonModule],
+  imports: [
+    CdkTreeModule,
+    DragDropModule,
+    FontAwesomeModule,
+    CommonModule,
+    NgcxTreeNodeComponent,
+  ],
 })
 export class NgcxTreeComponent implements OnChanges, OnInit {
   @Input() nodes = TREE_DATA;
+
+  @Input() treeNodeComponent: Type<any> = NgcxDefaultTreeNodeComponent;
 
   dataSource: ArrayDataSource<TreeNodeWrapper> = new ArrayDataSource([]);
   treeControl = new NestedTreeControl<TreeNodeWrapper>((node) => node.children);
   dragging = false;
 
-  faChevronRight = faChevronRight;
-  faChevronDown = faChevronDown;
-  faBook = faBook;
   ngOnInit(): void {
     const improvedNodes = this.improveNodes(this.nodes);
     this.dataSource = new ArrayDataSource(improvedNodes);
@@ -75,20 +78,27 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
 
   hasChild = (_: number, node: TreeNodeWrapper) => node.children.length > 0;
 
-  evenPredicate(parent?: TreeNodeWrapper) {
-    return (
-      drag: CdkDrag<TreeNodeWrapper>,
-      drop: CdkDropList<TreeNodeWrapper>
-    ): boolean => {
-      console.log(
-        parent?.node.title,
-        drag.data.node.title,
-        drop.data.node.title
-      );
-      // console.log(treeControl.getLevel(node));
-      return !!parent;
-    };
+  allowDrop(
+    drag: CdkDrag<TreeNodeWrapper>,
+    drop: CdkDropList<TreeNodeWrapper>
+  ): boolean {
+    console.log(drag.data.node.title, drop.data.node.title);
+    console.log(drop.data.parent);
+    console.log(drag.data.depth);
+
+    return drop.data.depth < 2;
   }
+
+  // allowDropInto(
+  //   drag: CdkDrag<TreeNodeWrapper>,
+  //   drop: CdkDropList<TreeNodeWrapper>
+  // ): boolean {
+  //   console.log(drag.data.node.title, drop.data.node.title);
+  //   console.log(drop.data.parent);
+  //   console.log(drag.data.depth);
+
+  //   return drop.data.depth < 1;
+  // }
 
   handleDrop(event: CdkDragDrop<string[]>) {
     console.log(event);
@@ -108,13 +118,4 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     //   );
     // }
   }
-}
-
-export interface TreeNodeWrapper {
-  node: TreeNode;
-  isFirstChild: boolean;
-  isLastChild: boolean;
-  children: TreeNodeWrapper[];
-  depth: number;
-  parent?: TreeNodeWrapper;
 }

@@ -37,7 +37,8 @@
             "configDir": "projects/ngx-tree/.storybook",
             "browserTarget": "ngx-tree:build",
             "compodoc": false,
-            "port": 6006
+            "port": 6006,
+            "styles": ["projects/ngx-tree/styles/styles.scss"]
           }
         },
         "build-storybook": {

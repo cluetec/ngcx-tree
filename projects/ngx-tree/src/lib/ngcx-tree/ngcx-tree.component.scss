@@ -19,52 +19,13 @@
   padding-left: 20px;
 }
 
-:not(.cdk-drag-preview) {
-  .tree-node-content-container,
-  .tree-node-children-container {
-    position: relative;
-    cursor: default;
-
-    ::before {
-      content: '';
-      position: absolute;
-      border-left: 1px dotted grey;
-      top: 1px;
-      bottom: 0px;
-      left: 25px;
-    }
-    .small-horizontal-tree-line {
-      width: 5px;
-      position: absolute;
-      left: 25px;
-      border-top: 1px dotted grey;
-    }
-  }
-
-  .tree-node-content-container {
-    &.first {
-      &::before {
-        top: 10px;
-      }
-    }
-    &.last {
-      &::before {
-        bottom: 10px;
-      }
-    }
-  }
-}
-
 .tree-node-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   position: relative;
-
-  &.dragging {
-    cursor: default;
-  }
+  cursor: default;
 
   .cdk-drag {
     display: flex;
@@ -75,9 +36,10 @@
 
   .tree-node-container-drop-zone {
     width: 100%;
-    height: 100%;
+    height: 50%;
     position: absolute;
     z-index: 1;
+    // background-color: red;
 
     &.hide {
       display: none;
@@ -89,42 +51,5 @@
     .tree-node-content-container {
       display: none;
     }
-  }
-}
-
-.tree-node-content-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-
-  .tree-node-expand-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
-
-    > button {
-      color: #2587be;
-      background: none;
-      border: none;
-      font: inherit;
-      cursor: pointer;
-      outline: inherit;
-    }
-  }
-
-  .tree-node-icon-container {
-    margin-right: 7px;
-    color: #2587be;
-  }
-
-  .tree-node-content {
-    font-weight: 600;
-    font-size: 14px;
-    color: #575757;
   }
 }

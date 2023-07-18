@@ -18,3 +18,16 @@ export interface TreeFlatNode {
   level: number;
   expandable: boolean;
 }
+
+export interface TreeNodeWrapper {
+  node: TreeNode;
+  isFirstChild: boolean;
+  isLastChild: boolean;
+  children: TreeNodeWrapper[];
+  depth: number;
+  parent?: TreeNodeWrapper;
+}
+
+export interface TreeNodeComponent {
+  nodeWrapper?: TreeNodeWrapper;
+}

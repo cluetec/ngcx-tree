@@ -1,0 +1,36 @@
+.tree-node-content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  .tree-node-expand-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+
+    > button {
+      color: #2587be;
+      background: none;
+      border: none;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+    }
+  }
+
+  .tree-node-icon-container {
+    margin-right: 7px;
+    color: #2587be;
+  }
+
+  .tree-node-content {
+    font-weight: 600;
+    font-size: 14px;
+    color: #575757;
+  }
+}

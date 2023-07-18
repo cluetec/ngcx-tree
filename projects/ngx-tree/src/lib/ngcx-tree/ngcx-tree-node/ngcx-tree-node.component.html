@@ -1,0 +1,26 @@
+<div
+  class="tree-node-content-container"
+  [class.first]="nodeWrapper.isFirstChild"
+  [class.last]="nodeWrapper.isLastChild">
+  <div class="tree-node-expand-container">
+    <button
+      *ngIf="nodeWrapper.children.length > 0"
+      class="tree-node-expand"
+      cdkTreeNodeToggle
+      [attr.aria-label]="'Toggle ' + nodeWrapper.node.title">
+      <fa-icon
+        [icon]="
+          treeControl.isExpanded(nodeWrapper) ? faChevronDown : faChevronRight
+        "
+        size="xs"
+        [attr.aria-hidden]="false"></fa-icon>
+    </button>
+  </div>
+  <div class="small-horizontal-tree-line"></div>
+  <div class="tree-node-icon-container">
+    <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
+  </div>
+  <div class="tree-node-content">
+    <ng-container #ref></ng-container>
+  </div>
+</div>

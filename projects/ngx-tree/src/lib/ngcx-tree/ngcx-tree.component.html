@@ -6,30 +6,25 @@
   cdkDropListGroup>
   <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
     <div class="tree-node-container">
+      <!-- <div
+        cdkDropList
+        [cdkDropListData]="node"
+        class="tree-node-container-drop-zone"
+        [class.hide]="!dragging"
+        [cdkDropListEnterPredicate]="allowDropInto"></div> -->
       <div
         cdkDropList
         [cdkDropListData]="node"
-        [cdkDropListEnterPredicate]="evenPredicate(undefined)">
+        [cdkDropListEnterPredicate]="allowDrop">
         <div
           cdkDrag
           [cdkDragData]="node"
           (cdkDragStarted)="dragging = true"
           (cdkDragReleased)="dragging = false"
           (cdkDragDropped)="handleDrop($event)">
-          <div class="small-horizontal-tree-line"></div>
-          <div
-            class="tree-node-content-container"
-            [class.first]="node.isFirstChild"
-            [class.last]="node.isLastChild">
-            <div class="tree-node-expand-container"></div>
-            <div class="small-horizontal-tree-line"></div>
-            <div class="tree-node-icon-container">
-              <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
-            </div>
-            <div class="tree-node-content">
-              {{ node.node.title }}
-            </div>
-          </div>
+          <ngcx-tree-node
+            [nodeWrapper]="node"
+            [treeControl]="treeControl"></ngcx-tree-node>
         </div>
       </div>
     </div>
@@ -39,13 +34,16 @@
     *cdkTreeNodeDef="let node; when: hasChild"
     class="tree-node">
     <div class="tree-node-container" [class.dragging]="dragging">
-      <div
+      <!-- <div
         cdkDropList
         [cdkDropListData]="node"
         class="tree-node-container-drop-zone"
         [class.hide]="!dragging"
-        [cdkDropListEnterPredicate]="evenPredicate(node)"></div>
-      <div cdkDropList [cdkDropListData]="node">
+        [cdkDropListEnterPredicate]="allowDropInto"></div> -->
+      <div
+        cdkDropList
+        [cdkDropListData]="node"
+        [cdkDropListEnterPredicate]="allowDrop">
         <div
           cdkDrag
           [cdkDragDisabled]="true"
@@ -56,36 +54,20 @@
           <div
             class="tree-node-content-container"
             [class.first]="node.isFirstChild"
-            [class.last]="node.isLastChild">
-            <div class="tree-node-expand-container">
-              <button
-                class="tree-node-expand"
-                cdkTreeNodeToggle
-                [attr.aria-label]="'Toggle ' + node.title">
-                <fa-icon
-                  [icon]="
-                    treeControl.isExpanded(node)
-                      ? faChevronDown
-                      : faChevronRight
-                  "
-                  size="xs"
-                  [attr.aria-hidden]="false"></fa-icon>
-              </button>
-            </div>
-            <div class="small-horizontal-tree-line"></div>
-            <div class="tree-node-icon-container">
-              <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
-            </div>
-            <div class="tree-node-content">
-              {{ node.node.title }}
-            </div>
+            [class.last]="node.isLastChild"
+            [class.expanded]="treeControl.isExpanded(node)">
+            <ngcx-tree-node
+              [nodeWrapper]="node"
+              [treeControl]="treeControl"></ngcx-tree-node>
           </div>
         </div>
       </div>
     </div>
     <div
       *ngIf="treeControl.isExpanded(node)"
-      class="tree-node-children-container">
+      class="tree-node-children-container"
+      [class.first]="node.isFirstChild"
+      [class.last]="node.isLastChild">
       <div cdkTreeNodeOutlet></div>
     </div>
   </cdk-nested-tree-node>
