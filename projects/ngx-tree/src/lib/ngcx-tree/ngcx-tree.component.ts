@@ -16,7 +16,11 @@ import {
   Type,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TreeConfig, TreeNode, TreeNodeWrapper } from '../ngcx-tree-models';
+import {
+  TreeConfig,
+  TreeNode,
+  TreeNodeWrapper,
+} from '../test/ngcx-tree-models';
 import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component';
 
 @Component({
@@ -39,7 +43,16 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   @Input() treeNodeContentComponent?: Type<any>;
 
   dataSource: ArrayDataSource<TreeNodeWrapper> = new ArrayDataSource([]);
-  treeControl = new NestedTreeControl<TreeNodeWrapper>((node) => node.children);
+  treeControl = new NestedTreeControl<TreeNodeWrapper>(
+    this.config?.loadChildren
+      ? (node) =>
+          this.createWrapperNodes(
+            this.config!.loadChildren!(node),
+            node,
+            node.depth + 1
+          )
+      : (node) => node.children
+  );
   dragging = false;
 
   ngOnInit(): void {
@@ -77,7 +90,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
 
   hasChild = (_: number, node: TreeNodeWrapper) => node.children.length > 0;
 
-  internalAllowDrop(): (
+  allowDrop(): (
     drag: CdkDrag<TreeNodeWrapper>,
     drop: CdkDropList<TreeNodeWrapper>
   ) => boolean {
@@ -88,6 +101,10 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
       ) => this.config!.allowDrop!(drag.data, drop.data.parent, drop.data);
     }
     return () => true;
+  }
+
+  disableDrag(node: TreeNodeWrapper) {
+    return this.config?.allowDrag ? !this.config.allowDrag(node) : false;
   }
 
   // allowDropInto(

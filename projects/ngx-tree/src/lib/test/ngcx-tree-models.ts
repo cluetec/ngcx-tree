@@ -6,6 +6,10 @@ export interface TreeConfig {
     parentNode?: TreeNodeWrapper,
     atNode?: TreeNodeWrapper
   ) => boolean;
+
+  allowDrag?: (drag: TreeNodeWrapper) => boolean;
+
+  loadChildren?: (node: TreeNodeWrapper) => TreeNode[];
 }
 
 export interface TreeNode {

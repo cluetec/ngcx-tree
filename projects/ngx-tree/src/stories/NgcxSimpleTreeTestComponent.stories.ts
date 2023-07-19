@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { NgcxTreeComponent } from '../lib/ngcx-tree/ngcx-tree.component';
-import { NgcxTreeTestComponent } from '../lib/test/ngcx-tree-test/ngcx-tree-test.component';
+import { NgcxSimpleTreeTestComponent } from '../lib/test/ngcx-simple-tree-test/ngcx-simple-tree-test.component';
 
-const meta: Meta<NgcxTreeTestComponent> = {
-  title: 'Example/NgcxTreeTestComponent',
-  component: NgcxTreeTestComponent,
+const meta: Meta<NgcxSimpleTreeTestComponent> = {
+  title: 'Example/NgcxSimpleTreeTestComponent',
+  component: NgcxSimpleTreeTestComponent,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout
     layout: 'fullscreen',
@@ -17,7 +17,7 @@ const meta: Meta<NgcxTreeTestComponent> = {
     moduleMetadata({
       imports: [
         CommonModule,
-        NgcxTreeTestComponent,
+        NgcxSimpleTreeTestComponent,
         NgcxTreeComponent,
         CdkTreeModule,
         DragDropModule,
@@ -27,6 +27,6 @@ const meta: Meta<NgcxTreeTestComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<NgcxTreeTestComponent>;
+type Story = StoryObj<NgcxSimpleTreeTestComponent>;
 
 export const DefaultView: Story = {};
