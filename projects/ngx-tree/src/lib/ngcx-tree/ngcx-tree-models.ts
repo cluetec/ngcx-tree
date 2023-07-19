@@ -1,5 +1,9 @@
+import { Type } from '@angular/core';
+
 export interface TreeConfig {
   enableDragging?: boolean;
+
+  treeNodeContentComponent?: Type<any>;
 
   allowDrop?: (
     drag: TreeNodeWrapper,

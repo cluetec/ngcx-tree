@@ -2,4 +2,4 @@
  * Public API Surface of ngx-tree
  */
 
-export * from './lib/test/ngcx-tree-models';
+export * from './lib/ngcx-tree/ngcx-tree-models';

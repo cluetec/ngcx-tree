@@ -1,4 +1,4 @@
-import { TreeNode } from '../ngcx-tree-models';
+import { TreeNode } from '../../ngcx-tree/ngcx-tree-models';
 
 export const TREE_DATA: TreeNode[] = [
   {

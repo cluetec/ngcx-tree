@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TreeNodeWrapper } from '../../ngcx-tree-models';
+import { TreeNodeWrapper } from '../../../ngcx-tree/ngcx-tree-models';
 
 @Component({
   selector: 'ngcx-sample-tree-node-content',

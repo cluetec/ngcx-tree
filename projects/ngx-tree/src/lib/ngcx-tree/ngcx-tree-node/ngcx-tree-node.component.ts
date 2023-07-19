@@ -9,7 +9,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TreeNodeWrapper } from '../../test/ngcx-tree-models';
+import { TreeNodeWrapper } from '../ngcx-tree-models';
 
 import {
   faBook,
