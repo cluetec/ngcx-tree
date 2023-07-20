@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { TreeConfig, TreeNodeWrapper } from '../../ngcx-tree/ngcx-tree-models';
+import { NgcxSampleTreeNodeContentComponent } from '../../../stories/custom-tree-node-content.component';
+import {
+  TreeConfig,
+  TreeNode,
+  TreeNodeWrapper,
+} from '../../ngcx-tree/ngcx-tree-models';
 import { NgcxTreeComponent } from '../../ngcx-tree/ngcx-tree.component';
-import { TREE_DATA } from './mock-tree-nodes';
-import { NgcxSampleTreeNodeContentComponent } from './ngcx-sample-tree-node-content/ngcx-sample-tree-node-content.component';
+import { TREE_DATA } from '../mock-tree-nodes';
 
 @Component({
   selector: 'ngcx-tree-test',
@@ -26,5 +30,9 @@ export class NgcxTreeTestComponent {
     allowDrag: (drag: TreeNodeWrapper): boolean => {
       return drag.children.length === 0; // allow only dnd of nodes without children
     },
+    loadChildren: (parent) => this.loadChildren(parent),
   };
+  loadChildren(parent: TreeNodeWrapper): TreeNode[] {
+    return parent.children.map((child) => child.node);
+  }
 }

@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { TreeNodeWrapper } from '../../../ngcx-tree/ngcx-tree-models';
+import { TreeNodeWrapper } from '../lib/ngcx-tree/ngcx-tree-models';
 
 @Component({
   selector: 'ngcx-sample-tree-node-content',
-  templateUrl: './ngcx-sample-tree-node-content.component.html',
+  template: '{{ nodeWrapper?.node?.title }} <i>(sample)</i>',
 })
 export class NgcxSampleTreeNodeContentComponent {
   @Input()

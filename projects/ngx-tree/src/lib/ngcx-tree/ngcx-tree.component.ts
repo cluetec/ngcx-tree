@@ -36,21 +36,29 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   @Input() config?: TreeConfig;
 
   dataSource: ArrayDataSource<TreeNodeWrapper> = new ArrayDataSource([]);
-  treeControl = new NestedTreeControl<TreeNodeWrapper>(
-    this.config?.loadChildren
-      ? (node) =>
-          this.createWrapperNodes(
-            this.config!.loadChildren!(node),
-            node,
-            node.depth + 1
-          )
-      : (node) => node.children
-  );
+  treeControl!: NestedTreeControl<TreeNodeWrapper>;
+
   dragging = false;
 
   ngOnInit(): void {
     const improvedNodes = this.createWrapperNodes(this.nodes ?? []);
     this.dataSource = new ArrayDataSource(improvedNodes);
+    const loadChildren = this.config?.loadChildren;
+
+    this.treeControl = new NestedTreeControl<TreeNodeWrapper>(
+      loadChildren
+        ? (node) => {
+            const improvedNodes = this.createWrapperNodes(
+              loadChildren(node),
+              node,
+              node.depth + 1
+            );
+            node.children = improvedNodes;
+
+            return improvedNodes;
+          }
+        : (node) => node.children
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -81,7 +89,8 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     });
   }
 
-  hasChild = (_: number, node: TreeNodeWrapper) => node.children.length > 0;
+  hasChild = (_: number, node: TreeNodeWrapper) =>
+    this.config?.loadChildren || node.children.length > 0;
 
   allowDrop(): (
     drag: CdkDrag<TreeNodeWrapper>,
@@ -111,22 +120,17 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   //   return drop.data.depth < 1;
   // }
 
-  handleDrop(event: CdkDragDrop<string[]>) {
-    console.log(event);
+  handleDrop(event: CdkDragDrop<TreeNodeWrapper>) {
+    console.log('node', event);
+    console.log('node', event.item.data.node.title);
+    console.log('from', event.previousContainer.data.node.title);
+    console.log('to', event.container.data.node.title);
 
-    // if (event.previousContainer === event.container) {
-    //   moveItemInArray(
-    //     event.container.data,
-    //     event.previousIndex,
-    //     event.currentIndex
-    //   );
-    // } else {
-    //   transferArrayItem(
-    //     event.previousContainer.data,
-    //     event.container.data,
-    //     event.previousIndex,
-    //     event.currentIndex
-    //   );
-    // }
+    // transferArrayItem(
+    //   event.previousContainer.data,
+    //   event.container.data,
+    //   event.previousIndex,
+    //   event.currentIndex
+    // );
   }
 }

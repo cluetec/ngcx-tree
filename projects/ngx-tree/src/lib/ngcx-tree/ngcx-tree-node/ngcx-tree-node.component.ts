@@ -4,12 +4,11 @@ import {
   Component,
   Input,
   OnInit,
-  Type,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TreeNodeWrapper } from '../ngcx-tree-models';
+import { TreeConfig, TreeNodeWrapper } from '../ngcx-tree-models';
 
 import {
   faBook,
@@ -27,7 +26,7 @@ import {
 export class NgcxTreeNodeComponent implements OnInit {
   @Input() nodeWrapper!: TreeNodeWrapper;
   @Input() treeControl!: NestedTreeControl<TreeNodeWrapper>;
-  @Input() treeNodeContentComponent?: Type<any>;
+  @Input() treeConfig?: TreeConfig;
 
   @ViewChild('ref', { read: ViewContainerRef, static: true })
   vcRef?: ViewContainerRef;
@@ -37,9 +36,9 @@ export class NgcxTreeNodeComponent implements OnInit {
   faChevronRight = faChevronRight;
 
   ngOnInit() {
-    if (this.vcRef && this.treeNodeContentComponent) {
+    if (this.vcRef && this.treeConfig?.treeNodeContentComponent) {
       const nodeComponent = this.vcRef.createComponent(
-        this.treeNodeContentComponent
+        this.treeConfig.treeNodeContentComponent
       );
       nodeComponent.instance.nodeWrapper = this.nodeWrapper;
     }
