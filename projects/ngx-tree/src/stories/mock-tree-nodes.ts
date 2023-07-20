@@ -67,7 +67,7 @@ const addIcon = (node: TreeNode): TreeNode => {
   const icon = (node.children?.length ?? 0) > 0 ? 'fa-folder' : 'fa-book';
   const result = { ...node };
   result.faIcon = icon;
-  result.children?.forEach((child) => addIcon(child));
+  result.children = result.children?.map((child) => addIcon(child));
   return result;
 };
 
