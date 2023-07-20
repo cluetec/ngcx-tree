@@ -10,17 +10,14 @@
       cdkTreeNodeToggle
       [attr.aria-label]="'Toggle ' + nodeWrapper.node.title"
       (click)="$event.preventDefault()">
-      <fa-icon
-        [icon]="
-          treeControl.isExpanded(nodeWrapper) ? faChevronDown : faChevronRight
-        "
-        size="xs"
-        [attr.aria-hidden]="false"></fa-icon>
+      <i
+        class="fa fa-xs fa-chevron-right"
+        [class.rotate]="treeControl.isExpanded(nodeWrapper)"></i>
     </button>
   </div>
   <div class="small-horizontal-tree-line"></div>
-  <div class="tree-node-icon-container">
-    <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
+  <div class="tree-node-icon-container" *ngIf="nodeWrapper.node.faIcon">
+    <i class="fa" [class]="nodeWrapper.node.faIcon"></i>
   </div>
   <div class="tree-node-content">
     <span *ngIf="!treeConfig?.treeNodeContentComponent">{{

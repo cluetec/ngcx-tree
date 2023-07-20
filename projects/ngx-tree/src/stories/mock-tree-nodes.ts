@@ -63,23 +63,12 @@ export const TREE_DATA: TreeNode[] = [
   },
 ];
 
-export const TREE_DATA_WITHOUT_CHILDREN = TREE_DATA.map((node) => ({
-  title: node.title,
-}));
-
-const createChildMap = (nodes: TreeNode[]): { [key: string]: TreeNode[] } => {
-  const childMap: { [key: string]: TreeNode[] } = {};
-  nodes
-    .filter((node) => node.children)
-    .forEach((node) => {
-      childMap[node.title!] = node.children!;
-      const childrenMap = createChildMap(node.children!);
-      Object.keys(childrenMap).forEach(
-        (key) => (childMap[key] = childrenMap[key])
-      );
-    });
-  return childMap;
+const addIcon = (node: TreeNode): TreeNode => {
+  const icon = (node.children?.length ?? 0) > 0 ? 'fa-folder' : 'fa-book';
+  const result = { ...node };
+  result.faIcon = icon;
+  result.children?.forEach((child) => addIcon(child));
+  return result;
 };
 
-export const TREE_CHILDREN: { [key: string]: TreeNode[] } =
-  createChildMap(TREE_DATA);
+export const TREE_DATA_WITH_ICONS = TREE_DATA.map((node) => addIcon(node));

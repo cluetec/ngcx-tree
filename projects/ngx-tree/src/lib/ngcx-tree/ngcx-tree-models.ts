@@ -17,6 +17,7 @@ export interface TreeConfig {
 export interface TreeNode {
   id: string;
   title?: string;
+  faIcon?: string;
   children?: TreeNode[];
 }
 

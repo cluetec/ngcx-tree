@@ -15,7 +15,6 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgcxTreeDataSource } from './ngcx-tree-data.source';
 import {
   NgcxTreeNodeMovedEvent,
@@ -31,13 +30,7 @@ import { isParentOf } from './ngcx-tree-utils';
   templateUrl: 'ngcx-tree.component.html',
   styleUrls: ['ngcx-tree.component.scss'],
   standalone: true,
-  imports: [
-    CdkTreeModule,
-    DragDropModule,
-    FontAwesomeModule,
-    CommonModule,
-    NgcxTreeNodeComponent,
-  ],
+  imports: [CdkTreeModule, DragDropModule, CommonModule, NgcxTreeNodeComponent],
 })
 export class NgcxTreeComponent implements OnChanges, OnInit {
   @Input() nodes?: TreeNode[];
