@@ -1,4 +1,3 @@
-import { ArrayDataSource } from '@angular/cdk/collections';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -9,14 +8,23 @@ import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TreeConfig, TreeNode, TreeNodeWrapper } from './ngcx-tree-models';
+import { NgcxTreeDataSource } from './ngcx-tree-data.source';
+import {
+  NgcxTreeNodeMovedEvent,
+  TreeConfig,
+  TreeNode,
+  TreeNodeWrapper,
+} from './ngcx-tree-models';
 import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component';
+import { isParentOf } from './ngcx-tree-utils';
 
 @Component({
   selector: 'ngcx-tree',
@@ -34,30 +42,22 @@ import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component
 export class NgcxTreeComponent implements OnChanges, OnInit {
   @Input() nodes?: TreeNode[];
   @Input() config?: TreeConfig;
+  @Output() nodeMoved = new EventEmitter<NgcxTreeNodeMovedEvent>();
+  @Output() customEvent = new EventEmitter<any>();
+  @Output() clickEvent = new EventEmitter<TreeNodeWrapper>();
 
-  dataSource: ArrayDataSource<TreeNodeWrapper> = new ArrayDataSource([]);
+  dataSource: NgcxTreeDataSource<TreeNodeWrapper> =
+    new NgcxTreeDataSource<TreeNodeWrapper>([]);
   treeControl!: NestedTreeControl<TreeNodeWrapper>;
-
   dragging = false;
 
   ngOnInit(): void {
     const improvedNodes = this.createWrapperNodes(this.nodes ?? []);
-    this.dataSource = new ArrayDataSource(improvedNodes);
-    const loadChildren = this.config?.loadChildren;
+    this.dataSource = new NgcxTreeDataSource(improvedNodes);
 
     this.treeControl = new NestedTreeControl<TreeNodeWrapper>(
-      loadChildren
-        ? (node) => {
-            const improvedNodes = this.createWrapperNodes(
-              loadChildren(node),
-              node,
-              node.depth + 1
-            );
-            node.children = improvedNodes;
-
-            return improvedNodes;
-          }
-        : (node) => node.children
+      (node) => node.children,
+      { trackBy: (node: TreeNodeWrapper) => node.id }
     );
   }
 
@@ -75,6 +75,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     const childCount = nodes.length;
     return nodes.map((node, idx) => {
       const nodeWrapper: TreeNodeWrapper = {
+        id: node.id,
         node: node,
         isFirstChild: idx === 0,
         isLastChild: idx === childCount - 1,
@@ -89,48 +90,67 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     });
   }
 
-  hasChild = (_: number, node: TreeNodeWrapper) =>
-    this.config?.loadChildren || node.children.length > 0;
+  hasChild = (_: number, node: TreeNodeWrapper) => node.children.length > 0;
 
   allowDrop(): (
     drag: CdkDrag<TreeNodeWrapper>,
     drop: CdkDropList<TreeNodeWrapper>
   ) => boolean {
-    if (this.config?.allowDrop) {
-      return (
-        drag: CdkDrag<TreeNodeWrapper>,
-        drop: CdkDropList<TreeNodeWrapper>
-      ) => this.config!.allowDrop!(drag.data, drop.data.parent, drop.data);
-    }
-    return () => true;
+    const customAllowDrop = this.config?.allowDrop
+      ? (drag: CdkDrag<TreeNodeWrapper>, drop: CdkDropList<TreeNodeWrapper>) =>
+          this.config!.allowDrop!(drag.data, drop.data.parent, drop.data)
+      : () => true;
+    return (
+      drag: CdkDrag<TreeNodeWrapper>,
+      drop: CdkDropList<TreeNodeWrapper>
+    ) => {
+      if (isParentOf(drag.data, drop.data)) {
+        return false;
+      }
+      return customAllowDrop(drag, drop);
+    };
   }
 
   disableDrag(node: TreeNodeWrapper) {
     return this.config?.allowDrag ? !this.config.allowDrag(node) : false;
   }
 
-  // allowDropInto(
-  //   drag: CdkDrag<TreeNodeWrapper>,
-  //   drop: CdkDropList<TreeNodeWrapper>
-  // ): boolean {
-  //   console.log(drag.data.node.title, drop.data.node.title);
-  //   console.log(drop.data.parent);
-  //   console.log(drag.data.depth);
-
-  //   return drop.data.depth < 1;
-  // }
-
+  // Every cdkDropList has only exact one element and will always removed from one and added to another
   handleDrop(event: CdkDragDrop<TreeNodeWrapper>) {
-    console.log('node', event);
-    console.log('node', event.item.data.node.title);
-    console.log('from', event.previousContainer.data.node.title);
-    console.log('to', event.container.data.node.title);
+    const movedNode: TreeNodeWrapper = event.item.data;
+    const removeFromList = movedNode.parent?.node.children ?? this.nodes!;
 
-    // transferArrayItem(
-    //   event.previousContainer.data,
-    //   event.container.data,
-    //   event.previousIndex,
-    //   event.currentIndex
-    // );
+    const removeIndex = removeFromList.findIndex(
+      (child) => child.id === movedNode.id
+    );
+    removeFromList.splice(removeIndex, 1);
+
+    const insertAfterNode = !!event.currentIndex;
+    const toNode: TreeNodeWrapper = event.container.data;
+    const addToList = toNode.parent?.node.children ?? this.nodes!;
+
+    let addAtNodeIdx = addToList.findIndex((child) => child.id === toNode.id);
+    if (insertAfterNode) {
+      addAtNodeIdx++;
+    }
+    addToList.splice(addAtNodeIdx, 0, movedNode.node);
+    this.dataSource.update(this.createWrapperNodes(this.nodes!));
+
+    const afterNodeIdx = addAtNodeIdx - 1;
+    const wrapperList = toNode.parent?.children ?? this.dataSource.data$.value;
+    const afterNode =
+      afterNodeIdx > -1 && addToList.length > afterNodeIdx
+        ? wrapperList.find((node) => node.id === addToList[afterNodeIdx].id)
+        : undefined;
+    this.nodeMoved.emit({
+      node: movedNode,
+      parent: toNode.parent,
+      afterNode: afterNode,
+    });
+    console.log({
+      node: movedNode,
+      parent: toNode.parent,
+      afterNode: afterNode,
+    });
   }
 }

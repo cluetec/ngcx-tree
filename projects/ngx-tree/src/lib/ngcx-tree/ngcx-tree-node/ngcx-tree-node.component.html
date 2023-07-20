@@ -1,13 +1,15 @@
 <div
   class="tree-node-content-container"
   [class.first]="nodeWrapper.isFirstChild"
-  [class.last]="nodeWrapper.isLastChild">
+  [class.last]="nodeWrapper.isLastChild"
+  (click)="clickEvent.emit()">
   <div class="tree-node-expand-container">
     <button
       *ngIf="nodeWrapper.children.length > 0"
       class="tree-node-expand"
       cdkTreeNodeToggle
-      [attr.aria-label]="'Toggle ' + nodeWrapper.node.title">
+      [attr.aria-label]="'Toggle ' + nodeWrapper.node.title"
+      (click)="$event.preventDefault()">
       <fa-icon
         [icon]="
           treeControl.isExpanded(nodeWrapper) ? faChevronDown : faChevronRight
@@ -21,7 +23,9 @@
     <fa-icon [icon]="faBook" [attr.aria-hidden]="false"></fa-icon>
   </div>
   <div class="tree-node-content">
-    <span *ngIf="!treeNodeContentComponent">{{ nodeWrapper.node.title }}</span>
+    <span *ngIf="!treeConfig?.treeNodeContentComponent">{{
+      nodeWrapper.node.title
+    }}</span>
     <ng-container #ref></ng-container>
   </div>
 </div>

@@ -1,30 +1,63 @@
-import { TreeNode } from '../ngcx-tree/ngcx-tree-models';
+import { TreeNode } from '../lib/ngcx-tree/ngcx-tree-models';
 
 export const TREE_DATA: TreeNode[] = [
   {
+    id: 'meat',
     title: 'Meat',
   },
   {
+    id: 'fish',
     title: 'Fish',
   },
   {
+    id: 'fru',
     title: 'Fruit',
     children: [
-      { title: 'Apple' },
-      { title: 'Banana' },
-      { title: 'Fruit loops' },
+      {
+        id: 'app',
+        title: 'Apple',
+      },
+      {
+        id: 'ban',
+        title: 'Banana',
+      },
+      {
+        id: 'fruloo',
+        title: 'Fruit loops',
+      },
     ],
   },
   {
+    id: 'veg',
     title: 'Vegetables',
     children: [
       {
+        id: 'gre',
         title: 'Green',
-        children: [{ title: 'Broccoli' }, { title: 'Brussels sprouts' }],
+        children: [
+          {
+            id: 'broc',
+            title: 'Broccoli',
+          },
+          {
+            id: 'brss',
+            title: 'Brussels sprouts',
+          },
+        ],
       },
       {
+        id: 'ora',
         title: 'Orange',
-        children: [{ title: 'Pumpkins' }, { title: 'Carrots' }],
+        children: [
+          {
+            id: 'pump',
+            title: 'Pumpkins',
+          },
+          {
+            id: 'carr',
+            title: 'Carrots',
+          },
+        ],
       },
     ],
   },

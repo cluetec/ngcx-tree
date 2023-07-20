@@ -12,11 +12,10 @@ export interface TreeConfig {
   ) => boolean;
 
   allowDrag?: (drag: TreeNodeWrapper) => boolean;
-
-  loadChildren?: (node: TreeNodeWrapper) => TreeNode[];
 }
 
 export interface TreeNode {
+  id: string;
   title?: string;
   children?: TreeNode[];
 }
@@ -30,6 +29,7 @@ export interface TreeFlatNode {
 }
 
 export interface TreeNodeWrapper {
+  id: any;
   node: TreeNode;
   isFirstChild: boolean;
   isLastChild: boolean;
@@ -40,4 +40,10 @@ export interface TreeNodeWrapper {
 
 export interface TreeNodeComponent {
   nodeWrapper?: TreeNodeWrapper;
+}
+
+export interface NgcxTreeNodeMovedEvent {
+  node: TreeNodeWrapper;
+  parent?: TreeNodeWrapper;
+  afterNode?: TreeNodeWrapper;
 }
