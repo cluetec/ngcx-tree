@@ -104,6 +104,21 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     };
   }
 
+  // prevent drop directly after a node on same level, that is expanded
+  sortPredicate(): (
+    index: number,
+    drag: CdkDrag,
+    drop: CdkDropList
+  ) => boolean {
+    return (
+      index: number,
+      _drag: CdkDrag<TreeNodeWrapper>,
+      drop: CdkDropList<TreeNodeWrapper>
+    ) => {
+      return index == 0 || !this.treeControl.isExpanded(drop.data);
+    };
+  }
+
   disableDrag(node: TreeNodeWrapper) {
     return this.config?.allowDrag ? !this.config.allowDrag(node) : false;
   }

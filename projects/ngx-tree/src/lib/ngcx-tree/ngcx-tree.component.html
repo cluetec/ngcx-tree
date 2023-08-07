@@ -16,7 +16,8 @@
       <div
         cdkDropList
         [cdkDropListData]="node"
-        [cdkDropListEnterPredicate]="allowDrop()">
+        [cdkDropListEnterPredicate]="allowDrop()"
+        [cdkDropListSortPredicate]="sortPredicate()">
         <div
           cdkDrag
           [cdkDragDisabled]="disableDrag(node)"
@@ -48,7 +49,8 @@
       <div
         cdkDropList
         [cdkDropListData]="node"
-        [cdkDropListEnterPredicate]="allowDrop()">
+        [cdkDropListEnterPredicate]="allowDrop()"
+        [cdkDropListSortPredicate]="sortPredicate()">
         <div
           cdkDrag
           [cdkDragDisabled]="disableDrag(node)"
