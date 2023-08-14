@@ -150,9 +150,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     removeFromList.splice(removeIndex, 1);
     const toNode: TreeNodeWrapperDropZone = event.container.data;
     const insertIntoNode = !toNode.id;
-    console.log('event.container', event.container);
-    console.log('toNode', toNode, insertIntoNode);
-    console.log('x', !!toNode.parent?.node.children);
+    console.log('toNode', toNode.dropType, toNode, insertIntoNode);
     if (toNode.dropType === DropType.DROP_INTO && !toNode.node.children) {
       toNode.node.children = [];
     }
@@ -160,7 +158,6 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
       toNode.dropType === DropType.DROP_INTO
         ? toNode.node.children!
         : toNode.parent?.node.children ?? this.nodes!;
-    console.log('addToList', addToList);
     let addAtNodeIdx = 0;
     if (
       toNode.dropType === DropType.DROP_AFTER ||
