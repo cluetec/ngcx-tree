@@ -39,6 +39,10 @@ export interface TreeNodeWrapper {
   parent?: TreeNodeWrapper;
 }
 
+export interface TreeNodeWrapperChildList {
+  parent?: TreeNodeWrapper;
+}
+
 export interface TreeNodeComponent {
   nodeWrapper?: TreeNodeWrapper;
 }

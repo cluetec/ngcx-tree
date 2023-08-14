@@ -7,23 +7,35 @@
   cdkDropListGroup>
   <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
     <div class="tree-node-container">
-      <!-- <div
+      <div
         cdkDropList
-        [cdkDropListData]="node"
-        class="tree-node-container-drop-zone"
-        [class.hide]="!dragging"
-        [cdkDropListEnterPredicate]="allowDropInto"></div> -->
+        [cdkDropListData]="createDropZoneData(node, DropType.DROP_BEFORE)"
+        [cdkDropListEnterPredicate]="allowDrop()"
+        class="tree-node-container-drop-zone before-node"
+        [class.hide]="!dragging || !ownAllowDrop(node)"></div>
+      <div
+        cdkDropList
+        [cdkDropListData]="createDropZoneData(node, DropType.DROP_INTO)"
+        [cdkDropListEnterPredicate]="allowDrop()"
+        class="tree-node-container-drop-zone into-node"
+        [class.hide]="!dragging || !ownAllowDrop(node)"></div>
+      <div
+        cdkDropList
+        [cdkDropListData]="createDropZoneData(node, DropType.DROP_AFTER)"
+        [cdkDropListEnterPredicate]="allowDrop()"
+        class="tree-node-container-drop-zone after-node"
+        [class.hide]="!dragging || !ownAllowDrop(node)"></div>
       <div
         cdkDropList
         [cdkDropListData]="node"
-        [cdkDropListEnterPredicate]="allowDrop()"
-        [cdkDropListSortPredicate]="sortPredicate()">
+        [cdkDropListEnterPredicate]="disable"
+        [cdkDropListSortPredicate]="disable">
         <div
           cdkDrag
           [cdkDragDisabled]="disableDrag(node)"
           [cdkDragData]="node"
-          (cdkDragStarted)="dragging = true"
-          (cdkDragReleased)="dragging = false"
+          (cdkDragStarted)="dragging = node"
+          (cdkDragReleased)="dragging = undefined"
           (cdkDragDropped)="handleDrop($event)">
           <ngcx-tree-node
             [nodeWrapper]="node"
@@ -49,14 +61,14 @@
       <div
         cdkDropList
         [cdkDropListData]="node"
-        [cdkDropListEnterPredicate]="allowDrop()"
-        [cdkDropListSortPredicate]="sortPredicate()">
+        [cdkDropListEnterPredicate]="disable"
+        [cdkDropListSortPredicate]="disable">
         <div
           cdkDrag
           [cdkDragDisabled]="disableDrag(node)"
           [cdkDragData]="node"
-          (cdkDragStarted)="dragging = true"
-          (cdkDragReleased)="dragging = false"
+          (cdkDragStarted)="dragging = node"
+          (cdkDragReleased)="dragging = undefined"
           (cdkDragDropped)="handleDrop($event)">
           <div
             class="tree-node-content-container"

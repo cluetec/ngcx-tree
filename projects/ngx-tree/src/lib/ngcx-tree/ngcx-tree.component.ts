@@ -42,7 +42,14 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   dataSource: NgcxTreeDataSource<TreeNodeWrapper> =
     new NgcxTreeDataSource<TreeNodeWrapper>([]);
   treeControl!: NestedTreeControl<TreeNodeWrapper>;
-  dragging = false;
+  dragging?: TreeNodeWrapper;
+
+  DropType = DropType;
+  disable = () => false;
+  createDropZoneData = (
+    node: TreeNodeWrapper,
+    dropType: DropType
+  ): TreeNodeWrapperDropZone => ({ ...node, dropType: dropType });
 
   ngOnInit(): void {
     const improvedNodes = this.createWrapperNodes(this.nodes ?? []);
@@ -95,13 +102,23 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
       : () => true;
     return (
       drag: CdkDrag<TreeNodeWrapper>,
-      drop: CdkDropList<TreeNodeWrapper>
-    ) => {
+      drop: CdkDropList<TreeNodeWrapperDropZone>
+    ): boolean => {
       if (isParentOf(drag.data, drop.data)) {
+        console.log('disable drop because of isParentOf', drag.data, drop.data);
         return false;
       }
       return customAllowDrop(drag, drop);
     };
+  }
+
+  ownAllowDrop(dropNode: TreeNodeWrapper): boolean {
+    if (!this.dragging || isParentOf(this.dragging, dropNode)) {
+      return false;
+    }
+
+    // return customAllowDrop(drag, drop);
+    return true;
   }
 
   // prevent drop directly after a node on same level, that is expanded
@@ -124,28 +141,44 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   }
 
   // Every cdkDropList has only exact one element and will always removed from one and added to another
-  handleDrop(event: CdkDragDrop<TreeNodeWrapper>) {
+  handleDrop(event: CdkDragDrop<TreeNodeWrapperDropZone>) {
     const movedNode: TreeNodeWrapper = event.item.data;
     const removeFromList = movedNode.parent?.node.children ?? this.nodes!;
-
     const removeIndex = removeFromList.findIndex(
       (child) => child.id === movedNode.id
     );
     removeFromList.splice(removeIndex, 1);
-
-    const insertAfterNode = !!event.currentIndex;
-    const toNode: TreeNodeWrapper = event.container.data;
-    const addToList = toNode.parent?.node.children ?? this.nodes!;
-
-    let addAtNodeIdx = addToList.findIndex((child) => child.id === toNode.id);
-    if (insertAfterNode) {
-      addAtNodeIdx++;
+    const toNode: TreeNodeWrapperDropZone = event.container.data;
+    const insertIntoNode = !toNode.id;
+    console.log('event.container', event.container);
+    console.log('toNode', toNode, insertIntoNode);
+    console.log('x', !!toNode.parent?.node.children);
+    if (toNode.dropType === DropType.DROP_INTO && !toNode.node.children) {
+      toNode.node.children = [];
+    }
+    const addToList =
+      toNode.dropType === DropType.DROP_INTO
+        ? toNode.node.children!
+        : toNode.parent?.node.children ?? this.nodes!;
+    console.log('addToList', addToList);
+    let addAtNodeIdx = 0;
+    if (
+      toNode.dropType === DropType.DROP_AFTER ||
+      toNode.dropType === DropType.DROP_BEFORE
+    ) {
+      addAtNodeIdx = addToList.findIndex((child) => child.id === toNode.id);
+      if (toNode.dropType === DropType.DROP_AFTER) {
+        addAtNodeIdx++;
+      }
     }
     addToList.splice(addAtNodeIdx, 0, movedNode.node);
     this.dataSource.update(this.createWrapperNodes(this.nodes!));
 
     const afterNodeIdx = addAtNodeIdx - 1;
-    const wrapperList = toNode.parent?.children ?? this.dataSource.data$.value;
+    const wrapperList =
+      toNode.dropType === DropType.DROP_INTO
+        ? toNode.children!
+        : toNode.parent?.children ?? this.dataSource.data$.value;
     const afterNode =
       afterNodeIdx > -1 && addToList.length > afterNodeIdx
         ? wrapperList.find((node) => node.id === addToList[afterNodeIdx].id)
@@ -161,4 +194,14 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
       afterNode: afterNode,
     });
   }
+}
+
+interface TreeNodeWrapperDropZone extends TreeNodeWrapper {
+  dropType?: DropType;
+}
+
+enum DropType {
+  DROP_AFTER = 'DROP_AFTER',
+  DROP_BEFORE = 'DROP_BEFORE',
+  DROP_INTO = 'DROP_INTO',
 }
