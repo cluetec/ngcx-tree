@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
+  HostListener,
   Input,
   OnChanges,
   OnInit,
@@ -43,13 +44,15 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     new NgcxTreeDataSource<TreeNodeWrapper>([]);
   treeControl!: NestedTreeControl<TreeNodeWrapper>;
   dragging?: TreeNodeWrapper;
-
+  showDndZones = false;
   DropType = DropType;
   disable = () => false;
   createDropZoneData = (
     node: TreeNodeWrapper,
     dropType: DropType
   ): TreeNodeWrapperDropZone => ({ ...node, dropType: dropType });
+
+  private canceledByEsq?: boolean;
 
   ngOnInit(): void {
     const improvedNodes = this.createWrapperNodes(this.nodes ?? []);
@@ -59,6 +62,9 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
       (node) => node.children,
       { trackBy: (node: TreeNodeWrapper) => node.id }
     );
+
+    this.treeControl.dataNodes = this.dataSource.data$.value;
+    setTimeout(() => this.treeControl.expandAll(), 100);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -140,15 +146,30 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     return this.config?.allowDrag ? !this.config.allowDrag(node) : false;
   }
 
+  @HostListener('window:keyup', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.canceledByEsq = true;
+      document.dispatchEvent(new Event('mouseup'));
+    }
+  }
+
   // Every cdkDropList has only exact one element and will always removed from one and added to another
   handleDrop(event: CdkDragDrop<TreeNodeWrapperDropZone>) {
     const movedNode: TreeNodeWrapper = event.item.data;
+    const toNode: TreeNodeWrapperDropZone = event.container.data;
+
+    // dropType undefined can happen if dropped directly without moving
+    if (this.canceledByEsq || toNode.dropType === undefined) {
+      this.canceledByEsq = false;
+      return;
+    }
+
     const removeFromList = movedNode.parent?.node.children ?? this.nodes!;
     const removeIndex = removeFromList.findIndex(
       (child) => child.id === movedNode.id
     );
     removeFromList.splice(removeIndex, 1);
-    const toNode: TreeNodeWrapperDropZone = event.container.data;
     const insertIntoNode = !toNode.id;
     console.log('toNode', toNode.dropType, toNode, insertIntoNode);
     if (toNode.dropType === DropType.DROP_INTO && !toNode.node.children) {

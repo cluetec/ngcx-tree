@@ -13,6 +13,18 @@
 .tree-node {
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  .tree-node-container-drop-zone.after-expanded-node {
+    position: absolute;
+
+    height: 20px;
+    z-index: 3;
+    bottom: -10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 }
 
 .tree-node .tree-node {
@@ -33,40 +45,59 @@
     justify-content: flex-start;
     align-items: center;
   }
-  .tree-node-container-drop-zone {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 1;
+}
 
-    &.hide {
-      height: 0 !important;
+.tree-node-container-drop-zone {
+  height: 100%;
+  left: 25px;
+  right: 5px;
+  position: absolute;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  &:hover,
+  &.show-dnd-zones {
+    &.into-node {
+      // background-color: rgba(0, 0, 0, 0.5);
+      border: 2px dashed rgba(0, 0, 0, 0.5);
     }
 
-    &:hover {
-      background-color: rgba(0, 255, 0, 0.05);
+    .drop-insert-line {
+      border-top: 2px dashed rgba(0, 0, 0, 0.5);
     }
-    // .tree-node-content-container {
-    //   // display: none;
+  }
+
+  &.hide:not(.show-dnd-zones) {
+    height: 0 !important;
+    .drop-insert-line {
+      border-top: solid transparent 0px !important;
+    }
+  }
+
+  &.after-node {
+    height: 50%;
+    z-index: 3;
+    top: 75%;
+
+    // &:hover,
+    // &.show-dnd-zones {
+    //   background-color: rgba(255, 0, 0, 0.5);
     // }
-
-    &.after-node {
-      height: 50%;
-      z-index: 3;
-      top: 75%;
-
-      &:hover {
-        background-color: rgba(255, 0, 0, 0.5);
-      }
-    }
-    &.before-node {
+    &.last {
       height: 25%;
-      z-index: 2;
-      top: 0;
-
-      &:hover {
-        background-color: rgba(0, 0, 255, 0.5);
-      }
     }
+  }
+  &.before-node {
+    height: 25%;
+    z-index: 2;
+    top: 0;
+
+    // &:hover,
+    // &.show-dnd-zones {
+    //   background-color: rgba(0, 0, 255, 0.5);
+    // }
   }
 }
