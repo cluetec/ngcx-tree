@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-tree": {
+    "ngcx-tree": {
       "projectType": "library",
-      "root": "projects/ngx-tree",
-      "sourceRoot": "projects/ngx-tree/src",
+      "root": "projects/ngcx-tree",
+      "sourceRoot": "projects/ngcx-tree/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngx-tree/ng-package.json"
+            "project": "projects/ngcx-tree/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-tree/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngcx-tree/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/ngx-tree/tsconfig.lib.json"
+              "tsConfig": "projects/ngcx-tree/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -27,25 +27,25 @@
         "test": {
           "builder": "@angular-devkit/build-angular:jest",
           "options": {
-            "tsConfig": "projects/ngx-tree/tsconfig.spec.json",
+            "tsConfig": "projects/ngcx-tree/tsconfig.spec.json",
             "polyfills": ["zone.js", "zone.js/testing"]
           }
         },
         "storybook": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
-            "configDir": "projects/ngx-tree/.storybook",
-            "browserTarget": "ngx-tree:build",
+            "configDir": "projects/ngcx-tree/.storybook",
+            "browserTarget": "ngcx-tree:build",
             "compodoc": false,
             "port": 6006,
-            "styles": ["projects/ngx-tree/styles/styles.scss"]
+            "styles": ["projects/ngcx-tree/styles/styles.scss"]
           }
         },
         "build-storybook": {
           "builder": "@storybook/angular:build-storybook",
           "options": {
-            "configDir": "projects/ngx-tree/.storybook",
-            "browserTarget": "ngx-tree:build",
+            "configDir": "projects/ngcx-tree/.storybook",
+            "browserTarget": "ngcx-tree:build",
             "compodoc": false,
             "outputDir": "storybook-static"
           }
