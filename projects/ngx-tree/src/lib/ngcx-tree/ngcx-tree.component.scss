@@ -49,7 +49,6 @@
 
   &:hover {
     &.into-node {
-      // background-color: rgba(0, 0, 0, 0.5);
       border: 2px dashed rgba(0, 0, 0, 0.5);
     }
 
@@ -66,10 +65,11 @@
   }
 
   &.before-node {
-    height: 25%;
+    height: 50%;
     z-index: 2;
-    top: 0;
+    top: -25%;
   }
+
   &.after-node {
     height: 50%;
     z-index: 3;

@@ -4,7 +4,6 @@ export const isParentOf = (
   parent: TreeNodeWrapper,
   node: TreeNodeWrapper
 ): boolean => {
-
   if (!node.parent) {
     return false;
   }

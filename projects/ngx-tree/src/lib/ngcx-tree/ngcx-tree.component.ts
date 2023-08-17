@@ -166,52 +166,64 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
       return;
     }
 
+    this.removeElementFromPreviousPosition(movedNode);
+
+    const insertIntoNode =
+      toNode.dropType === DropType.DROP_INTO ? toNode : toNode.parent;
+    const wrapperList = insertIntoNode?.children ?? this.dataSource.data$.value;
+    let addAtNodeIdx = this.findAddIndex(toNode, insertIntoNode, wrapperList);
+
+    // add element to new Position
+    (insertIntoNode?.node.children ?? this.nodes!).splice(
+      addAtNodeIdx,
+      0,
+      movedNode.node
+    );
+    this.dataSource.update(this.createWrapperNodes(this.nodes!));
+
+    const afterNodeIdx = addAtNodeIdx - 1;
+    const afterNode =
+      afterNodeIdx > -1 && wrapperList.length > afterNodeIdx
+        ? wrapperList[afterNodeIdx]
+        : undefined;
+    this.nodeMoved.emit({
+      node: movedNode,
+      parent: toNode.dropType === DropType.DROP_INTO ? toNode : toNode.parent,
+      afterNode: afterNode,
+    });
+  }
+
+  private findAddIndex(
+    node: TreeNodeWrapperDropZone,
+    insertIntoNode: TreeNodeWrapper | undefined,
+    insertIntoList: TreeNodeWrapper[]
+  ) {
+    if (
+      insertIntoNode &&
+      node.dropType === DropType.DROP_INTO &&
+      !insertIntoNode.node.children
+    ) {
+      insertIntoNode.node.children = [];
+    }
+    let addAtNodeIdx = 0;
+    if (
+      node.dropType === DropType.DROP_AFTER ||
+      node.dropType === DropType.DROP_BEFORE
+    ) {
+      addAtNodeIdx = insertIntoList.findIndex((child) => child.id === node.id);
+      if (node.dropType === DropType.DROP_AFTER) {
+        addAtNodeIdx++;
+      }
+    }
+    return addAtNodeIdx;
+  }
+
+  private removeElementFromPreviousPosition(movedNode: TreeNodeWrapper) {
     const removeFromList = movedNode.parent?.node.children ?? this.nodes!;
     const removeIndex = removeFromList.findIndex(
       (child) => child.id === movedNode.id
     );
     removeFromList.splice(removeIndex, 1);
-    const insertIntoNode = !toNode.id;
-    console.log('toNode', toNode.dropType, toNode, insertIntoNode);
-    if (toNode.dropType === DropType.DROP_INTO && !toNode.node.children) {
-      toNode.node.children = [];
-    }
-    const addToList =
-      toNode.dropType === DropType.DROP_INTO
-        ? toNode.node.children!
-        : toNode.parent?.node.children ?? this.nodes!;
-    let addAtNodeIdx = 0;
-    if (
-      toNode.dropType === DropType.DROP_AFTER ||
-      toNode.dropType === DropType.DROP_BEFORE
-    ) {
-      addAtNodeIdx = addToList.findIndex((child) => child.id === toNode.id);
-      if (toNode.dropType === DropType.DROP_AFTER) {
-        addAtNodeIdx++;
-      }
-    }
-    addToList.splice(addAtNodeIdx, 0, movedNode.node);
-    this.dataSource.update(this.createWrapperNodes(this.nodes!));
-
-    const afterNodeIdx = addAtNodeIdx - 1;
-    const wrapperList =
-      toNode.dropType === DropType.DROP_INTO
-        ? toNode.children!
-        : toNode.parent?.children ?? this.dataSource.data$.value;
-    const afterNode =
-      afterNodeIdx > -1 && addToList.length > afterNodeIdx
-        ? wrapperList.find((node) => node.id === addToList[afterNodeIdx].id)
-        : undefined;
-    this.nodeMoved.emit({
-      node: movedNode,
-      parent: toNode.parent,
-      afterNode: afterNode,
-    });
-    console.log({
-      node: movedNode,
-      parent: toNode.parent,
-      afterNode: afterNode,
-    });
   }
 }
 

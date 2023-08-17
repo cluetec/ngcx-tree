@@ -1,32 +1,30 @@
-# @cluetec/ngx-tree
+# @cluetec/ngcx-tree
 
-A reusable tree component for Angular based on the
-[Stackblitz example](https://stackblitz.com/edit/mat-tree-with-drag-and-drop) by
-[Jamie Perkins](https://stackblitz.com/@inorganik), using the Angular CDK Tree
-with Drag and Drop functionality. <br><br>
+A reusable tree component for Angular based on the CDK Tree and the CDK Drag n
+Drop features.
 
 ## Getting Started
 
-1. Install the library: <br>`npm install @cluetec/ngx-tree` <br>
+1. Install the library: <br>`npm install @cluetec/ngcx-tree` <br>
 
 2. Import the component. Since it is standalone, either add it directly to
    another standlone component or import it into your existing `NgModule`:
 
 ```
-import { NgxTreeComponent } from '@cluetec/ngx-tree';
+import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
 
 @Component({
   standalone: true,
-  imports: [NgxTreeComponent],
+  imports: [NgcxTreeComponent],
 })
 ```
 
 ```
-import { NgxTreeComponent } from '@cluetec/ngx-tree';
+import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [NgxTreeComponent],
+  imports: [NgcxTreeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
