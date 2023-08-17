@@ -1,13 +1,18 @@
-import { Type } from '@angular/core';
+import { EventEmitter, Type } from '@angular/core';
 
 export interface TreeConfig {
   enableDragging?: boolean;
 
-  treeNodeContentComponent?: Type<any>;
+  treeNodeContentComponent?: Type<NgcxCustomComponent>;
 
   allowDrop?: (node: TreeNodeWrapper, intoNode?: TreeNodeWrapper) => boolean;
 
   allowDrag?: (node: TreeNodeWrapper) => boolean;
+}
+
+export interface NgcxCustomComponent {
+  nodeWrapper?: TreeNodeWrapper;
+  customEvent?: EventEmitter<any>;
 }
 
 export interface TreeNode {
