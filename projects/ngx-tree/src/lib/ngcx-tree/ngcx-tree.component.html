@@ -10,24 +10,25 @@
       <div
         cdkDropList
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_BEFORE)"
-        [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone before-node"
-        [class.hide]="!dragging || !ownAllowDrop(node) || !node.isFirstChild">
+        [class.hide]="
+          !dragging ||
+          !node.isFirstChild ||
+          !allowDrop(node, DropType.DROP_BEFORE)
+        ">
         <div class="drop-insert-line"></div>
       </div>
       <div
         cdkDropList
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_INTO)"
-        [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone into-node"
-        [class.hide]="!dragging || !ownAllowDrop(node)"></div>
+        [class.hide]="!dragging || !allowDrop(node, DropType.DROP_INTO)"></div>
       <div
         cdkDropList
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_AFTER)"
-        [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone after-node"
         [class.last]="node.isLastChild"
-        [class.hide]="!dragging || !ownAllowDrop(node)">
+        [class.hide]="!dragging || !allowDrop(node, DropType.DROP_AFTER)">
         <div class="drop-insert-line"></div>
       </div>
       <div
@@ -50,6 +51,11 @@
             (customEvent)="customEvent.emit($event)"
             (clickEvent)="clickEvent.emit(node)"></ngcx-tree-node>
         </div>
+        <ngcx-tree-node
+          *ngIf="node.id === dragging?.id"
+          [nodeWrapper]="node"
+          [treeControl]="treeControl"
+          [treeConfig]="config"></ngcx-tree-node>
       </div>
     </div>
   </cdk-nested-tree-node>
@@ -60,10 +66,11 @@
     <div
       cdkDropList
       [cdkDropListData]="createDropZoneData(node, DropType.DROP_AFTER)"
-      [cdkDropListEnterPredicate]="allowDrop()"
       class="tree-node-container-drop-zone after-expanded-node"
       [class.hide]="
-        !dragging || !ownAllowDrop(node) || !treeControl.isExpanded(node)
+        !dragging ||
+        !allowDrop(node, DropType.DROP_AFTER) ||
+        !treeControl.isExpanded(node)
       ">
       <div class="drop-insert-line"></div>
     </div>
@@ -71,25 +78,28 @@
       <div
         cdkDropList
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_BEFORE)"
-        [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone before-node"
-        [class.hide]="!dragging || !ownAllowDrop(node) || !node.isFirstChild">
+        [class.hide]="
+          !dragging ||
+          !node.isFirstChild ||
+          !allowDrop(node, DropType.DROP_BEFORE)
+        ">
         <div class="drop-insert-line"></div>
       </div>
       <div
         cdkDropList
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_INTO)"
-        [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone into-node"
-        [class.hide]="!dragging || !ownAllowDrop(node)"></div>
+        [class.hide]="!dragging || !allowDrop(node, DropType.DROP_INTO)"></div>
       <div
         cdkDropList
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_AFTER)"
-        [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone after-node"
         [class.last]="node.isLastChild"
         [class.hide]="
-          !dragging || !ownAllowDrop(node) || treeControl.isExpanded(node)
+          !dragging ||
+          treeControl.isExpanded(node) ||
+          !allowDrop(node, DropType.DROP_AFTER)
         ">
         <div class="drop-insert-line"></div>
       </div>
@@ -122,7 +132,7 @@
       </div>
     </div>
     <div
-      *ngIf="treeControl.isExpanded(node)"
+      *ngIf="treeControl.isExpanded(node) && dragging?.id !== node.id"
       class="tree-node-children-container"
       [class.first]="node.isFirstChild"
       [class.last]="node.isLastChild">

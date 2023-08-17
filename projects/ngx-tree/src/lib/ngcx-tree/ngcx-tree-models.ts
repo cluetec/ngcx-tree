@@ -5,13 +5,9 @@ export interface TreeConfig {
 
   treeNodeContentComponent?: Type<any>;
 
-  allowDrop?: (
-    drag: TreeNodeWrapper,
-    parentNode?: TreeNodeWrapper,
-    atNode?: TreeNodeWrapper
-  ) => boolean;
+  allowDrop?: (node: TreeNodeWrapper, intoNode?: TreeNodeWrapper) => boolean;
 
-  allowDrag?: (drag: TreeNodeWrapper) => boolean;
+  allowDrag?: (node: TreeNodeWrapper) => boolean;
 }
 
 export interface TreeNode {

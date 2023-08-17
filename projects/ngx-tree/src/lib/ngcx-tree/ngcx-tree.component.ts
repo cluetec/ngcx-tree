@@ -99,32 +99,16 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
 
   hasChild = (_: number, node: TreeNodeWrapper) => node.children.length > 0;
 
-  allowDrop(): (
-    drag: CdkDrag<TreeNodeWrapper>,
-    drop: CdkDropList<TreeNodeWrapper>
-  ) => boolean {
-    const customAllowDrop = this.config?.allowDrop
-      ? (drag: CdkDrag<TreeNodeWrapper>, drop: CdkDropList<TreeNodeWrapper>) =>
-          this.config!.allowDrop!(drag.data, drop.data.parent, drop.data)
-      : () => true;
-    return (
-      drag: CdkDrag<TreeNodeWrapper>,
-      drop: CdkDropList<TreeNodeWrapperDropZone>
-    ): boolean => {
-      if (isParentOf(drag.data, drop.data)) {
-        console.log('disable drop because of isParentOf', drag.data, drop.data);
-        return false;
-      }
-      return customAllowDrop(drag, drop);
-    };
-  }
-
-  ownAllowDrop(dropNode: TreeNodeWrapper): boolean {
+  allowDrop(dropNode: TreeNodeWrapper, dropType: DropType): boolean {
     if (!this.dragging || isParentOf(this.dragging, dropNode)) {
       return false;
     }
-
-    // return customAllowDrop(drag, drop);
+    const intoNode =
+      dropType == DropType.DROP_INTO ? dropNode : dropNode.parent;
+    if (this.config?.allowDrop) {
+      // TODO cache calls?
+      return this.config.allowDrop(this.dragging, intoNode);
+    }
     return true;
   }
 

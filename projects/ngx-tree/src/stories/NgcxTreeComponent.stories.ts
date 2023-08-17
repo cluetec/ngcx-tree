@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { NgcxTreeComponent } from '../lib/ngcx-tree/ngcx-tree.component';
+import { TreeNodeWrapper } from '../public-api';
 import { NgcxSampleTreeNodeContentComponent } from './custom-tree-node-content.component';
 import { TREE_DATA, TREE_DATA_WITH_ICONS } from './mock-tree-nodes';
 
@@ -36,6 +37,23 @@ export const Default: Story = {
   args: { nodes: TREE_DATA },
 };
 
+export const MaxThreeLayersAndMoveLeafsOnly: Story = {
+  args: {
+    nodes: TREE_DATA,
+    config: {
+      allowDrop: (
+        _node: TreeNodeWrapper,
+        intoNode?: TreeNodeWrapper
+      ): boolean => {
+        return !intoNode || intoNode.depth + 1 < 3;
+      },
+      allowDrag: (node: TreeNodeWrapper): boolean => {
+        return !node.children || node.children.length === 0;
+      },
+    },
+  },
+};
+
 export const CustomComponent: Story = {
   args: {
     nodes: TREE_DATA,
@@ -45,7 +63,7 @@ export const CustomComponent: Story = {
   },
 };
 
-export const IconsComponent: Story = {
+export const WithIcons: Story = {
   args: {
     nodes: TREE_DATA_WITH_ICONS,
   },
