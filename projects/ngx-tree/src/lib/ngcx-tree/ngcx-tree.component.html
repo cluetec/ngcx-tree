@@ -129,10 +129,15 @@
               (clickEvent)="clickEvent.emit(node)"></ngcx-tree-node>
           </div>
         </div>
+        <ngcx-tree-node
+          *ngIf="node.id === dragging?.id"
+          [nodeWrapper]="node"
+          [treeControl]="treeControl"
+          [treeConfig]="config"></ngcx-tree-node>
       </div>
     </div>
     <div
-      *ngIf="treeControl.isExpanded(node) && dragging?.id !== node.id"
+      *ngIf="treeControl.isExpanded(node)"
       class="tree-node-children-container"
       [class.first]="node.isFirstChild"
       [class.last]="node.isLastChild">

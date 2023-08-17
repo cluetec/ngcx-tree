@@ -21,6 +21,7 @@
 }
 
 .tree-node-container {
+  min-height: 30px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -46,6 +47,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  // background-color: rgba(255, 0, 0, 0.5);
 
   &:hover {
     &.into-node {
@@ -65,18 +67,20 @@
   }
 
   &.before-node {
-    height: 50%;
+    // background-color: rgba(0, 255, 0, 0.5);
+    height: 20px;
     z-index: 2;
-    top: -25%;
+    top: -10px;
   }
 
   &.after-node {
-    height: 50%;
+    height: 20px;
     z-index: 3;
-    top: 75%;
+    top: calc(100% - 10px);
+    // background-color: rgba(255, 255, 0, 0.5);
 
     &.last {
-      height: 25%;
+      height: 10px;
     }
   }
 
@@ -89,5 +93,6 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    // background-color: rgba(255, 255, 0, 0.5);
   }
 }

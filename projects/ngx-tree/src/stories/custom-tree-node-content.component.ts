@@ -1,9 +1,12 @@
+import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TreeNodeWrapper } from '../lib/ngcx-tree/ngcx-tree-models';
 
 @Component({
   selector: 'ngcx-sample-tree-node-content',
   templateUrl: 'custom-tree-node-content.component.html',
+  standalone: true,
+  imports: [NgIf],
 })
 export class NgcxSampleTreeNodeContentComponent {
   @Input()
