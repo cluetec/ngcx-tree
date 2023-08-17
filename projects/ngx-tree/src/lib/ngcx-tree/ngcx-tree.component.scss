@@ -14,17 +14,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-
-  .tree-node-container-drop-zone.after-expanded-node {
-    position: absolute;
-
-    height: 20px;
-    z-index: 3;
-    bottom: -10px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
 }
 
 .tree-node .tree-node {
@@ -58,8 +47,7 @@
   justify-content: center;
   flex-direction: column;
 
-  &:hover,
-  &.show-dnd-zones {
+  &:hover {
     &.into-node {
       // background-color: rgba(0, 0, 0, 0.5);
       border: 2px dashed rgba(0, 0, 0, 0.5);
@@ -70,34 +58,36 @@
     }
   }
 
-  &.hide:not(.show-dnd-zones) {
+  &.hide {
     height: 0 !important;
     .drop-insert-line {
       border-top: solid transparent 0px !important;
     }
   }
 
+  &.before-node {
+    height: 25%;
+    z-index: 2;
+    top: 0;
+  }
   &.after-node {
     height: 50%;
     z-index: 3;
     top: 75%;
 
-    // &:hover,
-    // &.show-dnd-zones {
-    //   background-color: rgba(255, 0, 0, 0.5);
-    // }
     &.last {
       height: 25%;
     }
   }
-  &.before-node {
-    height: 25%;
-    z-index: 2;
-    top: 0;
 
-    // &:hover,
-    // &.show-dnd-zones {
-    //   background-color: rgba(0, 0, 255, 0.5);
-    // }
+  &.after-expanded-node {
+    position: absolute;
+
+    height: 20px;
+    z-index: 3;
+    bottom: -10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
 }

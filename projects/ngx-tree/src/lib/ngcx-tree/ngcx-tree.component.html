@@ -12,7 +12,6 @@
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_BEFORE)"
         [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone before-node"
-        [class.show-dnd-zones]="showDndZones"
         [class.hide]="!dragging || !ownAllowDrop(node) || !node.isFirstChild">
         <div class="drop-insert-line"></div>
       </div>
@@ -21,14 +20,12 @@
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_INTO)"
         [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone into-node"
-        [class.show-dnd-zones]="showDndZones"
         [class.hide]="!dragging || !ownAllowDrop(node)"></div>
       <div
         cdkDropList
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_AFTER)"
         [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone after-node"
-        [class.show-dnd-zones]="showDndZones"
         [class.last]="node.isLastChild"
         [class.hide]="!dragging || !ownAllowDrop(node)">
         <div class="drop-insert-line"></div>
@@ -65,7 +62,6 @@
       [cdkDropListData]="createDropZoneData(node, DropType.DROP_AFTER)"
       [cdkDropListEnterPredicate]="allowDrop()"
       class="tree-node-container-drop-zone after-expanded-node"
-      [class.show-dnd-zones]="showDndZones"
       [class.hide]="
         !dragging || !ownAllowDrop(node) || !treeControl.isExpanded(node)
       ">
@@ -77,7 +73,6 @@
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_BEFORE)"
         [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone before-node"
-        [class.show-dnd-zones]="showDndZones"
         [class.hide]="!dragging || !ownAllowDrop(node) || !node.isFirstChild">
         <div class="drop-insert-line"></div>
       </div>
@@ -86,7 +81,6 @@
         [cdkDropListData]="createDropZoneData(node, DropType.DROP_INTO)"
         [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone into-node"
-        [class.show-dnd-zones]="showDndZones"
         [class.hide]="!dragging || !ownAllowDrop(node)"></div>
       <div
         cdkDropList
@@ -94,7 +88,6 @@
         [cdkDropListEnterPredicate]="allowDrop()"
         class="tree-node-container-drop-zone after-node"
         [class.last]="node.isLastChild"
-        [class.show-dnd-zones]="showDndZones"
         [class.hide]="
           !dragging || !ownAllowDrop(node) || treeControl.isExpanded(node)
         ">

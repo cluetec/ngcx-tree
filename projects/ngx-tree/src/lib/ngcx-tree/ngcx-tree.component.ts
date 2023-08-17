@@ -44,8 +44,9 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     new NgcxTreeDataSource<TreeNodeWrapper>([]);
   treeControl!: NestedTreeControl<TreeNodeWrapper>;
   dragging?: TreeNodeWrapper;
-  showDndZones = false;
+
   DropType = DropType;
+
   disable = () => false;
   createDropZoneData = (
     node: TreeNodeWrapper,
