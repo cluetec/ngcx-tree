@@ -1,0 +1,28 @@
+<div
+  class="tree-node-content-container"
+  [class.first]="nodeWrapper.isFirstChild"
+  [class.last]="nodeWrapper.isLastChild"
+  (click)="clickEvent.emit()">
+  <div class="tree-node-expand-container">
+    <button
+      *ngIf="nodeWrapper.children.length > 0"
+      class="tree-node-expand"
+      cdkTreeNodeToggle
+      [attr.aria-label]="'Toggle ' + nodeWrapper.node.title"
+      (click)="$event.preventDefault()">
+      <i
+        class="fa fa-xs fa-chevron-right"
+        [class.rotate]="treeControl.isExpanded(nodeWrapper)"></i>
+    </button>
+  </div>
+  <div class="small-horizontal-tree-line"></div>
+  <div class="tree-node-icon-container" *ngIf="nodeWrapper.node.faIcon">
+    <i class="fa" [class]="nodeWrapper.node.faIcon"></i>
+  </div>
+  <div class="tree-node-content">
+    <span *ngIf="!treeConfig?.treeNodeContentComponent">{{
+      nodeWrapper.node.title
+    }}</span>
+    <ng-container #ref></ng-container>
+  </div>
+</div>

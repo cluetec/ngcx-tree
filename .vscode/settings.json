@@ -1,0 +1,50 @@
+{
+  "html.format.wrapAttributes": "force-aligned",
+  "html.format.wrapLineLength": 120,
+  "html.format.endWithNewline": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "files.eol": "\n",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.formatOnSave": false
+  },
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.activeBorder": "#40bfbf",
+    "activityBar.activeBackground": "#008888",
+    "activityBar.background": "#008888",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#ff80ff",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#008888",
+    "statusBar.background": "#005555",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#008888",
+    "statusBarItem.remoteBackground": "#005555",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#005555",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#00555599",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#055",
+  "sonarlint.connectedMode.project": {
+    "connectionId": "https-cxkasonar-cxka-local",
+    "projectKey": "de.cluetec:ngcx"
+  }
+}

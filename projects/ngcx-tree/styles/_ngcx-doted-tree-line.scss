@@ -1,0 +1,44 @@
+.tree-node-content-container,
+.tree-node-children-container {
+  position: relative;
+  cursor: default;
+
+  &::before {
+    content: '';
+    position: absolute;
+    border-left: 1px solid lightgrey;
+    top: 0;
+    bottom: 0px;
+    left: 25px;
+  }
+  .small-horizontal-tree-line {
+    width: 5px;
+    position: absolute;
+    left: 25px;
+    border-top: 1px solid lightgrey;
+  }
+}
+
+.tree-node-content-container {
+  &.first::before {
+    top: 5px;
+  }
+  &.last:not(.expanded)::before {
+    bottom: 14px;
+  }
+}
+
+.tree-node-children-container.last::before {
+  bottom: 14px;
+}
+
+.cdk-drag-preview {
+  .tree-node-content-container {
+    &::before {
+      border-left: none;
+    }
+    .small-horizontal-tree-line {
+      border-top: none;
+    }
+  }
+}
