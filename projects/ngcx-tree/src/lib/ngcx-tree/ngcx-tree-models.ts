@@ -1,9 +1,10 @@
-import { EventEmitter, Type } from '@angular/core';
+import { EventEmitter, TemplateRef, Type } from '@angular/core';
 
 export interface TreeConfig {
   enableDragging?: boolean;
 
   treeNodeContentComponent?: Type<NgcxCustomComponent>;
+  treeNodeContentTemplate?: TemplateRef<any>;
 
   allowDrop?: (node: TreeNodeWrapper, intoNode?: TreeNodeWrapper) => boolean;
 
@@ -52,4 +53,5 @@ export interface NgcxTreeNodeMovedEvent {
   node: TreeNodeWrapper;
   parent?: TreeNodeWrapper;
   afterNode?: TreeNodeWrapper;
+  beforeNode?: TreeNodeWrapper;
 }

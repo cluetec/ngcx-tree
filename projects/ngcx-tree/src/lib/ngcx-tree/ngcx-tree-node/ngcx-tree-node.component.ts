@@ -1,5 +1,4 @@
 import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
-import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -12,6 +11,7 @@ import {
 } from '@angular/core';
 import { TreeConfig, TreeNodeWrapper } from '../ngcx-tree-models';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -19,7 +19,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './ngcx-tree-node.component.html',
   styleUrls: ['./ngcx-tree-node.component.scss'],
   standalone: true,
-  imports: [CdkTreeModule, CommonModule],
+  imports: [CdkTreeModule, NgTemplateOutlet, NgIf],
 })
 export class NgcxTreeNodeComponent implements OnInit, OnDestroy {
   @Input() nodeWrapper!: TreeNodeWrapper;

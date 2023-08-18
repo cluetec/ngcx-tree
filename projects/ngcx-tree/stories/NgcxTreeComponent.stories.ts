@@ -1,11 +1,8 @@
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CdkTreeModule } from '@angular/cdk/tree';
-import { CommonModule } from '@angular/common';
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
+import { TreeNodeWrapper } from '../src/lib/ngcx-tree/ngcx-tree-models';
 import { NgcxTreeComponent } from '../src/lib/ngcx-tree/ngcx-tree.component';
-import { TreeNodeWrapper } from '../src/public-api';
 import { NgcxSampleTreeNodeContentComponent } from './custom-tree-node-content.component';
 import { TREE_DATA, TREE_DATA_WITH_ICONS } from './mock-tree-nodes';
 
@@ -18,7 +15,7 @@ const meta: Meta<NgcxTreeComponent> = {
   },
   decorators: [
     moduleMetadata({
-      imports: [CommonModule, NgcxTreeComponent, CdkTreeModule, DragDropModule],
+      imports: [NgcxTreeComponent],
     }),
   ],
   render: (component: NgcxTreeComponent) => ({

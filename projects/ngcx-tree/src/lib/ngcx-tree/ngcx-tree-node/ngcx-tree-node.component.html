@@ -20,9 +20,22 @@
     <i class="fa" [class]="nodeWrapper.node.faIcon"></i>
   </div>
   <div class="tree-node-content">
-    <span *ngIf="!treeConfig?.treeNodeContentComponent">{{
-      nodeWrapper.node.title
-    }}</span>
+    <span
+      *ngIf="
+        !treeConfig?.treeNodeContentComponent &&
+        !treeConfig?.treeNodeContentTemplate
+      "
+      >{{ nodeWrapper.node.title }}</span
+    >
     <ng-container #ref></ng-container>
+    <ng-container *ngIf="treeConfig?.treeNodeContentTemplate as template">
+      <ng-container
+        *ngTemplateOutlet="
+          template;
+          context: {
+            nodeWrapper: nodeWrapper
+          }
+        "></ng-container>
+    </ng-container>
   </div>
 </div>

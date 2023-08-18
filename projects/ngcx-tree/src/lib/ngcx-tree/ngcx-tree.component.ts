@@ -5,7 +5,7 @@ import {
   DragDropModule,
 } from '@angular/cdk/drag-drop';
 import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -31,7 +31,7 @@ import { isParentOf } from './ngcx-tree-utils';
   templateUrl: 'ngcx-tree.component.html',
   styleUrls: ['ngcx-tree.component.scss'],
   standalone: true,
-  imports: [CdkTreeModule, DragDropModule, CommonModule, NgcxTreeNodeComponent],
+  imports: [CdkTreeModule, DragDropModule, NgcxTreeNodeComponent, NgIf],
 })
 export class NgcxTreeComponent implements OnChanges, OnInit {
   @Input() nodes?: TreeNode[];
@@ -154,31 +154,36 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
       return;
     }
 
-    this.removeElementFromPreviousPosition(movedNode);
-
     const insertIntoNode =
       toNode.dropType === DropType.DROP_INTO ? toNode : toNode.parent;
     const wrapperList = insertIntoNode?.children ?? this.dataSource.data$.value;
-    let addAtNodeIdx = this.findAddIndex(toNode, insertIntoNode, wrapperList);
+    const addAtNodeIdx = this.findAddIndex(toNode, insertIntoNode, wrapperList);
 
+    const removedFromIdx = this.removeElementFromPreviousPosition(movedNode);
     // add element to new Position
     (insertIntoNode?.node.children ?? this.nodes!).splice(
-      addAtNodeIdx,
+      removedFromIdx < addAtNodeIdx ? addAtNodeIdx - 1 : addAtNodeIdx,
       0,
       movedNode.node
     );
-    this.dataSource.update(this.createWrapperNodes(this.nodes!));
 
     const afterNodeIdx = addAtNodeIdx - 1;
     const afterNode =
       afterNodeIdx > -1 && wrapperList.length > afterNodeIdx
         ? wrapperList[afterNodeIdx]
         : undefined;
+
+    const beforeNode =
+      addAtNodeIdx > -1 && wrapperList.length > addAtNodeIdx
+        ? wrapperList[addAtNodeIdx]
+        : undefined;
     this.nodeMoved.emit({
       node: movedNode,
       parent: toNode.dropType === DropType.DROP_INTO ? toNode : toNode.parent,
       afterNode: afterNode,
+      beforeNode: beforeNode,
     });
+    this.dataSource.update(this.createWrapperNodes(this.nodes!));
   }
 
   private findAddIndex(
@@ -206,12 +211,15 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     return addAtNodeIdx;
   }
 
-  private removeElementFromPreviousPosition(movedNode: TreeNodeWrapper) {
+  private removeElementFromPreviousPosition(
+    movedNode: TreeNodeWrapper
+  ): number {
     const removeFromList = movedNode.parent?.node.children ?? this.nodes!;
     const removeIndex = removeFromList.findIndex(
       (child) => child.id === movedNode.id
     );
     removeFromList.splice(removeIndex, 1);
+    return removeIndex;
   }
 }
 
