@@ -1,6 +1,4 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { moduleMetadata } from '@storybook/angular';
 import { TreeNodeWrapper } from '../src/lib/ngcx-tree/ngcx-tree-models';
 import { NgcxTreeComponent } from '../src/lib/ngcx-tree/ngcx-tree.component';
 import { NgcxSampleTreeNodeContentComponent } from './custom-tree-node-content.component';
@@ -13,19 +11,11 @@ const meta: Meta<NgcxTreeComponent> = {
     // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout
     layout: 'fullscreen',
   },
-  decorators: [
-    moduleMetadata({
-      imports: [NgcxTreeComponent],
-    }),
-  ],
-  render: (component: NgcxTreeComponent) => ({
-    props: {
-      ...component,
-      clickEvent: action('clickEvent'),
-      customEvent: action('customEvent'),
-      nodeMoved: action('nodeMoved'),
-    },
-  }),
+  argTypes: {
+    clickEvent: { action: 'clickEvent' },
+    nodeMoved: { action: 'nodeMoved' },
+    customEvent: { action: 'customEvent' },
+  },
 };
 export default meta;
 type Story = StoryObj<NgcxTreeComponent>;

@@ -160,9 +160,12 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     const addAtNodeIdx = this.findAddIndex(toNode, insertIntoNode, wrapperList);
 
     const removedFromIdx = this.removeElementFromPreviousPosition(movedNode);
-    // add element to new Position
+    // add element to new Position, subtract one if inserted in same list after the remove position
     (insertIntoNode?.node.children ?? this.nodes!).splice(
-      removedFromIdx < addAtNodeIdx ? addAtNodeIdx - 1 : addAtNodeIdx,
+      movedNode.parent?.id === insertIntoNode?.id &&
+        removedFromIdx < addAtNodeIdx
+        ? addAtNodeIdx - 1
+        : addAtNodeIdx,
       0,
       movedNode.node
     );
