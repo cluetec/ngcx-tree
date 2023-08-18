@@ -7,6 +7,7 @@
     "build": "ng build",
     "build-prod:lib": "ng-packagr -p projects/ngcx-tree/ng-package.json -c projects/ngcx-tree/tsconfig.lib.prod.json",
     "publish:lib": "npm run copy:readme && npm run copy:changelog && npm run copy:license && npm publish ./dist/ngcx-tree --tag next",
+    "prepare-publish:lib": "npm run copy:readme && npm run copy:changelog && npm run copy:license",
     "copy:readme": "cpx README.md dist/ngcx-tree",
     "copy:changelog": "cpx CHANGELOG.md dist/ngcx-tree",
     "copy:license": "cpx LICENSE dist/ngcx-tree",
