@@ -38,7 +38,10 @@
             "browserTarget": "ngcx-tree:build",
             "compodoc": false,
             "port": 6006,
-            "styles": ["projects/ngcx-tree/styles/styles.scss"]
+            "styles": [
+              "projects/ngcx-tree/styles/styles.scss",
+              "projects/ngcx-tree/stories/styles/styles.scss"
+            ]
           }
         },
         "build-storybook": {

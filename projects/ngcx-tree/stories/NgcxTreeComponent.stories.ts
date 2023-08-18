@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { NgcxTreeComponent } from '../lib/ngcx-tree/ngcx-tree.component';
-import { TreeNodeWrapper } from '../public-api';
+import { NgcxTreeComponent } from '../src/lib/ngcx-tree/ngcx-tree.component';
+import { TreeNodeWrapper } from '../src/public-api';
 import { NgcxSampleTreeNodeContentComponent } from './custom-tree-node-content.component';
 import { TREE_DATA, TREE_DATA_WITH_ICONS } from './mock-tree-nodes';
 

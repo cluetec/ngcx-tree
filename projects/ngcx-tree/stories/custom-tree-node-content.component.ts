@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   NgcxCustomComponent,
   TreeNodeWrapper,
-} from '../lib/ngcx-tree/ngcx-tree-models';
+} from '../src/lib/ngcx-tree/ngcx-tree-models';
 
 @Component({
   selector: 'ngcx-sample-tree-node-content',
