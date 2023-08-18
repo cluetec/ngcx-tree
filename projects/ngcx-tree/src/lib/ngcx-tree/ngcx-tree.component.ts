@@ -100,7 +100,11 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   hasChild = (_: number, node: TreeNodeWrapper) => node.children.length > 0;
 
   allowDrop(dropNode: TreeNodeWrapper, dropType: DropType): boolean {
-    if (!this.dragging || isParentOf(this.dragging, dropNode)) {
+    if (
+      !this.dragging ||
+      this.dragging.id === dropNode.id ||
+      isParentOf(this.dragging, dropNode)
+    ) {
       return false;
     }
     const intoNode =

@@ -51,11 +51,11 @@
 
   &:hover {
     &.into-node {
-      border: 2px dashed rgba(0, 0, 0, 0.5);
+      border: 1.5px dashed rgba(0, 0, 0, 0.5);
     }
 
     .drop-insert-line {
-      border-top: 2px dashed rgba(0, 0, 0, 0.5);
+      border-top: 1.5px dashed rgba(0, 0, 0, 0.5);
     }
   }
 
