@@ -1,8 +1,8 @@
-import { TreeNodeWrapper } from './ngcx-tree-models';
+import { NgcxTreeNodeWrapper } from './ngcx-tree-models';
 
 export const isParentOf = (
-  parent: TreeNodeWrapper,
-  node: TreeNodeWrapper
+  parent: NgcxTreeNodeWrapper<any>,
+  node: NgcxTreeNodeWrapper<any>
 ): boolean => {
   if (!node.parent) {
     return false;

@@ -8,7 +8,7 @@
       *ngIf="nodeWrapper.children.length > 0"
       class="tree-node-expand"
       cdkTreeNodeToggle
-      [attr.aria-label]="'Toggle ' + nodeWrapper.node.title"
+      [attr.aria-label]="'Toggle ' + nodeWrapper.data.title"
       (click)="$event.preventDefault()">
       <i
         class="fa fa-xs fa-chevron-right"
@@ -16,8 +16,8 @@
     </button>
   </div>
   <div class="small-horizontal-tree-line"></div>
-  <div class="tree-node-icon-container" *ngIf="nodeWrapper.node.faIcon">
-    <i class="fa" [class]="nodeWrapper.node.faIcon"></i>
+  <div class="tree-node-icon-container" *ngIf="nodeWrapper.data.faIcon">
+    <i class="fa" [class]="nodeWrapper.data.faIcon"></i>
   </div>
   <div class="tree-node-content">
     <span
@@ -25,7 +25,7 @@
         !treeConfig?.treeNodeContentComponent &&
         !treeConfig?.treeNodeContentTemplate
       "
-      >{{ nodeWrapper.node.title }}</span
+      >{{ nodeWrapper.data.title }}</span
     >
     <ng-container #ref></ng-container>
     <ng-container *ngIf="treeConfig?.treeNodeContentTemplate as template">
@@ -33,7 +33,7 @@
         *ngTemplateOutlet="
           template;
           context: {
-            nodeWrapper: nodeWrapper
+            node: nodeWrapper
           }
         "></ng-container>
     </ng-container>

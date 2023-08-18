@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { TreeNodeWrapper } from '../src/lib/ngcx-tree/ngcx-tree-models';
+import {
+  NgcxTreeNode,
+  NgcxTreeNodeWrapper,
+} from '../src/lib/ngcx-tree/ngcx-tree-models';
 import { NgcxTreeComponent } from '../src/lib/ngcx-tree/ngcx-tree.component';
 import { NgcxSampleTreeNodeContentComponent } from './custom-tree-node-content.component';
 import { TREE_DATA, TREE_DATA_WITH_ICONS } from './mock-tree-nodes';
@@ -29,12 +32,12 @@ export const MaxThreeLayersAndMoveLeafsOnly: Story = {
     nodes: TREE_DATA,
     config: {
       allowDrop: (
-        _node: TreeNodeWrapper,
-        intoNode?: TreeNodeWrapper
+        _node: NgcxTreeNodeWrapper<NgcxTreeNode>,
+        intoNode?: NgcxTreeNodeWrapper<NgcxTreeNode>
       ): boolean => {
         return !intoNode || intoNode.depth + 1 < 3;
       },
-      allowDrag: (node: TreeNodeWrapper): boolean => {
+      allowDrag: (node: NgcxTreeNodeWrapper<NgcxTreeNode>): boolean => {
         return !node.children || node.children.length === 0;
       },
     },

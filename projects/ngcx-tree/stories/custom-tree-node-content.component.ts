@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   NgcxCustomComponent,
-  TreeNodeWrapper,
+  NgcxTreeNodeWrapper,
 } from '../src/lib/ngcx-tree/ngcx-tree-models';
 
 @Component({
@@ -13,7 +13,7 @@ import {
 })
 export class NgcxSampleTreeNodeContentComponent implements NgcxCustomComponent {
   @Input()
-  nodeWrapper?: TreeNodeWrapper;
+  nodeWrapper?: NgcxTreeNodeWrapper;
   @Output()
   customEvent = new EventEmitter<any>();
 

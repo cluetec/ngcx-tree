@@ -1,57 +1,48 @@
 import { EventEmitter, TemplateRef, Type } from '@angular/core';
 
-export interface TreeConfig {
+export interface NgcxTreeConfig<T> {
   enableDragging?: boolean;
 
-  treeNodeContentComponent?: Type<NgcxCustomComponent>;
+  treeNodeContentComponent?: Type<NgcxCustomComponent<T>>;
   treeNodeContentTemplate?: TemplateRef<any>;
 
-  allowDrop?: (node: TreeNodeWrapper, intoNode?: TreeNodeWrapper) => boolean;
+  allowDrop?: (
+    node: NgcxTreeNodeWrapper<T>,
+    intoNode?: NgcxTreeNodeWrapper<T>
+  ) => boolean;
 
-  allowDrag?: (node: TreeNodeWrapper) => boolean;
+  allowDrag?: (node: NgcxTreeNodeWrapper<T>) => boolean;
 }
 
-export interface NgcxCustomComponent {
-  nodeWrapper?: TreeNodeWrapper;
+export interface NgcxCustomComponent<T> {
+  nodeWrapper?: NgcxTreeNodeWrapper<T>;
   customEvent?: EventEmitter<any>;
 }
 
-export interface TreeNode {
+export interface NgcxTreeNode {
   id: string;
-  title?: string;
+  title?: any;
   faIcon?: string;
-  children?: TreeNode[];
+  children?: NgcxTreeNode[];
 }
 
-export interface TreeFlatNode {
-  id: string;
-  title: string;
-  description?: string;
-  level: number;
-  expandable: boolean;
-}
-
-export interface TreeNodeWrapper {
+export interface NgcxTreeNodeWrapper<T> {
   id: any;
-  node: TreeNode;
+  data: T;
   isFirstChild: boolean;
   isLastChild: boolean;
-  children: TreeNodeWrapper[];
+  children: NgcxTreeNodeWrapper<T>[];
   depth: number;
-  parent?: TreeNodeWrapper;
+  parent?: NgcxTreeNodeWrapper<T>;
 }
 
-export interface TreeNodeWrapperChildList {
-  parent?: TreeNodeWrapper;
+export interface NgcxTreeNodeComponent<T> {
+  nodeWrapper?: NgcxTreeNodeWrapper<T>;
 }
 
-export interface TreeNodeComponent {
-  nodeWrapper?: TreeNodeWrapper;
-}
-
-export interface NgcxTreeNodeMovedEvent {
-  node: TreeNodeWrapper;
-  parent?: TreeNodeWrapper;
-  afterNode?: TreeNodeWrapper;
-  beforeNode?: TreeNodeWrapper;
+export interface NgcxTreeNodeMovedEvent<T> {
+  node: NgcxTreeNodeWrapper<T>;
+  parent?: NgcxTreeNodeWrapper<T>;
+  afterNode?: NgcxTreeNodeWrapper<T>;
+  beforeNode?: NgcxTreeNodeWrapper<T>;
 }

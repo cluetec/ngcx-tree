@@ -23,7 +23,7 @@ describe('NgcxTreeNodeComponent', () => {
       id: 'a1',
       isFirstChild: true,
       isLastChild: true,
-      node: {
+      data: {
         id: 'a1',
         title: 'Apple',
       },
