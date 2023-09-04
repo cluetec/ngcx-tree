@@ -16,6 +16,7 @@ const meta: Meta<NgcxTreeComponent> = {
   },
   argTypes: {
     clickEvent: { action: 'clickEvent' },
+    selectEvent: { action: 'selectEvent' },
     nodeMoved: { action: 'nodeMoved' },
     customEvent: { action: 'customEvent' },
   },

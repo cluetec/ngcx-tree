@@ -1,10 +1,11 @@
 <cdk-tree
   #tree
-  class="tree"
+  class="ngcx-tree"
   *ngIf="dataSource"
   [dataSource]="dataSource"
   [treeControl]="treeControl"
-  cdkDropListGroup>
+  cdkDropListGroup
+  [class.dragging]="dragging">
   <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
     <div class="tree-node-container">
       <div
@@ -45,11 +46,13 @@
           (cdkDragDropped)="handleDrop($event)">
           <div *cdkDragPlaceholder></div>
           <ngcx-tree-node
+            style="width: 100%"
             [nodeWrapper]="node"
+            [isSelected]="node.id === selectedNode?.id"
             [treeControl]="treeControl"
             [treeConfig]="config"
             (customEvent)="customEvent.emit($event)"
-            (clickEvent)="clickEvent.emit(node)"></ngcx-tree-node>
+            (clickEvent)="nodeClicked(node)"></ngcx-tree-node>
         </div>
         <ngcx-tree-node
           *ngIf="node.id === dragging?.id"
@@ -122,11 +125,13 @@
             [class.last]="node.isLastChild"
             [class.expanded]="treeControl.isExpanded(node)">
             <ngcx-tree-node
+              style="width: 100%"
               [nodeWrapper]="node"
+              [isSelected]="node.id === selectedNode?.id"
               [treeControl]="treeControl"
               [treeConfig]="config"
               (customEvent)="customEvent.emit($event)"
-              (clickEvent)="clickEvent.emit(node)"></ngcx-tree-node>
+              (clickEvent)="nodeClicked(node)"></ngcx-tree-node>
           </div>
         </div>
         <ngcx-tree-node

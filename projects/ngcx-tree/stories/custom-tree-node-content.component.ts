@@ -11,9 +11,11 @@ import {
   standalone: true,
   imports: [NgIf],
 })
-export class NgcxSampleTreeNodeContentComponent implements NgcxCustomComponent {
+export class NgcxSampleTreeNodeContentComponent
+  implements NgcxCustomComponent<any>
+{
   @Input()
-  nodeWrapper?: NgcxTreeNodeWrapper;
+  nodeWrapper?: NgcxTreeNodeWrapper<any>;
   @Output()
   customEvent = new EventEmitter<any>();
 

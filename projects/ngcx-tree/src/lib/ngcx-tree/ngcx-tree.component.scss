@@ -1,10 +1,9 @@
-.tree {
-  font-family: Arial, Helvetica, sans-serif;
+.ngcx-tree {
   height: auto;
 }
 
-.tree ul,
-.tree li {
+.ngcx-tree ul,
+.ngcx-tree li {
   margin-top: 0;
   margin-bottom: 0;
   list-style-type: none;
@@ -17,10 +16,11 @@
 }
 
 .tree-node .tree-node {
-  padding-left: 20px;
+  margin-left: 20px;
 }
 
 .tree-node-container {
+  width: 100%;
   min-height: 30px;
   display: flex;
   flex-direction: row;
@@ -29,7 +29,12 @@
   position: relative;
   cursor: default;
 
+  .tree-node-content-container {
+    width: 100%;
+  }
+
   .cdk-drag {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;

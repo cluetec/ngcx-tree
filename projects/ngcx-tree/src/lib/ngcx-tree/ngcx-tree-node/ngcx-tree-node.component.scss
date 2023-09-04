@@ -4,6 +4,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
 
   .tree-node-expand-container {
     display: flex;
@@ -31,11 +32,5 @@
   .tree-node-icon-container {
     margin-right: 7px;
     color: #2587be;
-  }
-
-  .tree-node-content {
-    font-weight: 600;
-    font-size: 14px;
-    color: #575757;
   }
 }

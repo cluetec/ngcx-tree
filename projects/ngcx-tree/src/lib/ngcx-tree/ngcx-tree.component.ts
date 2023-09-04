@@ -18,6 +18,7 @@ import {
 } from '@angular/core';
 import { NgcxTreeDataSource } from './ngcx-tree-data.source';
 import {
+  NgcxTreeApi,
   NgcxTreeConfig,
   NgcxTreeNode,
   NgcxTreeNodeMovedEvent,
@@ -39,11 +40,16 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   @Output() nodeMoved = new EventEmitter<NgcxTreeNodeMovedEvent<any>>();
   @Output() customEvent = new EventEmitter<any>();
   @Output() clickEvent = new EventEmitter<NgcxTreeNodeWrapper<any>>();
+  @Output() selectEvent = new EventEmitter<NgcxTreeNodeWrapper<any>>();
+
+  public readonly api: NgcxTreeApi<any> = new NgcxTreeControl(this);
 
   dataSource: NgcxTreeDataSource<NgcxTreeNodeWrapper<any>> =
     new NgcxTreeDataSource<NgcxTreeNodeWrapper<any>>([]);
   treeControl!: NestedTreeControl<NgcxTreeNodeWrapper<any>>;
   dragging?: NgcxTreeNodeWrapper<any>;
+
+  selectedNode?: NgcxTreeNodeWrapper<any>;
 
   DropType = DropType;
 
@@ -56,8 +62,8 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   private canceledByEsq?: boolean;
 
   ngOnInit(): void {
-    const improvedNodes = this.createWrapperNodes(this.nodes ?? []);
-    this.dataSource = new NgcxTreeDataSource(improvedNodes);
+    const wrapperNodes = this.createWrapperNodes(this.nodes ?? []);
+    this.dataSource = new NgcxTreeDataSource(wrapperNodes);
 
     this.treeControl = new NestedTreeControl<NgcxTreeNodeWrapper<any>>(
       (node) => node.children,
@@ -65,13 +71,12 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     );
 
     this.treeControl.dataNodes = this.dataSource.data$.value;
-    setTimeout(() => this.treeControl.expandAll(), 100);
-    console.log(this.config?.treeNodeContentTemplate);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['nodes']) {
-      this.ngOnInit();
+      const wrapperNodes = this.createWrapperNodes(this.nodes ?? []);
+      this.dataSource.update(wrapperNodes);
     }
   }
 
@@ -221,10 +226,27 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   ): number {
     const removeFromList = movedNode.parent?.data.children ?? this.nodes!;
     const removeIndex = removeFromList.findIndex(
-      (child: NgcxTreeNodeWrapper<any>) => child.id === movedNode.id
+      (child: any) => child.id === movedNode.id
     );
     removeFromList.splice(removeIndex, 1);
     return removeIndex;
+  }
+
+  nodeClicked(nodeWrapper: NgcxTreeNodeWrapper<any>) {
+    this.selectedNode =
+      nodeWrapper.id === this.selectedNode?.id ? undefined : nodeWrapper;
+    this.clickEvent.emit(nodeWrapper);
+    this.selectEvent.emit(this.selectedNode);
+  }
+
+  selectNode(nodeWrapper: NgcxTreeNodeWrapper<any> | undefined) {
+    this.selectedNode = nodeWrapper;
+    let expandNode = this.selectedNode?.parent;
+    while (expandNode) {
+      this.treeControl.expand(expandNode);
+      expandNode = expandNode.parent;
+    }
+    this.selectEvent.emit(this.selectedNode);
   }
 }
 
@@ -236,4 +258,42 @@ enum DropType {
   DROP_AFTER = 'DROP_AFTER',
   DROP_BEFORE = 'DROP_BEFORE',
   DROP_INTO = 'DROP_INTO',
+}
+
+export class NgcxTreeControl implements NgcxTreeApi<any> {
+  constructor(private treeComponent: NgcxTreeComponent) {}
+
+  get treeControl(): NestedTreeControl<NgcxTreeNodeWrapper<any>> {
+    return this.treeComponent.treeControl;
+  }
+
+  selectNodeById(id: string) {
+    this.treeComponent.selectNode(this.findNodeById(id));
+  }
+
+  findNodeById(id: string): NgcxTreeNodeWrapper<any> | undefined {
+    return this.findNodeByIdInNodes(
+      this.treeComponent.treeControl.dataNodes,
+      id
+    );
+  }
+
+  private findNodeByIdInNodes(
+    nodes: NgcxTreeNodeWrapper<any>[],
+    id: string
+  ): NgcxTreeNodeWrapper<any> | undefined {
+    for (const node of nodes) {
+      if (node.id === id) {
+        return node;
+      }
+      if (node.children?.length > 0) {
+        const foundNode = this.findNodeByIdInNodes(node.children, id);
+        if (foundNode) {
+          return foundNode;
+        }
+      }
+    }
+
+    return undefined;
+  }
 }

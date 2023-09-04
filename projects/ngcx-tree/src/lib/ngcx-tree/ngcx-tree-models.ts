@@ -1,8 +1,7 @@
+import { NestedTreeControl } from '@angular/cdk/tree';
 import { EventEmitter, TemplateRef, Type } from '@angular/core';
 
 export interface NgcxTreeConfig<T> {
-  enableDragging?: boolean;
-
   treeNodeContentComponent?: Type<NgcxCustomComponent<T>>;
   treeNodeContentTemplate?: TemplateRef<any>;
 
@@ -45,4 +44,11 @@ export interface NgcxTreeNodeMovedEvent<T> {
   parent?: NgcxTreeNodeWrapper<T>;
   afterNode?: NgcxTreeNodeWrapper<T>;
   beforeNode?: NgcxTreeNodeWrapper<T>;
+}
+
+export interface NgcxTreeApi<T> {
+  selectNodeById(id: string): void;
+  findNodeById(id: string): NgcxTreeNodeWrapper<T> | undefined;
+
+  get treeControl(): NestedTreeControl<NgcxTreeNodeWrapper<any>>;
 }

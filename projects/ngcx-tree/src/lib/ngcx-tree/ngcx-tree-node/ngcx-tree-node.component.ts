@@ -25,6 +25,7 @@ export class NgcxTreeNodeComponent implements OnInit, OnDestroy {
   @Input() nodeWrapper!: NgcxTreeNodeWrapper<any>;
   @Input() treeControl!: NestedTreeControl<NgcxTreeNodeWrapper<any>>;
   @Input() treeConfig?: NgcxTreeConfig<any>;
+  @Input() isSelected = false;
 
   @Output() customEvent = new EventEmitter<any>();
   @Output() clickEvent = new EventEmitter<void>();
