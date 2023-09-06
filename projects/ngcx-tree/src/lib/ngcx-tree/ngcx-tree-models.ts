@@ -28,11 +28,14 @@ export interface NgcxTreeNode {
 export interface NgcxTreeNodeWrapper<T> {
   id: any;
   data: T;
+  index: number;
   isFirstChild: boolean;
   isLastChild: boolean;
   children: NgcxTreeNodeWrapper<T>[];
   depth: number;
   parent?: NgcxTreeNodeWrapper<T>;
+  next?: NgcxTreeNodeWrapper<T>;
+  previous?: NgcxTreeNodeWrapper<T>;
 }
 
 export interface NgcxTreeNodeComponent<T> {

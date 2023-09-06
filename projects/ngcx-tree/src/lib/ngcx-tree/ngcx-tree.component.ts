@@ -77,6 +77,10 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     if (changes['nodes']) {
       const wrapperNodes = this.createWrapperNodes(this.nodes ?? []);
       this.dataSource.update(wrapperNodes);
+      if (this.selectedNode) {
+        const selectedNodeId = this.selectedNode.id;
+        setTimeout(() => this.api.selectNodeById(selectedNodeId));
+      }
     }
   }
 
@@ -86,12 +90,13 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     depth: number = 0
   ): NgcxTreeNodeWrapper<any>[] {
     const childCount = nodes.length;
-    return nodes.map((node, idx) => {
+    const wrapperNodes = nodes.map((node, idx) => {
       const nodeWrapper: NgcxTreeNodeWrapper<any> = {
         id: node.id,
         data: node,
         isFirstChild: idx === 0,
         isLastChild: idx === childCount - 1,
+        index: idx,
         parent: parent,
         depth: depth,
         children: [],
@@ -99,8 +104,18 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
       nodeWrapper.children = node.children
         ? this.createWrapperNodes(node.children, nodeWrapper, depth + 1)
         : [];
+
       return nodeWrapper;
     });
+    wrapperNodes.forEach((wrapperNode) => {
+      if (!wrapperNode.isLastChild) {
+        wrapperNode.next = wrapperNodes[wrapperNode.index + 1];
+      }
+      if (!wrapperNode.isFirstChild) {
+        wrapperNode.previous = wrapperNodes[wrapperNode.index - 1];
+      }
+    });
+    return wrapperNodes;
   }
 
   hasChild = (_: number, node: NgcxTreeNodeWrapper<any>) =>
@@ -142,11 +157,70 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     return this.config?.allowDrag ? !this.config.allowDrag(node) : false;
   }
 
-  @HostListener('window:keyup', ['$event'])
+  @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      this.canceledByEsq = true;
-      document.dispatchEvent(new Event('mouseup'));
+    switch (event.key) {
+      case 'Escape':
+        this.canceledByEsq = true;
+        document.dispatchEvent(new Event('mouseup'));
+        break;
+      case 'ArrowUp':
+        if (this.selectedNode) {
+          if (!this.selectedNode.isFirstChild) {
+            this.selectNode(this.selectedNode.previous);
+          } else if (this.selectedNode.parent) {
+            this.selectNode(this.selectedNode.parent);
+          }
+        } else {
+          const nodes = this.dataSource.data$.value;
+          if (nodes.length > 0) {
+            this.selectNode(nodes[nodes.length - 1]);
+          }
+        }
+        event.preventDefault();
+        break;
+      case 'ArrowDown':
+        if (this.selectedNode) {
+          if (!this.selectedNode.isLastChild) {
+            this.selectNode(this.selectedNode.next);
+          } else if (this.selectedNode.parent?.next) {
+            this.selectNode(this.selectedNode.parent.next);
+          }
+        } else {
+          const nodes = this.dataSource.data$.value;
+          if (nodes.length > 0) {
+            this.selectNode(nodes[0]);
+          }
+        }
+        event.preventDefault();
+        break;
+
+      case 'ArrowRight':
+        if (this.selectedNode && this.selectedNode.children.length > 0) {
+          this.selectNode(this.selectedNode.children[0]);
+        } else if (!this.selectedNode) {
+          const nodes = this.dataSource.data$.value;
+          if (nodes.length > 0) {
+            this.selectNode(nodes[0]);
+          }
+        }
+        event.preventDefault();
+        break;
+
+      case 'ArrowLeft':
+        if (this.selectedNode?.parent) {
+          this.selectNode(this.selectedNode.parent);
+        } else if (!this.selectedNode) {
+          const nodes = this.dataSource.data$.value;
+          if (nodes.length > 0) {
+            this.selectNode(nodes[0]);
+          }
+        }
+        event.preventDefault();
+        break;
+
+      default:
+        break;
     }
   }
 
@@ -273,7 +347,7 @@ export class NgcxTreeControl implements NgcxTreeApi<any> {
 
   findNodeById(id: string): NgcxTreeNodeWrapper<any> | undefined {
     return this.findNodeByIdInNodes(
-      this.treeComponent.treeControl.dataNodes,
+      this.treeComponent.dataSource.data$.value,
       id
     );
   }

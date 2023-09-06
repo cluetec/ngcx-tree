@@ -23,8 +23,19 @@
       cursor: pointer;
       outline: inherit;
 
-      > i.rotate {
-        transform: rotate(90deg);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .chevron {
+        width: 10px;
+        transition: transform 0.1s ease-in-out;
+
+        &.rotate {
+          transform: rotate(90deg);
+        }
       }
     }
   }

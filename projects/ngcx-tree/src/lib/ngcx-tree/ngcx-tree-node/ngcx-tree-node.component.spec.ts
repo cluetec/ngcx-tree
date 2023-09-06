@@ -27,6 +27,7 @@ describe('NgcxTreeNodeComponent', () => {
         id: 'a1',
         title: 'Apple',
       },
+      index: 0,
     };
     fixture.detectChanges();
   });
