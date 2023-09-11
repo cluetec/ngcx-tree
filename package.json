@@ -40,7 +40,7 @@
     "@angular/cli": "~16.1.0",
     "@angular/compiler-cli": "^16.1.0",
     "@fortawesome/fontawesome-free": "^6.1.1",
-    "@storybook/addon-actions": "^7.3.1",
+    "@storybook/addon-actions": "^7.4.1",
     "@storybook/addon-essentials": "^7.0.21",
     "@storybook/angular": "^7.0.21",
     "@storybook/blocks": "^7.0.21",
