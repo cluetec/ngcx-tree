@@ -9,8 +9,8 @@ export interface NgcxTreeConfig<T> {
     node: NgcxTreeNodeWrapper<T>,
     intoNode?: NgcxTreeNodeWrapper<T>
   ) => boolean;
-
   allowDrag?: (node: NgcxTreeNodeWrapper<T>) => boolean;
+  allowSelection?: (node: NgcxTreeNodeWrapper<T>) => boolean;
 }
 
 export interface NgcxCustomComponent<T> {
@@ -29,6 +29,7 @@ export interface NgcxTreeNodeWrapper<T> {
   id: any;
   data: T;
   index: number;
+  isSelectable?: boolean;
   isFirstChild: boolean;
   isLastChild: boolean;
   children: NgcxTreeNodeWrapper<T>[];

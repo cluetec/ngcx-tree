@@ -3,6 +3,7 @@
   [class.selected]="isSelected"
   [class.first]="nodeWrapper.isFirstChild"
   [class.last]="nodeWrapper.isLastChild"
+  [class.is-selectable]="nodeWrapper.isSelectable"
   (click)="clickEvent.emit()">
   <div class="tree-node-expand-container">
     <button
@@ -29,9 +30,9 @@
       *ngIf="
         !treeConfig?.treeNodeContentComponent &&
         !treeConfig?.treeNodeContentTemplate
-      "
-      >{{ nodeWrapper.data.title }}</span
-    >
+      ">
+      {{ nodeWrapper.data.title }}
+    </span>
     <ng-container #ref></ng-container>
     <ng-container *ngIf="treeConfig?.treeNodeContentTemplate as template">
       <ng-container

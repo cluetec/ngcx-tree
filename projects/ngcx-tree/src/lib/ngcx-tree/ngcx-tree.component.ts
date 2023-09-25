@@ -114,6 +114,9 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
       if (!wrapperNode.isFirstChild) {
         wrapperNode.previous = wrapperNodes[wrapperNode.index - 1];
       }
+      if (this.config?.allowSelection?.(wrapperNode)) {
+        wrapperNode.isSelectable = true;
+      }
     });
     return wrapperNodes;
   }
@@ -307,20 +310,24 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   }
 
   nodeClicked(nodeWrapper: NgcxTreeNodeWrapper<any>) {
-    this.selectedNode =
-      nodeWrapper.id === this.selectedNode?.id ? undefined : nodeWrapper;
     this.clickEvent.emit(nodeWrapper);
-    this.selectEvent.emit(this.selectedNode);
+    if (nodeWrapper.isSelectable) {
+      this.selectedNode =
+        nodeWrapper.id === this.selectedNode?.id ? undefined : nodeWrapper;
+      this.selectEvent.emit(this.selectedNode);
+    }
   }
 
   selectNode(nodeWrapper: NgcxTreeNodeWrapper<any> | undefined) {
-    this.selectedNode = nodeWrapper;
-    let expandNode = this.selectedNode?.parent;
-    while (expandNode) {
-      this.treeControl.expand(expandNode);
-      expandNode = expandNode.parent;
+    if (nodeWrapper.isSelectable) {
+      this.selectedNode = nodeWrapper;
+      let expandNode = this.selectedNode?.parent;
+      while (expandNode) {
+        this.treeControl.expand(expandNode);
+        expandNode = expandNode.parent;
+      }
+      this.selectEvent.emit(this.selectedNode);
     }
-    this.selectEvent.emit(this.selectedNode);
   }
 }
 
