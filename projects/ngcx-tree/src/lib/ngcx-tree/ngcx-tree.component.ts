@@ -132,6 +132,19 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     ) {
       return false;
     }
+    if (
+      dropType == DropType.DROP_AFTER &&
+      dropNode.next?.id === this.dragging?.id
+    ) {
+      return false;
+    }
+    if (
+      dropType == DropType.DROP_BEFORE &&
+      dropNode.previous?.id === this.dragging?.id
+    ) {
+      return false;
+    }
+
     const intoNode =
       dropType == DropType.DROP_INTO ? dropNode : dropNode.parent;
     if (this.config?.allowDrop) {
@@ -319,7 +332,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   }
 
   selectNode(nodeWrapper: NgcxTreeNodeWrapper<any> | undefined) {
-    if (nodeWrapper.isSelectable) {
+    if (!nodeWrapper || nodeWrapper.isSelectable) {
       this.selectedNode = nodeWrapper;
       let expandNode = this.selectedNode?.parent;
       while (expandNode) {
