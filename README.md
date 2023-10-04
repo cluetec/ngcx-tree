@@ -154,7 +154,43 @@ Contributions and improvement suggestions are always welcome!
 
 ## Samples
 
-for samples see the storybook stories. run `npm run storybook` to see the
+For samples see the storybook stories. run `npm run storybook` to see the
 samples.
 
 ### Simple Sample
+
+```ts
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { Component } from '@angular/core';
+import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
+
+@Component({
+  selector: 'app-simple-tree-sample',
+  template: '<ngcx-tree [nodes]="data"></ngcx-tree>',
+  standalone: true,
+  imports: [CdkTreeModule, DragDropModule, NgcxTreeComponent],
+})
+export class SimpleTreeSampleComponent {
+  data = [
+    {
+      id: 'fru',
+      title: 'Fruit',
+      children: [
+        {
+          id: 'app',
+          title: 'Apple',
+        },
+        {
+          id: 'ban',
+          title: 'Banana',
+        },
+      ],
+    },
+    {
+      id: 'fish',
+      title: 'Fish',
+    },
+  ];
+}
+```
