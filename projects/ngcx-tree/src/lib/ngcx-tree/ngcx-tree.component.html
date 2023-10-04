@@ -5,7 +5,12 @@
   [dataSource]="dataSource"
   [treeControl]="treeControl"
   cdkDropListGroup
-  [class.dragging]="dragging">
+  [class.dragging]="dragging"
+  (keyup.arrowup)="keyDownArrowUp($event)"
+  (keydown.arrowdown)="keyDownArrowDown($event)"
+  (keydown.arrowleft)="keyDownArrowLeft($event)"
+  (keydown.arrowright)="keyDownArrowRight($event)"
+  tabindex="0">
   <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
     <div class="tree-node-container">
       <div

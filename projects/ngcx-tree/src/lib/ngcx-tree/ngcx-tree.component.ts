@@ -181,70 +181,69 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     return this.config?.allowDrag ? !this.config.allowDrag(node) : false;
   }
 
-  @HostListener('window:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    switch (event.key) {
-      case 'Escape':
-        this.canceledByEsq = true;
-        document.dispatchEvent(new Event('mouseup'));
-        break;
-      case 'ArrowUp':
-        if (this.selectedNode) {
-          if (!this.selectedNode.isFirstChild) {
-            this.selectNode(this.selectedNode.previous);
-          } else if (this.selectedNode.parent) {
-            this.selectNode(this.selectedNode.parent);
-          }
-        } else {
-          const nodes = this.dataSource.data$.value;
-          if (nodes.length > 0) {
-            this.selectNode(nodes[nodes.length - 1]);
-          }
-        }
-        event.preventDefault();
-        break;
-      case 'ArrowDown':
-        if (this.selectedNode) {
-          if (!this.selectedNode.isLastChild) {
-            this.selectNode(this.selectedNode.next);
-          } else if (this.selectedNode.parent?.next) {
-            this.selectNode(this.selectedNode.parent.next);
-          }
-        } else {
-          const nodes = this.dataSource.data$.value;
-          if (nodes.length > 0) {
-            this.selectNode(nodes[0]);
-          }
-        }
-        event.preventDefault();
-        break;
+  keyDownArrowUp(event: Event) {
+    console.log('arrow up');
 
-      case 'ArrowRight':
-        if (this.selectedNode && this.selectedNode.children.length > 0) {
-          this.selectNode(this.selectedNode.children[0]);
-        } else if (!this.selectedNode) {
-          const nodes = this.dataSource.data$.value;
-          if (nodes.length > 0) {
-            this.selectNode(nodes[0]);
-          }
-        }
-        event.preventDefault();
-        break;
+    if (this.selectedNode) {
+      if (!this.selectedNode.isFirstChild) {
+        this.selectNode(this.selectedNode.previous);
+      } else if (this.selectedNode.parent) {
+        this.selectNode(this.selectedNode.parent);
+      }
+    } else {
+      const nodes = this.dataSource.data$.value;
+      if (nodes.length > 0) {
+        this.selectNode(nodes[nodes.length - 1]);
+      }
+    }
+    event.preventDefault();
+  }
 
-      case 'ArrowLeft':
-        if (this.selectedNode?.parent) {
-          this.selectNode(this.selectedNode.parent);
-        } else if (!this.selectedNode) {
-          const nodes = this.dataSource.data$.value;
-          if (nodes.length > 0) {
-            this.selectNode(nodes[0]);
-          }
-        }
-        event.preventDefault();
-        break;
+  keyDownArrowDown(event: Event) {
+    if (this.selectedNode) {
+      if (!this.selectedNode.isLastChild) {
+        this.selectNode(this.selectedNode.next);
+      } else if (this.selectedNode.parent?.next) {
+        this.selectNode(this.selectedNode.parent.next);
+      }
+    } else {
+      const nodes = this.dataSource.data$.value;
+      if (nodes.length > 0) {
+        this.selectNode(nodes[0]);
+      }
+    }
+    event.preventDefault();
+  }
 
-      default:
-        break;
+  keyDownArrowLeft(event: Event) {
+    if (this.selectedNode?.parent) {
+      this.selectNode(this.selectedNode.parent);
+    } else if (!this.selectedNode) {
+      const nodes = this.dataSource.data$.value;
+      if (nodes.length > 0) {
+        this.selectNode(nodes[0]);
+      }
+    }
+    event.preventDefault();
+  }
+
+  keyDownArrowRight(event: Event) {
+    if (this.selectedNode && this.selectedNode.children.length > 0) {
+      this.selectNode(this.selectedNode.children[0]);
+    } else if (!this.selectedNode) {
+      const nodes = this.dataSource.data$.value;
+      if (nodes.length > 0) {
+        this.selectNode(nodes[0]);
+      }
+    }
+    event.preventDefault();
+  }
+
+  @HostListener('window:keydown.escape')
+  keyEscapeWhileDragging() {
+    if (this.dragging) {
+      this.canceledByEsq = true;
+      document.dispatchEvent(new Event('mouseup'));
     }
   }
 
