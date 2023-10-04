@@ -62,7 +62,7 @@
           [cdkDragDisabled]="disableDrag(node)"
           [cdkDragData]="node"
           (cdkDragStarted)="dragging = node"
-          (cdkDragReleased)="dragging = undefined; handleDragRelease($event)">
+          (cdkDragReleased)="handleDragRelease($event)">
           <div *cdkDragPlaceholder></div>
           <div
             class="tree-node-content-container"

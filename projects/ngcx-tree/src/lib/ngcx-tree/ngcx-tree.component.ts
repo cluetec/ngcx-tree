@@ -248,6 +248,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   }
 
   handleDragRelease(event: CdkDragRelease<NgcxTreeNodeWrapper<any>>) {
+    this.dragging = undefined;
     const movedNode = event.source.data;
     const dropZoneId = (<any>event.event.target).id;
     if (!dropZoneId) {
