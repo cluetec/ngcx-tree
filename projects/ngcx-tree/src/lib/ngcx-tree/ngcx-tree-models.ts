@@ -26,14 +26,14 @@ export interface NgcxTreeNode {
 }
 
 export interface NgcxTreeNodeWrapper<T> {
-  id: any;
+  id: string;
   data: T;
+  depth: number;
   index: number;
   isSelectable?: boolean;
   isFirstChild: boolean;
   isLastChild: boolean;
   children: NgcxTreeNodeWrapper<T>[];
-  depth: number;
   parent?: NgcxTreeNodeWrapper<T>;
   next?: NgcxTreeNodeWrapper<T>;
   previous?: NgcxTreeNodeWrapper<T>;
@@ -54,5 +54,5 @@ export interface NgcxTreeApi<T> {
   selectNodeById(id: string): void;
   findNodeById(id: string): NgcxTreeNodeWrapper<T> | undefined;
 
-  get treeControl(): NestedTreeControl<NgcxTreeNodeWrapper<any>>;
+  get treeControl(): NestedTreeControl<NgcxTreeNodeWrapper<any>, string>;
 }

@@ -46,10 +46,13 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
 
   dataSource: NgcxTreeDataSource<NgcxTreeNodeWrapper<any>> =
     new NgcxTreeDataSource<NgcxTreeNodeWrapper<any>>([]);
-  treeControl: NestedTreeControl<NgcxTreeNodeWrapper<any>> =
-    new NestedTreeControl<NgcxTreeNodeWrapper<any>>((node) => node.children, {
-      trackBy: (node: NgcxTreeNodeWrapper<any>) => node.id,
-    });
+  treeControl: NestedTreeControl<NgcxTreeNodeWrapper<any>, string> =
+    new NestedTreeControl<NgcxTreeNodeWrapper<any>, string>(
+      (node) => node.children,
+      {
+        trackBy: (node: NgcxTreeNodeWrapper<any>) => node.id,
+      }
+    );
   dragging?: NgcxTreeNodeWrapper<any>;
 
   selectedNode?: NgcxTreeNodeWrapper<any>;
@@ -378,7 +381,7 @@ enum DropType {
 export class NgcxTreeControl implements NgcxTreeApi<any> {
   constructor(private treeComponent: NgcxTreeComponent) {}
 
-  get treeControl(): NestedTreeControl<NgcxTreeNodeWrapper<any>> {
+  get treeControl(): NestedTreeControl<NgcxTreeNodeWrapper<any>, string> {
     return this.treeComponent.treeControl;
   }
 

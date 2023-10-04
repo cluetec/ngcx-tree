@@ -23,7 +23,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class NgcxTreeNodeComponent implements OnInit, OnDestroy {
   @Input() nodeWrapper!: NgcxTreeNodeWrapper<any>;
-  @Input() treeControl!: NestedTreeControl<NgcxTreeNodeWrapper<any>>;
+  @Input() treeControl!: NestedTreeControl<NgcxTreeNodeWrapper<any>, string>;
   @Input() treeConfig?: NgcxTreeConfig<any>;
   @Input() isSelected = false;
 
