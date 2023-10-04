@@ -41,6 +41,9 @@ export const MaxThreeLayersAndMoveLeafsOnly: Story = {
       allowDrag: (node: NgcxTreeNodeWrapper<NgcxTreeNode>): boolean => {
         return !node.children || node.children.length === 0;
       },
+      allowSelection: (_node: NgcxTreeNodeWrapper<NgcxTreeNode>): boolean => {
+        return true;
+      },
     },
   },
 };

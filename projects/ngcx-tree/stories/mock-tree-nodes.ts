@@ -15,8 +15,7 @@ export const TREE_DATA: NgcxTreeNode[] = [
     children: [
       {
         id: 'app',
-        title:
-          'Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple ',
+        title: 'Apple',
         // 'Apple',
       },
       {

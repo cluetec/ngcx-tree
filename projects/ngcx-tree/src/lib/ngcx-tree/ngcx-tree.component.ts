@@ -37,6 +37,7 @@ import { isParentOf } from './ngcx-tree-utils';
 export class NgcxTreeComponent implements OnChanges, OnInit {
   @Input() nodes?: NgcxTreeNode[];
   @Input() config?: NgcxTreeConfig<any>;
+
   @Output() nodeMoved = new EventEmitter<NgcxTreeNodeMovedEvent<any>>();
   @Output() customEvent = new EventEmitter<any>();
   @Output() clickEvent = new EventEmitter<NgcxTreeNodeWrapper<any>>();
@@ -156,7 +157,6 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     const intoNode =
       dropType == DropType.DROP_INTO ? dropNode : dropNode.parent;
     if (this.config?.allowDrop) {
-      // TODO cache calls?
       return this.config.allowDrop(this.dragging, intoNode);
     }
     return true;
