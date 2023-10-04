@@ -37,10 +37,10 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.1.0",
     "@angular-eslint/template-parser": "^16.1.1",
-    "@angular/cli": "~16.2.0",
+    "@angular/cli": "~16.2.1",
     "@angular/compiler-cli": "^16.1.0",
     "@fortawesome/fontawesome-free": "^6.1.1",
-    "@storybook/addon-actions": "^7.3.2",
+    "@storybook/addon-actions": "^7.4.0",
     "@storybook/addon-essentials": "^7.0.21",
     "@storybook/angular": "^7.0.21",
     "@storybook/blocks": "^7.0.21",
@@ -58,7 +58,7 @@
     "prettier-plugin-organize-imports": "^3.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook": "^7.3.2",
+    "storybook": "^7.4.0",
     "typescript": "~5.1.6"
   }
 }
