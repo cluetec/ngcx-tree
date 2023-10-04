@@ -1,1 +1,5 @@
 @import 'ngcx-doted-tree-line';
+
+.cdk-drop-list-dragging {
+  z-index: -1;
+}

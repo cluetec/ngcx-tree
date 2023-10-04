@@ -9,8 +9,8 @@
   <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
     <div class="tree-node-container">
       <div
+        [id]="node.id + '_' + DropType.DROP_BEFORE"
         cdkDropList
-        [cdkDropListData]="createDropZoneData(node, DropType.DROP_BEFORE)"
         class="tree-node-container-drop-zone before-node"
         [class.hide]="
           !dragging ||
@@ -20,13 +20,13 @@
         <div class="drop-insert-line"></div>
       </div>
       <div
+        [id]="node.id + '_' + DropType.DROP_INTO"
         cdkDropList
-        [cdkDropListData]="createDropZoneData(node, DropType.DROP_INTO)"
         class="tree-node-container-drop-zone into-node"
         [class.hide]="!dragging || !allowDrop(node, DropType.DROP_INTO)"></div>
       <div
+        [id]="node.id + '_' + DropType.DROP_AFTER"
         cdkDropList
-        [cdkDropListData]="createDropZoneData(node, DropType.DROP_AFTER)"
         class="tree-node-container-drop-zone after-node"
         [class.last]="node.isLastChild"
         [class.hide]="!dragging || !allowDrop(node, DropType.DROP_AFTER)">
@@ -42,8 +42,7 @@
           [cdkDragDisabled]="disableDrag(node)"
           [cdkDragData]="node"
           (cdkDragStarted)="dragging = node"
-          (cdkDragReleased)="dragging = undefined"
-          (cdkDragDropped)="handleDrop($event)">
+          (cdkDragReleased)="dragging = undefined; handleDragRelease($event)">
           <div *cdkDragPlaceholder></div>
           <ngcx-tree-node
             style="width: 100%"
@@ -68,7 +67,7 @@
     class="tree-node">
     <div
       cdkDropList
-      [cdkDropListData]="createDropZoneData(node, DropType.DROP_AFTER)"
+      [id]="node.id + '_' + DropType.DROP_AFTER"
       class="tree-node-container-drop-zone after-expanded-node"
       [class.hide]="
         !dragging ||
@@ -80,7 +79,7 @@
     <div class="tree-node-container" [class.dragging]="dragging">
       <div
         cdkDropList
-        [cdkDropListData]="createDropZoneData(node, DropType.DROP_BEFORE)"
+        [id]="node.id + '_' + DropType.DROP_BEFORE"
         class="tree-node-container-drop-zone before-node"
         [class.hide]="
           !dragging ||
@@ -91,12 +90,12 @@
       </div>
       <div
         cdkDropList
-        [cdkDropListData]="createDropZoneData(node, DropType.DROP_INTO)"
+        [id]="node.id + '_' + DropType.DROP_INTO"
         class="tree-node-container-drop-zone into-node"
         [class.hide]="!dragging || !allowDrop(node, DropType.DROP_INTO)"></div>
       <div
         cdkDropList
-        [cdkDropListData]="createDropZoneData(node, DropType.DROP_AFTER)"
+        [id]="node.id + '_' + DropType.DROP_AFTER"
         class="tree-node-container-drop-zone after-node"
         [class.last]="node.isLastChild"
         [class.hide]="
@@ -116,8 +115,7 @@
           [cdkDragDisabled]="disableDrag(node)"
           [cdkDragData]="node"
           (cdkDragStarted)="dragging = node"
-          (cdkDragReleased)="dragging = undefined"
-          (cdkDragDropped)="handleDrop($event)">
+          (cdkDragReleased)="dragging = undefined; handleDragRelease($event)">
           <div *cdkDragPlaceholder></div>
           <div
             class="tree-node-content-container"
