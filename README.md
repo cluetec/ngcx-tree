@@ -1,5 +1,3 @@
-# @cluetec/ngcx-tree
-
 A reusable tree component for Angular based on the CDK Tree and the CDK Drag n
 Drop features.
 
@@ -8,7 +6,6 @@ Status is beta - feedback welcome :)
 
 # Table of Content
 
-- [@cluetec/ngcx-tree](#cluetecngcx-tree)
 - [Table of Content](#table-of-content)
 - [Getting Started](#getting-started)
 - [Inputs](#inputs)
