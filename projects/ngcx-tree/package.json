@@ -1,6 +1,6 @@
 {
   "name": "ngcx-tree",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "peerDependencies": {
     "@angular/common": "^16.1.0",
     "@angular/core": "^16.1.0",
