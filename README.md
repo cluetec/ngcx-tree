@@ -71,7 +71,7 @@ settings.
   wrapper to render the node
 - `treeNodeContentComponent` Angular Component that will be used to render a
   node. (use `treeNodeContentComponent` or `treeNodeContentTemplate`, but not
-  both). see [NgcxCustomComponent<T>](#NgcxCustomComponent<T>)
+  both). see [NgcxCustomComponent<T>](#NgcxCustomComponent)
 
 <br><br>
 
