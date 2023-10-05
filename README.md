@@ -6,9 +6,39 @@ Drop features.
 <br>
 Status is beta - feedback welcome :)
 
-[[_TOC_]]
+# Table of Content
 
-## Getting Started
+- [@cluetec/ngcx-tree](#cluetecngcx-tree)
+- [Table of Content](#table-of-content)
+- [Getting Started](#getting-started)
+- [Inputs](#inputs)
+- [Outputs](#outputs)
+- [Model](#model)
+  - [NgcxTreeConfig](#ngcxtreeconfig)
+  - [NgcxTreeNode](#ngcxtreenode)
+  - [NgcxTreeNodeWrapper](#ngcxtreenodewrapper)
+  - [NgcxTreeNodeMovedEvent](#ngcxtreenodemovedevent)
+  - [NgcxCustomComponent](#ngcxcustomcomponent)
+    - [Input](#input)
+    - [Output](#output)
+- [Api](#api)
+  - [treeControl](#treecontrol)
+  - [Helper methods](#helper-methods)
+    - [selectNodeById](#selectnodebyid)
+    - [findNodeById](#findnodebyid)
+- [Styling](#styling)
+  - [Include Styles](#include-styles)
+  - [Common styling](#common-styling)
+    - [Dotted tree lines](#dotted-tree-lines)
+    - [Selection highlighting](#selection-highlighting)
+    - [Icon color](#icon-color)
+  - [Font Awesome](#font-awesome)
+  - [Selection](#selection)
+  - [Contributions](#contributions)
+  - [Samples](#samples)
+    - [Simple Sample](#simple-sample)
+
+# Getting Started
 
 1. Install the library: <br>`npm install @cluetec/ngcx-tree` <br>
 
