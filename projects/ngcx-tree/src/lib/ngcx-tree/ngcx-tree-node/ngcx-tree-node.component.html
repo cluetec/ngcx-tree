@@ -1,32 +1,38 @@
 <div
   class="tree-node-content-container"
+  [class.selected]="isSelected"
   [class.first]="nodeWrapper.isFirstChild"
   [class.last]="nodeWrapper.isLastChild"
+  [class.is-selectable]="nodeWrapper.isSelectable"
   (click)="clickEvent.emit()">
   <div class="tree-node-expand-container">
     <button
       *ngIf="nodeWrapper.children.length > 0"
       class="tree-node-expand"
       cdkTreeNodeToggle
-      [attr.aria-label]="'Toggle ' + nodeWrapper.node.title"
+      [attr.aria-label]="'Toggle ' + nodeWrapper.data.title"
       (click)="$event.preventDefault()">
-      <i
-        class="fa fa-xs fa-chevron-right"
-        [class.rotate]="treeControl.isExpanded(nodeWrapper)"></i>
+      <div class="chevron" [class.rotate]="treeControl.isExpanded(nodeWrapper)">
+        <svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9">
+          <path
+            d="m2.83.09l4.2,4.2c.05.05.09.14.09.21s-.04.15-.09.21l-4.2,4.2c-.05.05-.14.09-.21.09s-.15-.04-.21-.09l-.45-.45c-.05-.05-.09-.13-.09-.21,0-.07.04-.15.09-.21l3.54-3.54L1.97.96c-.05-.05-.09-.14-.09-.21s.04-.15.09-.21l.45-.45c.05-.05.14-.09.21-.09s.15.04.21.09Z"
+            style="fill: var(--icon-color, #333); stroke-width: 0px" />
+        </svg>
+      </div>
     </button>
   </div>
   <div class="small-horizontal-tree-line"></div>
-  <div class="tree-node-icon-container" *ngIf="nodeWrapper.node.faIcon">
-    <i class="fa" [class]="nodeWrapper.node.faIcon"></i>
+  <div class="tree-node-icon-container" *ngIf="nodeWrapper.data.faIcon">
+    <i class="fa" [class]="nodeWrapper.data.faIcon"></i>
   </div>
   <div class="tree-node-content">
     <span
       *ngIf="
         !treeConfig?.treeNodeContentComponent &&
         !treeConfig?.treeNodeContentTemplate
-      "
-      >{{ nodeWrapper.node.title }}</span
-    >
+      ">
+      {{ nodeWrapper.data.title }}
+    </span>
     <ng-container #ref></ng-container>
     <ng-container *ngIf="treeConfig?.treeNodeContentTemplate as template">
       <ng-container

@@ -1,9 +1,13 @@
 .tree-node-content-container {
-  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
+
+  &.is-selectable {
+    cursor: pointer;
+  }
 
   .tree-node-expand-container {
     display: flex;
@@ -22,8 +26,19 @@
       cursor: pointer;
       outline: inherit;
 
-      > i.rotate {
-        transform: rotate(90deg);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .chevron {
+        width: 10px;
+        transition: transform 0.1s ease-in-out;
+
+        &.rotate {
+          transform: rotate(90deg);
+        }
       }
     }
   }
@@ -31,11 +46,5 @@
   .tree-node-icon-container {
     margin-right: 7px;
     color: #2587be;
-  }
-
-  .tree-node-content {
-    font-weight: 600;
-    font-size: 14px;
-    color: #575757;
   }
 }

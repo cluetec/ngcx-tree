@@ -1,4 +1,3 @@
-{{ nodeWrapper?.node?.title }}
-<i (click)="sampleClicked()">(sample)</i>
-<div *ngIf="nodeWrapper?.id === 'ban'">test2</div>
-<div *ngIf="nodeWrapper?.id === 'ban'">test1</div>
+<strong>{{ nodeWrapper.data.title }}</strong>
+<i>(id:{{ nodeWrapper.id }}, next:{{ nodeWrapper.next?.id ?? 'none' }})</i>
+<button (click)="sampleClicked()">sample button</button>

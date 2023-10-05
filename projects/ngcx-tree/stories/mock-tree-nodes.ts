@@ -1,6 +1,6 @@
-import { TreeNode } from '../src/lib/ngcx-tree/ngcx-tree-models';
+import { NgcxTreeNode } from '../src/lib/ngcx-tree/ngcx-tree-models';
 
-export const TREE_DATA: TreeNode[] = [
+export const TREE_DATA: NgcxTreeNode[] = [
   {
     id: 'meat',
     title: 'Meat',
@@ -16,6 +16,7 @@ export const TREE_DATA: TreeNode[] = [
       {
         id: 'app',
         title: 'Apple',
+        // 'Apple',
       },
       {
         id: 'ban',
@@ -63,7 +64,7 @@ export const TREE_DATA: TreeNode[] = [
   },
 ];
 
-const addIcon = (node: TreeNode): TreeNode => {
+const addIcon = (node: NgcxTreeNode): NgcxTreeNode => {
   const icon = (node.children?.length ?? 0) > 0 ? 'fa-folder' : 'fa-book';
   const result = { ...node };
   result.faIcon = icon;

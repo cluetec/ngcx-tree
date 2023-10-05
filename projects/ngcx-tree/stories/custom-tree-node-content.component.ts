@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   NgcxCustomComponent,
-  TreeNodeWrapper,
+  NgcxTreeNodeWrapper,
 } from '../src/lib/ngcx-tree/ngcx-tree-models';
 
 @Component({
@@ -11,13 +11,15 @@ import {
   standalone: true,
   imports: [NgIf],
 })
-export class NgcxSampleTreeNodeContentComponent implements NgcxCustomComponent {
+export class NgcxSampleTreeNodeContentComponent
+  implements NgcxCustomComponent<any>
+{
   @Input()
-  nodeWrapper?: TreeNodeWrapper;
+  nodeWrapper!: NgcxTreeNodeWrapper<any>;
   @Output()
   customEvent = new EventEmitter<any>();
 
   sampleClicked() {
-    this.customEvent.emit('sample clicked ' + this.nodeWrapper?.id);
+    this.customEvent.emit('sample button clicked ' + this.nodeWrapper?.id);
   }
 }

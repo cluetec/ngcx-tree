@@ -1,5 +1,5 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgcxTreeComponent } from './ngcx-tree.component';
 
@@ -7,11 +7,11 @@ describe('NgcxTreeComponent', () => {
   let component: NgcxTreeComponent;
   let fixture: ComponentFixture<NgcxTreeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NgcxTreeComponent],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NgcxTreeComponent);

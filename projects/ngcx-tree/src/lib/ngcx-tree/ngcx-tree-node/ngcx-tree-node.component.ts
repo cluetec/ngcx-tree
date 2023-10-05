@@ -9,7 +9,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { TreeConfig, TreeNodeWrapper } from '../ngcx-tree-models';
+import { NgcxTreeConfig, NgcxTreeNodeWrapper } from '../ngcx-tree-models';
 
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
@@ -22,9 +22,10 @@ import { Subject, takeUntil } from 'rxjs';
   imports: [CdkTreeModule, NgTemplateOutlet, NgIf],
 })
 export class NgcxTreeNodeComponent implements OnInit, OnDestroy {
-  @Input() nodeWrapper!: TreeNodeWrapper;
-  @Input() treeControl!: NestedTreeControl<TreeNodeWrapper>;
-  @Input() treeConfig?: TreeConfig;
+  @Input() nodeWrapper!: NgcxTreeNodeWrapper<any>;
+  @Input() treeControl!: NestedTreeControl<NgcxTreeNodeWrapper<any>, string>;
+  @Input() treeConfig?: NgcxTreeConfig<any>;
+  @Input() isSelected = false;
 
   @Output() customEvent = new EventEmitter<any>();
   @Output() clickEvent = new EventEmitter<void>();

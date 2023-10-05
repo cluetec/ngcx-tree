@@ -4,6 +4,7 @@ exports[`NgcxTreeNodeComponent should create 1`] = `
 <ngcx-tree-node
   clickEvent={[Function EventEmitter_]}
   customEvent={[Function EventEmitter_]}
+  isSelected="false"
   ngUnsubscribe={[Function Subject]}
   nodeWrapper={[Function Object]}
   vcRef={[Function ViewContainerRef2]}
@@ -22,7 +23,7 @@ exports[`NgcxTreeNodeComponent should create 1`] = `
       class="tree-node-content"
     >
       <span>
-        Apple
+         Apple 
       </span>
     </div>
   </div>
