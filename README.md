@@ -31,13 +31,16 @@ Status is beta - feedback welcome :)
     - [Icon color](#icon-color)
   - [Font Awesome](#font-awesome)
   - [Selection](#selection)
-  - [Contributions](#contributions)
-  - [Samples](#samples)
-    - [Simple Sample](#simple-sample)
+- [Simple Sample](#simple-sample)
+- [Contributions](#contributions)
 
 # Getting Started
 
-1. Install the library: <br>`npm install @cluetec/ngcx-tree` <br>
+1. Install the library:
+
+```
+npm install @cluetec/ngcx-tree
+```
 
 2. Import the component. Since it is standalone, either add it directly to
    another standlone component or import it into your existing `NgModule`:
@@ -265,18 +268,7 @@ Remove Selection css on dragging element:
 }
 ```
 
-<br><br>
-
-## Contributions
-
-Contributions and improvement suggestions are always welcome!
-
-## Samples
-
-For samples see the storybook stories. run `npm run storybook` to see the
-samples.
-
-### Simple Sample
+# Simple Sample
 
 ```ts
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -313,3 +305,14 @@ export class SimpleTreeSampleComponent {
   ];
 }
 ```
+
+<br><br>
+
+# Contributions
+
+Contributions and improvement suggestions are always welcome!
+
+##Samples
+
+For samples see the storybook stories. run `npm run storybook` to see the
+samples.

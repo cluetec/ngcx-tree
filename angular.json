@@ -5,6 +5,11 @@
   "projects": {
     "ngcx-tree": {
       "projectType": "library",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "projects/ngcx-tree",
       "sourceRoot": "projects/ngcx-tree/src",
       "prefix": "lib",
