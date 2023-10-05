@@ -28,19 +28,16 @@ export const Default: Story = {
   args: { nodes: TREE_DATA },
 };
 
-export const MaxThreeLayersAndMoveLeafsOnly: Story = {
+export const Icons: Story = {
+  args: {
+    nodes: TREE_DATA_WITH_ICONS,
+  },
+};
+
+export const Selection: Story = {
   args: {
     nodes: TREE_DATA,
     config: {
-      allowDrop: (
-        _node: NgcxTreeNodeWrapper<NgcxTreeNode>,
-        intoNode?: NgcxTreeNodeWrapper<NgcxTreeNode>
-      ): boolean => {
-        return !intoNode || intoNode.depth + 1 < 3;
-      },
-      allowDrag: (node: NgcxTreeNodeWrapper<NgcxTreeNode>): boolean => {
-        return !node.children || node.children.length === 0;
-      },
       allowSelection: (_node: NgcxTreeNodeWrapper<NgcxTreeNode>): boolean => {
         return true;
       },
@@ -56,9 +53,19 @@ export const CustomComponent: Story = {
     },
   },
 };
-
-export const WithIcons: Story = {
+export const MaxThreeLayersAndMoveLeafsOnly: Story = {
   args: {
-    nodes: TREE_DATA_WITH_ICONS,
+    nodes: TREE_DATA,
+    config: {
+      allowDrop: (
+        _node: NgcxTreeNodeWrapper<NgcxTreeNode>,
+        intoNode?: NgcxTreeNodeWrapper<NgcxTreeNode>
+      ): boolean => {
+        return !intoNode || intoNode.depth + 1 < 3;
+      },
+      allowDrag: (node: NgcxTreeNodeWrapper<NgcxTreeNode>): boolean => {
+        return !node.children || node.children.length === 0;
+      },
+    },
   },
 };

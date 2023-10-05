@@ -15,11 +15,11 @@ export class NgcxSampleTreeNodeContentComponent
   implements NgcxCustomComponent<any>
 {
   @Input()
-  nodeWrapper?: NgcxTreeNodeWrapper<any>;
+  nodeWrapper!: NgcxTreeNodeWrapper<any>;
   @Output()
   customEvent = new EventEmitter<any>();
 
   sampleClicked() {
-    this.customEvent.emit('sample clicked ' + this.nodeWrapper?.id);
+    this.customEvent.emit('sample button clicked ' + this.nodeWrapper?.id);
   }
 }

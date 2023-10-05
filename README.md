@@ -146,6 +146,95 @@ Can be called to select a node by id. the selectEvent event is fired afterwards.
 Can be used to get the `NgcxTreeNodeWrapper<T>` for an id. returns `undefined`
 if no node is available for the id.
 
+# Styling
+
+## Include Styles
+
+Or All styles from below:
+
+```scss
+@import '@cluetec/ngcx-tree/styles/styles';
+```
+
+## Common styling
+
+you should set the width of cdk-drop-list to 100%, otherwise, the node content
+may be on wrong place:
+
+```css
+.ngcx-tree .cdk-drop-list {
+  width: 100%;
+}
+```
+
+Or Include this:
+
+```scss
+@import '@cluetec/ngcx-tree/styles/ngcx-common';
+```
+
+### Dotted tree lines
+
+Import or copy the scss to show tree lines:
+
+```scss
+@import '@cluetec/ngcx-tree/styles/ngcx-doted-tree-line';
+```
+
+### Selection highlighting
+
+Import or copy the scss to show some selection styling:
+
+```scss
+@import '@cluetec/ngcx-tree/styles/ngcx-selection';
+```
+
+### Icon color
+
+Import or copy the scss to set the color of the node icon:
+
+```scss
+@import '@cluetec/ngcx-tree/styles/ngcx-icon-color';
+```
+
+## Font Awesome
+
+Font Awesome is not referenced included here, but to show icons for the nodes
+you must include font-awesome on your own and may use the `node.faIcon` property
+to set the icon.
+
+Include like this:
+[projects/ngcx-tree/stories/styles/styles.scss](projects/ngcx-tree/stories/styles/styles.scss)
+
+## Selection
+
+Selected node can be styled like this:
+
+```css
+.tree-node-content-container.selected .tree-node-content {
+  background-color: #555;
+  padding-left: 5px;
+}
+```
+
+Hover effect on selectable node:
+
+```css
+.ngcx-tree:not(.dragging)
+  .tree-node-content-container.is-selectable:hover
+  .tree-node-content {
+  background-color: #fbfbfb;
+}
+```
+
+Remove Selection css on dragging element:
+
+```css
+.cdk-drag-preview .tree-node-content-container.selected .tree-node-content {
+  background-color: inherit;
+}
+```
+
 <br><br>
 
 ## Contributions
