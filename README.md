@@ -210,12 +210,6 @@ if no node is available for the id.
 
 ## Include Styles
 
-Or All styles from below:
-
-```scss
-@import '@cluetec/ngcx-tree/styles/styles';
-```
-
 ## Common styling
 
 you should set the width of cdk-drop-list to 100%, otherwise, the node content
@@ -230,7 +224,7 @@ may be on wrong place:
 Or Include this:
 
 ```scss
-@import '@cluetec/ngcx-tree/styles/ngcx-common';
+@import 'node_modules/@cluetec/ngcx-tree/styles/ngcx-common';
 ```
 
 ### Dotted tree lines
@@ -238,7 +232,7 @@ Or Include this:
 Import or copy the scss to show tree lines:
 
 ```scss
-@import '@cluetec/ngcx-tree/styles/ngcx-doted-tree-line';
+@import 'node_modules/@cluetec/ngcx-tree/styles/ngcx-doted-tree-line';
 ```
 
 ### Selection highlighting
@@ -246,7 +240,7 @@ Import or copy the scss to show tree lines:
 Import or copy the scss to show some selection styling:
 
 ```scss
-@import '@cluetec/ngcx-tree/styles/ngcx-selection';
+@import 'node_modules/@cluetec/ngcx-tree/styles/ngcx-selection';
 ```
 
 ### Icon color
@@ -254,7 +248,7 @@ Import or copy the scss to show some selection styling:
 Import or copy the scss to set the color of the node icon:
 
 ```scss
-@import '@cluetec/ngcx-tree/styles/ngcx-icon-color';
+@import 'node_modules/@cluetec/ngcx-tree/styles/ngcx-icon-color';
 ```
 
 ## Font Awesome
