@@ -1,6 +1,14 @@
 {
-  "name": "ngcx-tree",
+  "name": "@cluetec/ngcx-tree",
   "version": "0.1.0",
+  "description": "An angular tree component that allows to move nodes by drag and drop.",
+  "author": "Michael Niedermaier <mn@cluetec.de>",
+  "repository": "https://github.com/cluetec/ngcx-tree",
+  "license": "MIT",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/cluetec/ngcx-tree/issues"
+  },
   "peerDependencies": {
     "@angular/common": "^16.1.0",
     "@angular/core": "^16.1.0",
@@ -9,5 +17,17 @@
   "dependencies": {
     "tslib": "^2.6.1"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "keywords": [
+    "angular",
+    "ng",
+    "tree",
+    "dnd",
+    "d&d",
+    "drag",
+    "and",
+    "drop",
+    "drag and drop",
+    "cluetec"
+  ]
 }
