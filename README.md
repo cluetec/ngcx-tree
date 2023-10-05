@@ -163,6 +163,33 @@ Your component can implement this interface and can be set as
 
 # Api
 
+Access api like this
+
+````ts
+import { ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
+
+@Component({
+  selector: 'app-expand-tree-sample',
+  template: ```
+  <button (click)="expandAll()"></button>
+  <ngcx-tree #tree [nodes]="nodes"></ngcx-tree>
+  ```,
+  standalone: true,
+  imports: [NgcxTreeComponent],
+})
+export class ExpandTreeSampleComponent {
+  nodes = [];
+  @ViewChild('tree', { static: false })
+  ngcxTree: NgcxTreeComponent;
+
+  expandAll(): void {
+    this.ngcxTree.api.treeControl.expandAll();
+  }
+}
+````
+
 ## treeControl
 
 the treeControl (`NestedTreeControl<NgcxTreeNodeWrapper<T>, string>`) of Angular
@@ -271,19 +298,17 @@ Remove Selection css on dragging element:
 # Simple Sample
 
 ```ts
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CdkTreeModule } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
 import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
 
 @Component({
   selector: 'app-simple-tree-sample',
-  template: '<ngcx-tree [nodes]="data"></ngcx-tree>',
+  template: '<ngcx-tree [nodes]="nodes"></ngcx-tree>',
   standalone: true,
-  imports: [CdkTreeModule, DragDropModule, NgcxTreeComponent],
+  imports: [NgcxTreeComponent],
 })
 export class SimpleTreeSampleComponent {
-  data = [
+  nodes = [
     {
       id: 'fru',
       title: 'Fruit',
