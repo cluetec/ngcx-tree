@@ -3,7 +3,10 @@
 A reusable tree component for Angular based on the CDK Tree and the CDK Drag n
 Drop features.
 
-<br><br> Status is beta - feedback welcome :)
+<br>
+Status is beta - feedback welcome :)
+
+[[_TOC_]]
 
 ## Getting Started
 
