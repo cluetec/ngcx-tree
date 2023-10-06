@@ -211,6 +211,12 @@ if no node is available for the id.
 
 ## Include Styles
 
+styles.scss and styles.css contains all the parts described below in one file:
+
+```scss
+@import 'node_modules/@cluetec/ngcx-tree/styles/styles';
+```
+
 ## Common styling
 
 you should set the width of cdk-drop-list to 100%, otherwise, the node content

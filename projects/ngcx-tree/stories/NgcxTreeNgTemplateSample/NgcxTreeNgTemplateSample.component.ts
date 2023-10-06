@@ -13,7 +13,7 @@ import {
   NgcxTreeNode,
   NgcxTreeNodeMovedEvent,
   NgcxTreeNodeWrapper,
-} from 'ngcx-tree';
+} from 'projects/ngcx-tree/src/public-api';
 
 @Component({
   selector: 'app-NgcxTreeNgTemplateSample',
