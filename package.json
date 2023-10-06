@@ -15,7 +15,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "provide:link": "cd dist/ngcx-tree && npm link",
-    "storybook": "ng run ngcx-tree:storybook --https --ssl-cert %AUDIT_DEV_ENVIRONMENT%/localenv/platform.mqa.crt --ssl-key %AUDIT_DEV_ENVIRONMENT%/localenv/platform.mqa.key",
+    "storybook": "ng run ngcx-tree:storybook",
     "build-storybook": "ng run ngcx-tree:build-storybook"
   },
   "private": true,
