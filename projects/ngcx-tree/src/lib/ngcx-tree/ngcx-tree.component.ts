@@ -182,8 +182,6 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   }
 
   keyDownArrowUp(event: Event) {
-    console.log('arrow up');
-
     if (this.selectedNode) {
       if (!this.selectedNode.isFirstChild) {
         this.selectNode(this.selectedNode.previous);
