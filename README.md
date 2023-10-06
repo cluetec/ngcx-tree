@@ -33,6 +33,7 @@ Status is beta - feedback welcome :)
   - [Selection](#selection)
 - [Simple Sample](#simple-sample)
 - [Contributions](#contributions)
+  - [Samples](#samples)
 
 # Getting Started
 
@@ -331,7 +332,9 @@ export class SimpleTreeSampleComponent {
 
 Contributions and improvement suggestions are always welcome!
 
-##Samples
+## Samples
 
-For samples see the storybook stories. run `npm run storybook` to see the
-samples.
+You can run Storybook and see the samples there.
+
+1. `npm run build`
+2. `npm run storybook`
