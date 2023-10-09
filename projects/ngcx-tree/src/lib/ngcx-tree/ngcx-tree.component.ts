@@ -214,12 +214,16 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   }
 
   keyDownArrowLeft(event: Event) {
-    if (this.selectedNode?.parent) {
-      this.selectNode(this.selectedNode.parent);
-    } else if (!this.selectedNode) {
-      const nodes = this.dataSource.data$.value;
-      if (nodes.length > 0) {
-        this.selectNode(nodes[0]);
+    if (this.selectedNode) {
+      if (this.treeControl.isExpanded(this.selectedNode)) {
+        this.treeControl.collapse(this.selectedNode);
+      } else if (this.selectedNode?.parent) {
+        this.selectNode(this.selectedNode.parent);
+      } else if (!this.selectedNode) {
+        const nodes = this.dataSource.data$.value;
+        if (nodes.length > 0) {
+          this.selectNode(nodes[0]);
+        }
       }
     }
     event.preventDefault();
