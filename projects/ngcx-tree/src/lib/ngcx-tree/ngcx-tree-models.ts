@@ -1,7 +1,6 @@
-import { NestedTreeControl } from '@angular/cdk/tree';
 import { EventEmitter, TemplateRef, Type } from '@angular/core';
 
-export interface NgcxTreeConfig<T> {
+export interface NgcxTreeConfig<T extends NgcxTreeNode> {
   treeNodeContentComponent?: Type<NgcxCustomComponent<T>>;
   treeNodeContentTemplate?: TemplateRef<any>;
 
@@ -13,7 +12,7 @@ export interface NgcxTreeConfig<T> {
   allowSelection?: (node: NgcxTreeNodeWrapper<T>) => boolean;
 }
 
-export interface NgcxCustomComponent<T> {
+export interface NgcxCustomComponent<T extends NgcxTreeNode> {
   nodeWrapper?: NgcxTreeNodeWrapper<T>;
   customEvent?: EventEmitter<any>;
 }
@@ -25,7 +24,7 @@ export interface NgcxTreeNode {
   children?: NgcxTreeNode[];
 }
 
-export interface NgcxTreeNodeWrapper<T> {
+export interface NgcxTreeNodeWrapper<T extends NgcxTreeNode> {
   id: string;
   data: T;
   depth: number;
@@ -39,20 +38,13 @@ export interface NgcxTreeNodeWrapper<T> {
   previous?: NgcxTreeNodeWrapper<T>;
 }
 
-export interface NgcxTreeNodeComponent<T> {
+export interface NgcxTreeNodeComponent<T extends NgcxTreeNode> {
   nodeWrapper?: NgcxTreeNodeWrapper<T>;
 }
 
-export interface NgcxTreeNodeMovedEvent<T> {
+export interface NgcxTreeNodeMovedEvent<T extends NgcxTreeNode> {
   node: NgcxTreeNodeWrapper<T>;
   parent?: NgcxTreeNodeWrapper<T>;
   afterNode?: NgcxTreeNodeWrapper<T>;
   beforeNode?: NgcxTreeNodeWrapper<T>;
-}
-
-export interface NgcxTreeApi<T> {
-  selectNodeById(id: string): void;
-  findNodeById(id: string): NgcxTreeNodeWrapper<T> | undefined;
-
-  get treeControl(): NestedTreeControl<NgcxTreeNodeWrapper<any>, string>;
 }
