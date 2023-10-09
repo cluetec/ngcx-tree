@@ -62,7 +62,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
 
   disable = () => false;
 
-  private canceledByEsq?: boolean;
+  private canceledByEsc?: boolean;
 
   ngOnInit(): void {
     this.updateTree();
@@ -244,7 +244,7 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
   @HostListener('window:keydown.escape')
   keyEscapeWhileDragging() {
     if (this.dragging) {
-      this.canceledByEsq = true;
+      this.canceledByEsc = true;
       document.dispatchEvent(new Event('mouseup'));
     }
   }
@@ -266,8 +266,8 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     }
 
     // dropType undefined can happen if dropped directly without moving
-    if (this.canceledByEsq || dropZoneInfo.dropType === undefined) {
-      this.canceledByEsq = false;
+    if (this.canceledByEsc || dropZoneInfo.dropType === undefined) {
+      this.canceledByEsc = false;
       return;
     }
 
