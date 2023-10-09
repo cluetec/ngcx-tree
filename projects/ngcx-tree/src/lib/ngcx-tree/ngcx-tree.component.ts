@@ -124,9 +124,6 @@ export class NgcxTreeComponent implements OnChanges, OnInit {
     return wrapperNodes;
   }
 
-  hasChild = (_: number, node: NgcxTreeNodeWrapper<any>) =>
-    node.children.length > 0;
-
   allowDrop(dropNode: NgcxTreeNodeWrapper<any>, dropType: DropType): boolean {
     if (
       !this.dragging ||
