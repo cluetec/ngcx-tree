@@ -7,7 +7,7 @@ import { NgcxTreeComponent } from '../src/lib/ngcx-tree/ngcx-tree.component';
 import { NgcxSampleTreeNodeContentComponent } from './custom-tree-node-content.component';
 import { TREE_DATA, TREE_DATA_WITH_ICONS } from './mock-tree-nodes';
 
-const meta: Meta<NgcxTreeComponent> = {
+const meta: Meta<NgcxTreeComponent<NgcxTreeNode>> = {
   title: 'Example/NgcxTreeComponent',
   component: NgcxTreeComponent,
   parameters: {
@@ -22,7 +22,7 @@ const meta: Meta<NgcxTreeComponent> = {
   },
 };
 export default meta;
-type Story = StoryObj<NgcxTreeComponent>;
+type Story = StoryObj<NgcxTreeComponent<NgcxTreeNode>>;
 
 export const Default: Story = {
   args: { nodes: TREE_DATA },

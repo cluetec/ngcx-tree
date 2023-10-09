@@ -4,7 +4,11 @@ import {
   CdkDropList,
   DragDropModule,
 } from '@angular/cdk/drag-drop';
-import { CdkTreeModule, NestedTreeControl } from '@angular/cdk/tree';
+import {
+  CdkTreeModule,
+  NestedTreeControl,
+  NestedTreeControlOptions,
+} from '@angular/cdk/tree';
 import { NgIf } from '@angular/common';
 import {
   Component,
@@ -45,17 +49,10 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
   @Output() selectEvent = new EventEmitter<NgcxTreeNodeWrapper<T>>();
 
   /**
-   * api for finding and selecting node
+   * Api for finding and selecting node. Extends from the CDK treeControl for expanding/collapsing the tree
    */
-  public readonly api: NgcxTreeApi<T> = new NgcxTreeApi<T>(this);
-
-  /**
-   * the CDK treeControl for expanding/collapsing the tree
-   */
-  public readonly treeControl: NestedTreeControl<
-    NgcxTreeNodeWrapper<T>,
-    string
-  > = new NestedTreeControl<NgcxTreeNodeWrapper<T>, string>(
+  public readonly treeControl: NgcxTreeControl<T> = new NgcxTreeControl<T>(
+    this,
     (node) => node.children,
     {
       trackBy: (node: NgcxTreeNodeWrapper<T>) => node.id,
@@ -87,7 +84,7 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
       }
       if (this.selectedNode) {
         const selectedNodeId = this.selectedNode.id;
-        setTimeout(() => this.api.selectNodeById(selectedNodeId));
+        setTimeout(() => this.treeControl.selectNodeById(selectedNodeId));
       }
     }
   }
@@ -270,7 +267,7 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
     }
 
     const dropZoneInfo = new DropZoneInfo(dropZoneId);
-    const toNode = this.api.findNodeById(dropZoneInfo.nodeId);
+    const toNode = this.treeControl.findNodeById(dropZoneInfo.nodeId);
     if (!toNode) {
       console.error(`node with id '${dropZoneInfo.nodeId}' could not be found`);
       return;
@@ -391,8 +388,17 @@ enum DropType {
   DROP_INTO = 'DROP_INTO',
 }
 
-export class NgcxTreeApi<T extends NgcxTreeNode> {
-  constructor(private treeComponent: NgcxTreeComponent<T>) {}
+export class NgcxTreeControl<T extends NgcxTreeNode> extends NestedTreeControl<
+  NgcxTreeNodeWrapper<T>,
+  string
+> {
+  constructor(
+    private treeComponent: NgcxTreeComponent<T>,
+    getChildren: (dataNode: NgcxTreeNodeWrapper<T>) => NgcxTreeNodeWrapper<T>[],
+    options?: NestedTreeControlOptions<NgcxTreeNodeWrapper<T>, string>
+  ) {
+    super(getChildren, options);
+  }
 
   /**
    * select a node by id. the selectEvent is fired afterwards.
