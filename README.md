@@ -18,9 +18,9 @@ Status is beta - feedback welcome :)
   - [NgcxCustomComponent](#ngcxcustomcomponent)
     - [Input](#input)
     - [Output](#output)
-- [Api](#api)
+- [TreeControl - Api](#treecontrol---api)
   - [treeControl](#treecontrol)
-  - [Helper methods](#helper-methods)
+  - [Additional Helper methods](#additional-helper-methods)
     - [selectNodeById](#selectnodebyid)
     - [findNodeById](#findnodebyid)
 - [Styling](#styling)
@@ -46,7 +46,7 @@ npm install @cluetec/ngcx-tree
 2. Import the component. Since it is standalone, either add it directly to
    another standlone component or import it into your existing `NgModule`:
 
-```
+```ts
 import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
 
 @Component({
@@ -55,15 +55,19 @@ import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
 })
 ```
 
-```
+```ts
 import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [NgcxTreeComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
+```
+
+```html
+<ngcx-tree [nodes]="nodes"></ngcx-tree>
 ```
 
 <br><br>
@@ -162,7 +166,7 @@ Your component can implement this interface and can be set as
 `customEvent` `EventEmitter<any>` can be used to trigger the output
 'customEvent'
 
-# Api
+# TreeControl - Api
 
 Access api like this
 
@@ -186,17 +190,18 @@ export class ExpandTreeSampleComponent {
   ngcxTree: NgcxTreeComponent;
 
   expandAll(): void {
-    this.ngcxTree.api.treeControl.expandAll();
+    this.ngcxTree.treeControl.expandAll();
   }
 }
 ````
 
 ## treeControl
 
-the treeControl (`NestedTreeControl<NgcxTreeNodeWrapper<T>, string>`) of Angular
-CDK can be mainly used to expand and collapse nodes.
+The treeControl extends the treeControl from Angular CDK
+(`NestedTreeControl<NgcxTreeNodeWrapper<T>, string>`) and can mainly be used to
+expand and collapse nodes.
 
-## Helper methods
+## Additional Helper methods
 
 ### selectNodeById
 
