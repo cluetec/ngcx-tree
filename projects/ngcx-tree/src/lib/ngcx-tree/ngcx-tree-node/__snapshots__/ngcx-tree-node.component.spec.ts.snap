@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NgcxTreeNodeComponent should create 1`] = `
+<ngcx-tree-node
+  clickEvent={[Function EventEmitter_]}
+  customEvent={[Function EventEmitter_]}
+  isSelected="false"
+  ngUnsubscribe={[Function Subject]}
+  nodeWrapper={[Function Object]}
+  vcRef={[Function ViewContainerRef2]}
+>
+  <div
+    class="tree-node-content-container first last"
+  >
+    <div
+      class="tree-node-expand-container"
+    >
+    </div>
+    <div
+      class="small-horizontal-tree-line"
+    />
+    <div
+      class="tree-node-content"
+    >
+      <span>
+         Apple 
+      </span>
+    </div>
+  </div>
+</ngcx-tree-node>
+`;

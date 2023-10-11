@@ -1,0 +1,91 @@
+<cdk-tree
+  #tree
+  class="ngcx-tree"
+  *ngIf="dataSource"
+  [dataSource]="dataSource"
+  [treeControl]="treeControl"
+  cdkDropListGroup
+  [class.dragging]="dragging"
+  (keyup.arrowup)="keyDownArrowUp($event)"
+  (keydown.arrowdown)="keyDownArrowDown($event)"
+  (keydown.arrowleft)="keyDownArrowLeft($event)"
+  (keydown.arrowright)="keyDownArrowRight($event)"
+  tabindex="0">
+  <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
+    <div
+      cdkDropList
+      [id]="node.id + '_' + DropType.DROP_AFTER"
+      class="tree-node-container-drop-zone after-expanded-node"
+      [class.hide]="
+        !allowDrop(node, DropType.DROP_AFTER) || !treeControl.isExpanded(node)
+      ">
+      <div class="drop-insert-line"></div>
+    </div>
+    <div class="tree-node-container">
+      <div
+        cdkDropList
+        [id]="node.id + '_' + DropType.DROP_BEFORE"
+        class="tree-node-container-drop-zone before-node"
+        [class.hide]="
+          !node.isFirstChild || !allowDrop(node, DropType.DROP_BEFORE)
+        ">
+        <div class="drop-insert-line"></div>
+      </div>
+      <div
+        cdkDropList
+        [id]="node.id + '_' + DropType.DROP_INTO"
+        class="tree-node-container-drop-zone into-node"
+        [class.hide]="!allowDrop(node, DropType.DROP_INTO)"></div>
+      <div
+        cdkDropList
+        [id]="node.id + '_' + DropType.DROP_AFTER"
+        class="tree-node-container-drop-zone after-node"
+        [class.last]="node.isLastChild"
+        [class.hide]="
+          treeControl.isExpanded(node) || !allowDrop(node, DropType.DROP_AFTER)
+        ">
+        <div class="drop-insert-line"></div>
+      </div>
+      <div
+        cdkDropList
+        [cdkDropListData]="node"
+        [cdkDropListEnterPredicate]="disable"
+        [cdkDropListSortPredicate]="disable">
+        <div
+          cdkDrag
+          [cdkDragDisabled]="disableDrag(node)"
+          [cdkDragData]="node"
+          (cdkDragStarted)="dragging = node"
+          (cdkDragReleased)="handleDragRelease($event)">
+          <div *cdkDragPlaceholder></div>
+          <div
+            class="tree-node-content-container"
+            [class.first]="node.isFirstChild"
+            [class.last]="node.isLastChild"
+            [class.expanded]="treeControl.isExpanded(node)">
+            <ngcx-tree-node
+              style="width: 100%"
+              [nodeWrapper]="node"
+              [isSelected]="node.id === selectedNode?.id"
+              [treeControl]="treeControl"
+              [treeConfig]="config"
+              (customEvent)="customEvent.emit($event)"
+              (clickEvent)="nodeClicked(node)"></ngcx-tree-node>
+          </div>
+        </div>
+        <ngcx-tree-node
+          *ngIf="node.id === dragging?.id"
+          [nodeWrapper]="node"
+          [treeControl]="treeControl"
+          [treeConfig]="config"></ngcx-tree-node>
+      </div>
+    </div>
+    <div
+      *ngIf="treeControl.isExpanded(node)"
+      class="tree-node-children-container"
+      [class.first]="node.isFirstChild"
+      [class.last]="node.isLastChild">
+      <div cdkTreeNodeOutlet></div>
+    </div>
+  </cdk-nested-tree-node>
+</cdk-tree>

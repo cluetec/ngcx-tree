@@ -1,0 +1,33 @@
+language: node_js
+node_js:
+  - "18"
+dist: trusty
+addons:
+  chrome: stable
+cache:
+  directories:
+    - node_modules
+before_install:
+  - npm update
+install:
+  - npm install
+before_script:
+  - npm install -g @angular/cli@16
+script:
+  - npm run lint:lib
+  - npm run build-prod:lib
+before_deploy:
+  - npm run copy:readme
+  - npm run copy:changelog
+  - npm run copy:license
+  - cd dist/ngcx-tree
+deploy:
+  provider: npm
+  email: mn@cluetec.de
+  skip_cleanup: true
+  api_token: $NPM_TOKEN
+  tag: latest
+  edge: true
+  on:
+    tags: true
+    repo: cluetec/ngcx-tree

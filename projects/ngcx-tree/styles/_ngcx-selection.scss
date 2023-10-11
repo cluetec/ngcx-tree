@@ -1,0 +1,24 @@
+.ngcx-tree {
+  .tree-node-content-container {
+    &.selected {
+      .tree-node-content {
+        font-weight: 600;
+      }
+    }
+  }
+
+  &:not(.dragging) {
+    .tree-node-content-container.is-selectable:hover {
+      .tree-node-content {
+        font-weight: 600;
+      }
+    }
+  }
+}
+.cdk-drag-preview {
+  .ngcx-tree .tree-node-content-container.selected {
+    .tree-node-content {
+      background-color: inherit;
+    }
+  }
+}
