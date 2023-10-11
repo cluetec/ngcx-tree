@@ -7,7 +7,9 @@
   [config]="config"></ngcx-tree>
 
 <ng-template #treeNodeTemplate let-nodeWrapper="nodeWrapper">
-  <strong>{{ nodeWrapper.data.title }}</strong>
-  <i>(id:{{ nodeWrapper.id }}, next:{{ nodeWrapper.next?.id ?? 'none' }})</i>
-  <button (click)="sampleClicked(nodeWrapper)">sample button</button>
+  <div class="node-container">
+    <strong class="node-text">{{ nodeWrapper.data.title }}</strong>
+    <i>(id:{{ nodeWrapper.id }}, next:{{ nodeWrapper.next?.id ?? 'none' }})</i>
+    <button (click)="sampleClicked(nodeWrapper)">sample button</button>
+  </div>
 </ng-template>

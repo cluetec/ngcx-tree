@@ -16,8 +16,9 @@ import {
 } from 'projects/ngcx-tree/src/public-api';
 
 @Component({
-  selector: 'app-NgcxTreeNgTemplateSample',
-  templateUrl: './NgcxTreeNgTemplateSample.component.html',
+  selector: 'app-ngcx-tree-ng-template-sample',
+  templateUrl: './ngcx-tree-ng-template-sample.component.html',
+  styleUrls: ['./ngcx-tree-ng-template-sample.component.scss'],
   standalone: true,
   imports: [NgcxTreeComponent],
 })

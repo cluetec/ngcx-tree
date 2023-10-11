@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { NgcxTreeNgTemplateSampleComponent } from './NgcxTreeNgTemplateSample/NgcxTreeNgTemplateSample.component';
+import { NgcxTreeNgTemplateSampleComponent } from './NgcxTreeNgTemplateSample/ngcx-tree-ng-template-sample.component';
 import { TREE_DATA } from './mock-tree-nodes';
 
 const meta: Meta<NgcxTreeNgTemplateSampleComponent> = {

@@ -1,0 +1,13 @@
+.node-container {
+  min-height: 19px;
+  width: 200px;
+}
+
+.node-text {
+  overflow: clip;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}

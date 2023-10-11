@@ -3,20 +3,23 @@ import { NgcxTreeNode } from '../src/lib/ngcx-tree/ngcx-tree-models';
 export const TREE_DATA: NgcxTreeNode[] = [
   {
     id: 'meat',
-    title: 'Meat',
+    title:
+      'Meat Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua',
   },
   {
     id: 'fish',
-    title: 'Fish',
+    title:
+      'Fish Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua',
   },
   {
     id: 'fru',
-    title: 'Fruit',
+    title:
+      'Fruit Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua',
     children: [
       {
         id: 'app',
-        title: 'Apple',
-        // 'Apple',
+        title:
+          'Apple Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua',
       },
       {
         id: 'ban',
