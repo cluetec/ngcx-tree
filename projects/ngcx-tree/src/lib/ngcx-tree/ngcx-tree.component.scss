@@ -54,7 +54,8 @@
   flex-direction: column;
   // background-color: rgba(255, 0, 0, 0.5);
 
-  &:hover {
+  &:hover,
+  &.cdk-drop-list-dragging {
     &.into-node {
       border: 1.5px dashed rgba(0, 0, 0, 0.5);
     }
