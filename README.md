@@ -8,6 +8,7 @@ Status is beta - feedback welcome :)
 
 - [Table of Content](#table-of-content)
 - [Getting Started](#getting-started)
+- [Prerequisites](#prerequisites)
 - [Inputs](#inputs)
 - [Outputs](#outputs)
 - [Model](#model)
@@ -70,6 +71,10 @@ export class AppModule {}
 <ngcx-tree [nodes]="nodes"></ngcx-tree>
 ```
 
+# Prerequisites
+
+You need at least angular 16 to use the tree. 
+
 <br><br>
 
 # Inputs
@@ -81,12 +86,12 @@ export class AppModule {}
 
 # Outputs
 
-| Property    | event content type     | Description                                                                               |
-| ----------- | ---------------------- | ----------------------------------------------------------------------------------------- |
-| nodeMoved   | NgcxTreeNodeMovedEvent | fired when a node is moved                                                                |
-| customEvent | any                    | may be fired by your own custom component                                                 |
-| clickEvent  | NgcxTreeNodeWrapper    | fired when node is clicked                                                                |
-| selectEvent | NgcxTreeNodeWrapper    | fired when node is selected or un-selected. Clicking a selected node un-selects the node. |
+| Property    | event content type                                | Description                                                                               |
+| ----------- | ------------------------------------------------  | ----------------------------------------------------------------------------------------- |
+| nodeMoved   | [NgcxTreeNodeMovedEvent](#NgcxTreeNodeMovedEvent) | fired when a node is moved                                                                |
+| customEvent | any                                               | may be fired by your own custom component                                                 |
+| clickEvent  | [NgcxTreeNodeWrapper](#NgcxTreeNodeWrapper)       | fired when node is clicked                                                                |
+| selectEvent | [NgcxTreeNodeWrapper](#NgcxTreeNodeWrapper)       | fired when node is selected or un-selected. Clicking a selected node un-selects the node. |
 
 # Model
 
