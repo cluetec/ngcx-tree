@@ -17,9 +17,7 @@
       [id]="node.id + '_' + DropType.DROP_AFTER"
       class="tree-node-container-drop-zone after-expanded-node"
       [class.hide]="
-        !dragging ||
-        !allowDrop(node, DropType.DROP_AFTER) ||
-        !treeControl.isExpanded(node)
+        !allowDrop(node, DropType.DROP_AFTER) || !treeControl.isExpanded(node)
       ">
       <div class="drop-insert-line"></div>
     </div>
@@ -29,9 +27,7 @@
         [id]="node.id + '_' + DropType.DROP_BEFORE"
         class="tree-node-container-drop-zone before-node"
         [class.hide]="
-          !dragging ||
-          !node.isFirstChild ||
-          !allowDrop(node, DropType.DROP_BEFORE)
+          !node.isFirstChild || !allowDrop(node, DropType.DROP_BEFORE)
         ">
         <div class="drop-insert-line"></div>
       </div>
@@ -39,16 +35,14 @@
         cdkDropList
         [id]="node.id + '_' + DropType.DROP_INTO"
         class="tree-node-container-drop-zone into-node"
-        [class.hide]="!dragging || !allowDrop(node, DropType.DROP_INTO)"></div>
+        [class.hide]="!allowDrop(node, DropType.DROP_INTO)"></div>
       <div
         cdkDropList
         [id]="node.id + '_' + DropType.DROP_AFTER"
         class="tree-node-container-drop-zone after-node"
         [class.last]="node.isLastChild"
         [class.hide]="
-          !dragging ||
-          treeControl.isExpanded(node) ||
-          !allowDrop(node, DropType.DROP_AFTER)
+          treeControl.isExpanded(node) || !allowDrop(node, DropType.DROP_AFTER)
         ">
         <div class="drop-insert-line"></div>
       </div>

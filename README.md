@@ -18,9 +18,9 @@ Status is beta - feedback welcome :)
   - [NgcxCustomComponent](#ngcxcustomcomponent)
     - [Input](#input)
     - [Output](#output)
-- [Api](#api)
+- [TreeControl - Api](#treecontrol---api)
   - [treeControl](#treecontrol)
-  - [Helper methods](#helper-methods)
+  - [Additional Helper methods](#additional-helper-methods)
     - [selectNodeById](#selectnodebyid)
     - [findNodeById](#findnodebyid)
 - [Styling](#styling)
@@ -33,6 +33,7 @@ Status is beta - feedback welcome :)
   - [Selection](#selection)
 - [Simple Sample](#simple-sample)
 - [Contributions](#contributions)
+  - [Samples](#samples)
 
 # Getting Started
 
@@ -45,7 +46,7 @@ npm install @cluetec/ngcx-tree
 2. Import the component. Since it is standalone, either add it directly to
    another standlone component or import it into your existing `NgModule`:
 
-```
+```ts
 import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
 
 @Component({
@@ -54,15 +55,19 @@ import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
 })
 ```
 
-```
+```ts
 import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [NgcxTreeComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
+```
+
+```html
+<ngcx-tree [nodes]="nodes"></ngcx-tree>
 ```
 
 <br><br>
@@ -161,7 +166,7 @@ Your component can implement this interface and can be set as
 `customEvent` `EventEmitter<any>` can be used to trigger the output
 'customEvent'
 
-# Api
+# TreeControl - Api
 
 Access api like this
 
@@ -185,17 +190,18 @@ export class ExpandTreeSampleComponent {
   ngcxTree: NgcxTreeComponent;
 
   expandAll(): void {
-    this.ngcxTree.api.treeControl.expandAll();
+    this.ngcxTree.treeControl.expandAll();
   }
 }
 ````
 
 ## treeControl
 
-the treeControl (`NestedTreeControl<NgcxTreeNodeWrapper<T>, string>`) of Angular
-CDK can be mainly used to expand and collapse nodes.
+The treeControl extends the treeControl from Angular CDK
+(`NestedTreeControl<NgcxTreeNodeWrapper<T>, string>`) and can mainly be used to
+expand and collapse nodes.
 
-## Helper methods
+## Additional Helper methods
 
 ### selectNodeById
 
@@ -209,6 +215,12 @@ if no node is available for the id.
 # Styling
 
 ## Include Styles
+
+styles.scss and styles.css contains all the parts described below in one file:
+
+```scss
+@import 'node_modules/@cluetec/ngcx-tree/styles/styles';
+```
 
 ## Common styling
 
@@ -331,7 +343,9 @@ export class SimpleTreeSampleComponent {
 
 Contributions and improvement suggestions are always welcome!
 
-##Samples
+## Samples
 
-For samples see the storybook stories. run `npm run storybook` to see the
-samples.
+You can run Storybook and see the samples there.
+
+1. `npm run build`
+2. `npm run storybook`
