@@ -176,9 +176,8 @@ Your component can implement this interface and can be set as
 Access api like this
 
 ````ts
-import { ViewChild } from '@angular/core';
-import { Component } from '@angular/core';
-import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
+import { ViewChild, Component} from '@angular/core';
+import { NgcxTreeComponent, NgcxTreeNode } from '@cluetec/ngcx-tree';
 
 @Component({
   selector: 'app-expand-tree-sample',
@@ -192,7 +191,7 @@ import { NgcxTreeComponent } from '@cluetec/ngcx-tree';
 export class ExpandTreeSampleComponent {
   nodes = [];
   @ViewChild('tree', { static: false })
-  ngcxTree: NgcxTreeComponent;
+  ngcxTree: NgcxTreeComponent<NgcxTreeNode>;
 
   expandAll(): void {
     this.ngcxTree.treeControl.expandAll();
