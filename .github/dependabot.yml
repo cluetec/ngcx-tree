@@ -16,4 +16,10 @@ updates:
     groups:
       angular:
         patterns:
-          - "@angular/*"
+        - "@angular*"
+        update-types:
+        - "minor"
+        - "patch"
+    ignore:
+      - dependency-name: "@angular*"
+        update-types: ["version-update:semver-major"]
