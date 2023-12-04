@@ -20,6 +20,12 @@ updates:
         update-types:
         - "minor"
         - "patch"
+      storybook:
+        patterns:
+        - "*storybook*"
+        update-types:
+        - "minor"
+        - "patch"
     ignore:
       - dependency-name: "@angular*"
         update-types: ["version-update:semver-major"]
