@@ -1,11 +1,30 @@
 A reusable tree component for Angular based on the CDK Tree and the CDK Drag n
 Drop features.
 
-<br>
-Status is beta - feedback welcome :)
+Includes only peer dependencies to angular cdk, no other library included. So
+the lib size is pretty small.
+
+# Feature Overview
+
+- Highly custumizable tree component
+  - Configure your Angular Template for node rendering
+  - Or configure your own component for node rendering
+- Selection state
+  - configure which nodes are selectable
+- Drag and Drop
+  - configure which nodes may be moved
+  - configure where a node can be dropped
+- Events (always with detailed information about parents, next or prev. nodes):
+  - On move
+  - On click
+  - On select/unselect
+  - custom event may be emitted by custom component
+
+Missing features? Let me know :)
 
 # Table of Content
 
+- [Feature Overview](#feature-overview)
 - [Table of Content](#table-of-content)
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
@@ -73,7 +92,7 @@ export class AppModule {}
 
 # Prerequisites
 
-You need at least angular 16 to use the tree. 
+You need at least angular 16 to use the tree.
 
 <br><br>
 
@@ -87,7 +106,7 @@ You need at least angular 16 to use the tree.
 # Outputs
 
 | Property    | event content type                                | Description                                                                               |
-| ----------- | ------------------------------------------------  | ----------------------------------------------------------------------------------------- |
+| ----------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | nodeMoved   | [NgcxTreeNodeMovedEvent](#NgcxTreeNodeMovedEvent) | fired when a node is moved                                                                |
 | customEvent | any                                               | may be fired by your own custom component                                                 |
 | clickEvent  | [NgcxTreeNodeWrapper](#NgcxTreeNodeWrapper)       | fired when node is clicked                                                                |
@@ -176,7 +195,7 @@ Your component can implement this interface and can be set as
 Access api like this
 
 ````ts
-import { ViewChild, Component} from '@angular/core';
+import { ViewChild, Component } from '@angular/core';
 import { NgcxTreeComponent, NgcxTreeNode } from '@cluetec/ngcx-tree';
 
 @Component({
@@ -269,9 +288,9 @@ Import or copy the scss to set the color of the node icon:
 
 ## Font Awesome
 
-Font Awesome is not referenced included here, but to show icons for the nodes
-you must include font-awesome on your own and may use the `node.faIcon` property
-to set the icon.
+Font Awesome is not included here, but to show icons for the nodes you may
+include font-awesome on your own and may use the `node.faIcon` property to set
+the icon.
 
 Include like this:
 [projects/ngcx-tree/stories/styles/styles.scss](projects/ngcx-tree/stories/styles/styles.scss)
