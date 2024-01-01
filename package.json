@@ -44,7 +44,7 @@
     "@storybook/blocks": "^7.6.6",
     "@storybook/testing-library": "^0.2.2",
     "@types/jest": "^29.5.11",
-    "cpx2": "^6.0.1",
+    "cpx2": "^7.0.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-storybook": "^0.6.15",
