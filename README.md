@@ -4,6 +4,10 @@ Drop features.
 Includes only peer dependencies to angular cdk, no other library included. So
 the lib size is pretty small.
 
+# Demo:
+
+[https://cluetec.github.io/ngcx-tree-demo](https://cluetec.github.io/ngcx-tree-demo)
+
 # Feature Overview
 
 - Highly custumizable tree component
@@ -24,6 +28,7 @@ Missing features? Let me know :)
 
 # Table of Content
 
+- [Demo:](#demo)
 - [Feature Overview](#feature-overview)
 - [Table of Content](#table-of-content)
 - [Getting Started](#getting-started)
