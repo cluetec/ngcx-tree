@@ -1,6 +1,6 @@
 {
   "name": "@cluetec/ngcx-tree",
-  "version": "17.0.0",
+  "version": "17.0.1",
   "description": "An angular tree component with drag and drop.",
   "author": "Michael Niedermaier <mn@cluetec.de>",
   "repository": "https://github.com/cluetec/ngcx-tree",

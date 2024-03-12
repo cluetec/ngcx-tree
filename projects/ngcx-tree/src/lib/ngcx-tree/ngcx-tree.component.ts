@@ -260,7 +260,8 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
   protected handleDragRelease(event: CdkDragRelease<NgcxTreeNodeWrapper<T>>) {
     this.dragging = undefined;
     const movedNode = event.source.data;
-    const dropZoneId = (<any>event.event.target).id;
+    const target = <HTMLDivElement>event.event.target;
+    const dropZoneId = target.id ?? target.parentElement?.id;
     if (!dropZoneId) {
       // no valid drop zone
       return;
