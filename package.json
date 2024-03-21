@@ -64,5 +64,14 @@
     "localtunnel": {
       "axios": "1.6.2"
     }
-  }
+  },
+  "keywords": [
+    "angular",
+    "component",
+    "tree",
+    "dnd",
+    "d&d",
+    "drag&drop",
+    "drag and drop"
+  ]
 }
