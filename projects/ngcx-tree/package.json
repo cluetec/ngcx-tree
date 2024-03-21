@@ -1,6 +1,6 @@
 {
   "name": "@cluetec/ngcx-tree",
-  "version": "17.0.1",
+  "version": "17.0.2",
   "description": "An angular tree component with drag and drop.",
   "author": "Michael Niedermaier <mn@cluetec.de>",
   "repository": "https://github.com/cluetec/ngcx-tree",
@@ -17,18 +17,11 @@
   "sideEffects": false,
   "keywords": [
     "angular",
-    "ng",
+    "component",
     "tree",
     "dnd",
     "d&d",
-    "drag",
-    "and",
-    "drop",
-    "drag and drop",
-    "cluetec",
-    "ngcx",
-    "ngx",
-    "cx",
-    "component"
+    "drag&drop",
+    "drag and drop"
   ]
 }
