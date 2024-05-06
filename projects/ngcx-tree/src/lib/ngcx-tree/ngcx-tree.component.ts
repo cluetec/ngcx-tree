@@ -132,7 +132,7 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
     return wrapperNodes;
   }
 
-  protected allowDrop(
+  protected hideDrop(
     dropNode: NgcxTreeNodeWrapper<T>,
     dropType: DropType
   ): boolean {
@@ -161,13 +161,33 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
     ) {
       return false;
     }
+    return true;
+  }
 
+  protected allowDrop(
+    dropNode: NgcxTreeNodeWrapper<T>,
+    dropType: DropType
+  ): boolean | string {
     const intoNode =
       dropType == DropType.DROP_INTO ? dropNode : dropNode.parent;
-    if (this.config?.allowDrop) {
-      return this.config.allowDrop(this.dragging, intoNode);
+    if (this.config?.allowDrop && this.dragging) {
+      const allowDrop = this.config.allowDrop(this.dragging, intoNode);
+      return typeof allowDrop === 'string' ? !allowDrop : allowDrop;
     }
     return true;
+  }
+
+  protected allowDropText(
+    dropNode: NgcxTreeNodeWrapper<T>,
+    dropType: DropType
+  ): boolean | string {
+    const intoNode =
+      dropType == DropType.DROP_INTO ? dropNode : dropNode.parent;
+    if (this.config?.allowDrop && this.dragging) {
+      const allowDrop = this.config.allowDrop(this.dragging, intoNode);
+      return typeof allowDrop === 'string' ? allowDrop : '';
+    }
+    return '';
   }
 
   // prevent drop directly after a node on same level, that is expanded
@@ -258,21 +278,32 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
   }
 
   protected handleDragRelease(event: CdkDragRelease<NgcxTreeNodeWrapper<T>>) {
-    this.dragging = undefined;
     const movedNode = event.source.data;
     const target = <HTMLDivElement>event.event.target;
     const dropZoneId = target.id ?? target.parentElement?.id;
     if (!dropZoneId) {
       // no valid drop zone
+      this.dragging = undefined;
       return;
     }
 
     const dropZoneInfo = new DropZoneInfo(dropZoneId);
     const toNode = this.treeControl.findNodeById(dropZoneInfo.nodeId);
     if (!toNode) {
+      this.dragging = undefined;
       console.error(`node with id '${dropZoneInfo.nodeId}' could not be found`);
       return;
     }
+
+    if (
+      !this.allowDrop(toNode, dropZoneInfo.dropType) ||
+      !this.hideDrop(toNode, dropZoneInfo.dropType)
+    ) {
+      this.dragging = undefined;
+      return;
+    }
+
+    this.dragging = undefined;
 
     // dropType undefined can happen if dropped directly without moving
     if (this.canceledByEsc || dropZoneInfo.dropType === undefined) {

@@ -17,8 +17,10 @@
       [id]="node.id + '_' + DropType.DROP_AFTER"
       class="tree-node-container-drop-zone after-expanded-node"
       [class.hide]="
-        !allowDrop(node, DropType.DROP_AFTER) || !treeControl.isExpanded(node)
-      ">
+        !hideDrop(node, DropType.DROP_AFTER) || !treeControl.isExpanded(node)
+      "
+      [class.no-drop]="!allowDrop(node, DropType.DROP_AFTER)"
+      [title]="allowDropText(node, DropType.DROP_AFTER)">
       <div class="drop-insert-line"></div>
     </div>
     <div class="tree-node-container">
@@ -27,23 +29,30 @@
         [id]="node.id + '_' + DropType.DROP_BEFORE"
         class="tree-node-container-drop-zone before-node"
         [class.hide]="
-          !node.isFirstChild || !allowDrop(node, DropType.DROP_BEFORE)
-        ">
+          !node.isFirstChild || !hideDrop(node, DropType.DROP_BEFORE)
+        "
+        [class.no-drop]="!allowDrop(node, DropType.DROP_BEFORE)"
+        [title]="allowDropText(node, DropType.DROP_BEFORE)">
         <div class="drop-insert-line"></div>
       </div>
       <div
         cdkDropList
         [id]="node.id + '_' + DropType.DROP_INTO"
         class="tree-node-container-drop-zone into-node"
-        [class.hide]="!allowDrop(node, DropType.DROP_INTO)"></div>
+        [class.hide]="!hideDrop(node, DropType.DROP_INTO)"
+        [class.no-drop]="!allowDrop(node, DropType.DROP_INTO)"
+        [title]="allowDropText(node, DropType.DROP_INTO)"></div>
       <div
         cdkDropList
         [id]="node.id + '_' + DropType.DROP_AFTER"
         class="tree-node-container-drop-zone after-node"
         [class.last]="node.isLastChild"
         [class.hide]="
-          treeControl.isExpanded(node) || !allowDrop(node, DropType.DROP_AFTER)
-        ">
+          treeControl.isExpanded(node) || !hideDrop(node, DropType.DROP_AFTER)
+        "
+        let
+        [class.no-drop]="!allowDrop(node, DropType.DROP_AFTER)"
+        [title]="allowDropText(node, DropType.DROP_AFTER)">
         <div class="drop-insert-line"></div>
       </div>
       <div

@@ -71,6 +71,14 @@
     }
   }
 
+  &.no-drop {
+    cursor: no-drop;
+    border: 0px dashed transparent !important;
+    .drop-insert-line {
+      border-top: solid transparent 0px !important;
+    }
+  }
+
   &.before-node {
     // background-color: rgba(0, 255, 0, 0.5);
     height: 20px;
