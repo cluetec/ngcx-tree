@@ -4,8 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgcxTreeComponent } from './ngcx-tree.component';
 
 describe('NgcxTreeComponent', () => {
-  let component: NgcxTreeComponent;
-  let fixture: ComponentFixture<NgcxTreeComponent>;
+  let component: NgcxTreeComponent<any>;
+  let fixture: ComponentFixture<NgcxTreeComponent<any>>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({

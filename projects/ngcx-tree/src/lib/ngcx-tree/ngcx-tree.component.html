@@ -13,46 +13,44 @@
   tabindex="0">
   <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="tree-node">
     <div
+      *ngIf="allowDrop(node, DropType.DROP_AFTER) as dropControl"
       cdkDropList
       [id]="node.id + '_' + DropType.DROP_AFTER"
       class="tree-node-container-drop-zone after-expanded-node"
-      [class.hide]="
-        !hideDrop(node, DropType.DROP_AFTER) || !treeControl.isExpanded(node)
-      "
-      [class.no-drop]="!allowDrop(node, DropType.DROP_AFTER)"
-      [title]="allowDropText(node, DropType.DROP_AFTER)">
+      [class.hide]="dropControl.hideDrop || !treeControl.isExpanded(node)"
+      [class.no-drop]="dropControl.preventDrop"
+      [title]="dropControl.preventDropText">
       <div class="drop-insert-line"></div>
     </div>
     <div class="tree-node-container">
       <div
+        *ngIf="allowDrop(node, DropType.DROP_BEFORE) as dropControl"
         cdkDropList
         [id]="node.id + '_' + DropType.DROP_BEFORE"
         class="tree-node-container-drop-zone before-node"
-        [class.hide]="
-          !node.isFirstChild || !hideDrop(node, DropType.DROP_BEFORE)
-        "
-        [class.no-drop]="!allowDrop(node, DropType.DROP_BEFORE)"
-        [title]="allowDropText(node, DropType.DROP_BEFORE)">
+        [class.hide]="!node.isFirstChild || dropControl.hideDrop"
+        [class.no-drop]="dropControl.preventDrop"
+        [title]="dropControl.preventDropText">
         <div class="drop-insert-line"></div>
       </div>
       <div
+        *ngIf="allowDrop(node, DropType.DROP_INTO) as dropControl"
         cdkDropList
         [id]="node.id + '_' + DropType.DROP_INTO"
         class="tree-node-container-drop-zone into-node"
-        [class.hide]="!hideDrop(node, DropType.DROP_INTO)"
-        [class.no-drop]="!allowDrop(node, DropType.DROP_INTO)"
-        [title]="allowDropText(node, DropType.DROP_INTO)"></div>
+        [class.hide]="dropControl.hideDrop"
+        [class.no-drop]="dropControl.preventDrop"
+        [title]="dropControl.preventDropText"></div>
       <div
+        *ngIf="allowDrop(node, DropType.DROP_AFTER) as dropControl"
         cdkDropList
         [id]="node.id + '_' + DropType.DROP_AFTER"
         class="tree-node-container-drop-zone after-node"
         [class.last]="node.isLastChild"
-        [class.hide]="
-          treeControl.isExpanded(node) || !hideDrop(node, DropType.DROP_AFTER)
-        "
+        [class.hide]="treeControl.isExpanded(node) || dropControl.hideDrop"
         let
-        [class.no-drop]="!allowDrop(node, DropType.DROP_AFTER)"
-        [title]="allowDropText(node, DropType.DROP_AFTER)">
+        [class.no-drop]="dropControl.preventDrop"
+        [title]="dropControl.preventDropText">
         <div class="drop-insert-line"></div>
       </div>
       <div
