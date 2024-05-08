@@ -19,7 +19,7 @@
       class="tree-node-container-drop-zone after-expanded-node"
       [class.hide]="dropControl.hideDrop || !treeControl.isExpanded(node)"
       [class.no-drop]="dropControl.preventDrop"
-      [title]="dropControl.preventDropText">
+      [title]="dropControl.preventDropReason">
       <div class="drop-insert-line"></div>
     </div>
     <div class="tree-node-container">
@@ -30,7 +30,7 @@
         class="tree-node-container-drop-zone before-node"
         [class.hide]="!node.isFirstChild || dropControl.hideDrop"
         [class.no-drop]="dropControl.preventDrop"
-        [title]="dropControl.preventDropText">
+        [title]="dropControl.preventDropReason">
         <div class="drop-insert-line"></div>
       </div>
       <div
@@ -40,7 +40,7 @@
         class="tree-node-container-drop-zone into-node"
         [class.hide]="dropControl.hideDrop"
         [class.no-drop]="dropControl.preventDrop"
-        [title]="dropControl.preventDropText"></div>
+        [title]="dropControl.preventDropReason"></div>
       <div
         *ngIf="allowDrop(node, DropType.DROP_AFTER) as dropControl"
         cdkDropList
@@ -50,7 +50,7 @@
         [class.hide]="treeControl.isExpanded(node) || dropControl.hideDrop"
         let
         [class.no-drop]="dropControl.preventDrop"
-        [title]="dropControl.preventDropText">
+        [title]="dropControl.preventDropReason">
         <div class="drop-insert-line"></div>
       </div>
       <div

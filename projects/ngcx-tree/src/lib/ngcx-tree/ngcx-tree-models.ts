@@ -7,7 +7,11 @@ export interface NgcxTreeConfig<T extends NgcxTreeNode> {
   allowDrop?: (
     node: NgcxTreeNodeWrapper<T>,
     intoNode?: NgcxTreeNodeWrapper<T>
-  ) => boolean | string;
+  ) => boolean;
+  preventDropReason?: (
+    node: NgcxTreeNodeWrapper<T>,
+    intoNode?: NgcxTreeNodeWrapper<T>
+  ) => string;
   allowDrag?: (node: NgcxTreeNodeWrapper<T>) => boolean;
   allowSelection?: (node: NgcxTreeNodeWrapper<T>) => boolean;
 }

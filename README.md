@@ -128,10 +128,15 @@ settings.
   `(node: NgcxTreeNodeWrapper<T>) => boolean` - all nodes are draggable by
   default<br><br>
 - `allowDrop` method that decides if node can be dropped into another node
-  `(node: NgcxTreeNodeWrapper<T>, intoNode?: NgcxTreeNodeWrapper<T>) => boolean | string` -
+  `(node: NgcxTreeNodeWrapper<T>, intoNode?: NgcxTreeNodeWrapper<T>) => boolean` -
+  every node may be draggable everywhere by default.<br><br>
+- `preventDropReason` method that decides if node can be dropped into another
+  node
+  `(node: NgcxTreeNodeWrapper<T>, intoNode?: NgcxTreeNodeWrapper<T>) => string` -
   every node may be draggable everywhere by default. If a non empty string is
   returned, then the node cannot be dropped and the string will be displayed.
-  <br><br>
+  One of the methods `allowDrop` or `preventDropReason` is sufficient to prevent
+  the node to be dropped. <br><br>
 - `allowSelection` method that decides if node can be selected
   `(node: NgcxTreeNodeWrapper<T>) => boolean ` - nodes are not selectable by
   default<br><br>

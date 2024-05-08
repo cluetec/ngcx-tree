@@ -172,18 +172,24 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
 
     const intoNode =
       dropType == DropType.DROP_INTO ? dropNode : dropNode.parent;
-    if (this.config?.allowDrop && this.dragging) {
-      const allowDrop = this.config.allowDrop(this.dragging, intoNode);
-      const isString = typeof allowDrop === 'string';
 
-      return new DropControl(
-        hideDrop,
-        isString ? !!allowDrop : !allowDrop,
-        isString ? allowDrop : undefined
+    let preventDropReason = '';
+    let allowDrop = true;
+    if (this.config?.preventDropReason && this.dragging) {
+      preventDropReason = this.config.preventDropReason(
+        this.dragging,
+        intoNode
       );
     }
+    if (this.config?.allowDrop && this.dragging) {
+      allowDrop = this.config.allowDrop(this.dragging, intoNode);
+    }
 
-    return new DropControl(hideDrop, false);
+    return new DropControl(
+      hideDrop,
+      !allowDrop || !!preventDropReason,
+      preventDropReason
+    );
   }
 
   // prevent drop directly after a node on same level, that is expanded
@@ -481,11 +487,15 @@ class DropZoneInfo {
 class DropControl {
   hideDrop: boolean;
   preventDrop: boolean;
-  preventDropText: string;
+  preventDropReason: string;
 
-  constructor(hideDrop: boolean, preventDrop: boolean, forbiddenText?: string) {
+  constructor(
+    hideDrop: boolean,
+    preventDrop: boolean,
+    preventDropReason?: string
+  ) {
     this.hideDrop = hideDrop;
     this.preventDrop = preventDrop;
-    this.preventDropText = forbiddenText ?? '';
+    this.preventDropReason = preventDropReason ?? '';
   }
 }
