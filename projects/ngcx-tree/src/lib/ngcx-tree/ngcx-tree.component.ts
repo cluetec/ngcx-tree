@@ -302,10 +302,8 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
       return;
     }
 
-    if (
-      !this.allowDrop(toNode, dropZoneInfo.dropType) ||
-      !this.hideDrop(toNode, dropZoneInfo.dropType)
-    ) {
+    const dropControl = this.allowDrop(toNode, dropZoneInfo.dropType);
+    if (dropControl.hideDrop || dropControl.preventDrop) {
       return;
     }
 
