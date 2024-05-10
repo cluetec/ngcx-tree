@@ -173,7 +173,7 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
     const intoNode =
       dropType == DropType.DROP_INTO ? dropNode : dropNode.parent;
 
-    let preventDropReason = '';
+    let preventDropReason;
     let allowDrop = true;
     if (this.config?.preventDropReason && this.dragging) {
       preventDropReason = this.config.preventDropReason(
@@ -485,17 +485,9 @@ class DropZoneInfo {
 }
 
 class DropControl {
-  hideDrop: boolean;
-  preventDrop: boolean;
-  preventDropReason: string;
-
   constructor(
-    hideDrop: boolean,
-    preventDrop: boolean,
-    preventDropReason?: string
-  ) {
-    this.hideDrop = hideDrop;
-    this.preventDrop = preventDrop;
-    this.preventDropReason = preventDropReason ?? '';
-  }
+    public hideDrop: boolean,
+    public preventDrop: boolean,
+    public preventDropReason: string = ''
+  ) {}
 }
