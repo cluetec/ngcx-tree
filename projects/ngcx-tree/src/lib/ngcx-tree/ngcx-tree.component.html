@@ -19,9 +19,6 @@
       class="tree-node-container-drop-zone after-expanded-node"
       [class.hide]="dropControl.hideDrop || !treeControl.isExpanded(node)"
       [class.no-drop]="dropControl.preventDrop">
-      <div *ngIf="dropControl.preventDropReason" class="tooltip">
-        {{ dropControl.preventDropReason }}
-      </div>
       <div class="drop-insert-line"></div>
       <div *ngIf="dropControl.preventDropReason" class="tooltip">
         {{ dropControl.preventDropReason }}
