@@ -54,6 +54,7 @@ Missing features? Let me know :)
     - [Dotted tree lines](#dotted-tree-lines)
     - [Selection highlighting](#selection-highlighting)
     - [Icon color](#icon-color)
+    - [Prevent drop reason tooltip](#prevent-drop-reason-tooltip)
   - [Font Awesome](#font-awesome)
   - [Selection](#selection)
 - [Simple Sample](#simple-sample)
@@ -259,12 +260,12 @@ styles.scss and styles.css contains all the parts described below in one file:
 
 ## Common styling
 
-you should set the width of cdk-drop-list to 100%, otherwise, the node content
+you should set the width of cdk-drop-list to auto, otherwise, the node content
 may be on wrong place:
 
 ```css
 .ngcx-tree .cdk-drop-list {
-  width: 100%;
+  width: auto;
 }
 ```
 
@@ -296,6 +297,14 @@ Import or copy the scss to set the color of the node icon:
 
 ```scss
 @import 'node_modules/@cluetec/ngcx-tree/styles/ngcx-icon-color';
+```
+
+### Prevent drop reason tooltip
+
+Import or copy the scss to style the tooltip, shown when `config.preventDropReason` is used:
+
+```scss
+@import 'node_modules/@cluetec/ngcx-tree/styles/ngcx-tooltip';
 ```
 
 ## Font Awesome
