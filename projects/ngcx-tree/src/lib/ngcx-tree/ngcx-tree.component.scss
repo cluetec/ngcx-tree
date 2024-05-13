@@ -47,7 +47,7 @@
   left: 25px;
   right: 5px;
   position: absolute;
-  z-index: 1;
+  z-index: 1001;
 
   display: flex;
   justify-content: center;
@@ -82,13 +82,13 @@
   &.before-node {
     // background-color: rgba(0, 255, 0, 0.5);
     height: 20px;
-    z-index: 2;
+    z-index: 1002;
     top: -10px;
   }
 
   &.after-node {
     height: 20px;
-    z-index: 3;
+    z-index: 1003;
     top: calc(100% - 10px);
     // background-color: rgba(255, 255, 0, 0.5);
 
@@ -101,11 +101,27 @@
     position: absolute;
 
     height: 20px;
-    z-index: 3;
+    z-index: 1003;
     bottom: -10px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     // background-color: rgba(255, 255, 0, 0.5);
+  }
+
+  &:not(:hover) .tooltip {
+    display: none;
+  }
+
+  .tooltip {
+    border: 1px solid;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.3);
+    padding: 2px;
+    max-width: 300px;
+    font-size: 85%;
+    position: absolute;
+    top: 110%;
+    z-index: 1004;
   }
 }

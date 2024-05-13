@@ -18,9 +18,14 @@
       [id]="node.id + '_' + DropType.DROP_AFTER"
       class="tree-node-container-drop-zone after-expanded-node"
       [class.hide]="dropControl.hideDrop || !treeControl.isExpanded(node)"
-      [class.no-drop]="dropControl.preventDrop"
-      [title]="dropControl.preventDropReason">
+      [class.no-drop]="dropControl.preventDrop">
+      <div *ngIf="dropControl.preventDropReason" class="tooltip">
+        {{ dropControl.preventDropReason }}
+      </div>
       <div class="drop-insert-line"></div>
+      <div *ngIf="dropControl.preventDropReason" class="tooltip">
+        {{ dropControl.preventDropReason }}
+      </div>
     </div>
     <div class="tree-node-container">
       <div
@@ -29,9 +34,11 @@
         [id]="node.id + '_' + DropType.DROP_BEFORE"
         class="tree-node-container-drop-zone before-node"
         [class.hide]="!node.isFirstChild || dropControl.hideDrop"
-        [class.no-drop]="dropControl.preventDrop"
-        [title]="dropControl.preventDropReason">
+        [class.no-drop]="dropControl.preventDrop">
         <div class="drop-insert-line"></div>
+        <div *ngIf="dropControl.preventDropReason" class="tooltip">
+          {{ dropControl.preventDropReason }}
+        </div>
       </div>
       <div
         *ngIf="allowDrop(node, DropType.DROP_INTO) as dropControl"
@@ -39,8 +46,11 @@
         [id]="node.id + '_' + DropType.DROP_INTO"
         class="tree-node-container-drop-zone into-node"
         [class.hide]="dropControl.hideDrop"
-        [class.no-drop]="dropControl.preventDrop"
-        [title]="dropControl.preventDropReason"></div>
+        [class.no-drop]="dropControl.preventDrop">
+        <div *ngIf="dropControl.preventDropReason" class="tooltip">
+          {{ dropControl.preventDropReason }}
+        </div>
+      </div>
       <div
         *ngIf="allowDrop(node, DropType.DROP_AFTER) as dropControl"
         cdkDropList
@@ -48,9 +58,11 @@
         class="tree-node-container-drop-zone after-node"
         [class.last]="node.isLastChild"
         [class.hide]="treeControl.isExpanded(node) || dropControl.hideDrop"
-        [class.no-drop]="dropControl.preventDrop"
-        [title]="dropControl.preventDropReason">
+        [class.no-drop]="dropControl.preventDrop">
         <div class="drop-insert-line"></div>
+        <div *ngIf="dropControl.preventDropReason" class="tooltip">
+          {{ dropControl.preventDropReason }}
+        </div>
       </div>
       <div
         cdkDropList
