@@ -132,7 +132,7 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
     return wrapperNodes;
   }
 
-  protected allowDrop(
+  protected hideDrop(
     dropNode: NgcxTreeNodeWrapper<T>,
     dropType: DropType
   ): boolean {
@@ -141,33 +141,55 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
       this.dragging.id === dropNode.id ||
       isParentOf(this.dragging, dropNode)
     ) {
-      return false;
+      return true;
     }
     if (
       dropType == DropType.DROP_INTO &&
       dropNode.id === this.dragging.parent?.id
     ) {
-      return false;
+      return true;
     }
     if (
       dropType == DropType.DROP_AFTER &&
       dropNode.next?.id === this.dragging.id
     ) {
-      return false;
+      return true;
     }
     if (
       dropType == DropType.DROP_BEFORE &&
       dropNode.previous?.id === this.dragging.id
     ) {
-      return false;
+      return true;
     }
+    return false;
+  }
+
+  protected allowDrop(
+    dropNode: NgcxTreeNodeWrapper<T>,
+    dropType: DropType
+  ): DropControl {
+    const hideDrop = this.hideDrop(dropNode, dropType);
 
     const intoNode =
       dropType == DropType.DROP_INTO ? dropNode : dropNode.parent;
-    if (this.config?.allowDrop) {
-      return this.config.allowDrop(this.dragging, intoNode);
+
+    let preventDropReason;
+    let allowDrop = true;
+    if (this.config?.preventDropReason && this.dragging) {
+      preventDropReason = this.config.preventDropReason(
+        this.dragging,
+        intoNode
+      );
     }
-    return true;
+    if (this.config?.allowDrop && this.dragging) {
+      allowDrop = this.config.allowDrop(this.dragging, intoNode);
+    }
+
+    return new DropControl(
+      hideDrop,
+      !allowDrop || !!preventDropReason,
+      preventDropReason
+    );
   }
 
   // prevent drop directly after a node on same level, that is expanded
@@ -258,7 +280,13 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
   }
 
   protected handleDragRelease(event: CdkDragRelease<NgcxTreeNodeWrapper<T>>) {
+    this.handleDragReleaseInternal(event);
     this.dragging = undefined;
+  }
+
+  private handleDragReleaseInternal(
+    event: CdkDragRelease<NgcxTreeNodeWrapper<T>>
+  ) {
     const movedNode = event.source.data;
     const target = <HTMLDivElement>event.event.target;
     const dropZoneId = target.id ?? target.parentElement?.id;
@@ -271,6 +299,11 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
     const toNode = this.treeControl.findNodeById(dropZoneInfo.nodeId);
     if (!toNode) {
       console.error(`node with id '${dropZoneInfo.nodeId}' could not be found`);
+      return;
+    }
+
+    const dropControl = this.allowDrop(toNode, dropZoneInfo.dropType);
+    if (dropControl.hideDrop || dropControl.preventDrop) {
       return;
     }
 
@@ -447,4 +480,12 @@ class DropZoneInfo {
     this.nodeId = id.substring(0, pos);
     this.dropType = <DropType>id.substring(pos + 1);
   }
+}
+
+class DropControl {
+  constructor(
+    public hideDrop: boolean,
+    public preventDrop: boolean,
+    public preventDropReason: string = ''
+  ) {}
 }

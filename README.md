@@ -50,10 +50,12 @@ Missing features? Let me know :)
     - [findNodeById](#findnodebyid)
 - [Styling](#styling)
   - [Include Styles](#include-styles)
+  - [CSS Variables](#css-variables)
   - [Common styling](#common-styling)
     - [Dotted tree lines](#dotted-tree-lines)
     - [Selection highlighting](#selection-highlighting)
     - [Icon color](#icon-color)
+    - [Prevent drop reason tooltip](#prevent-drop-reason-tooltip)
   - [Font Awesome](#font-awesome)
   - [Selection](#selection)
 - [Simple Sample](#simple-sample)
@@ -128,8 +130,15 @@ settings.
   `(node: NgcxTreeNodeWrapper<T>) => boolean` - all nodes are draggable by
   default<br><br>
 - `allowDrop` method that decides if node can be dropped into another node
-  `(node: NgcxTreeNodeWrapper<T>, intoNode?: NgcxTreeNodeWrapper<T>) => boolean ` -
-  every node may be draggable everywhere by default<br><br>
+  `(node: NgcxTreeNodeWrapper<T>, intoNode?: NgcxTreeNodeWrapper<T>) => boolean` -
+  every node may be draggable everywhere by default.<br><br>
+- `preventDropReason` method that decides if node can be dropped into another
+  node
+  `(node: NgcxTreeNodeWrapper<T>, intoNode?: NgcxTreeNodeWrapper<T>) => string` -
+  every node may be draggable everywhere by default. If a non empty string is
+  returned, then the node cannot be dropped and the string will be displayed.
+  One of the methods `allowDrop` or `preventDropReason` is sufficient to prevent
+  the node to be dropped. <br><br>
 - `allowSelection` method that decides if node can be selected
   `(node: NgcxTreeNodeWrapper<T>) => boolean ` - nodes are not selectable by
   default<br><br>
@@ -250,14 +259,28 @@ styles.scss and styles.css contains all the parts described below in one file:
 @import 'node_modules/@cluetec/ngcx-tree/styles/styles';
 ```
 
+## CSS Variables
+
+Css Variables may be defined to customize the Look and feel like this:
+
+```scss
+  --ngcx-tree-color-no-drop: #ff0000;
+```
+
+
+| Variable name           | Description                                                                                                                                                                 |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ngcx-tree-color-no-drop | Color which is shown at the drop box dashed border or line to indicate that drop is not possible here. You may set to transparent if you don't want the border in this case |
+
+
 ## Common styling
 
-you should set the width of cdk-drop-list to 100%, otherwise, the node content
+you should set the width of cdk-drop-list to auto, otherwise, the node content
 may be on wrong place:
 
 ```css
 .ngcx-tree .cdk-drop-list {
-  width: 100%;
+  width: auto;
 }
 ```
 
@@ -289,6 +312,14 @@ Import or copy the scss to set the color of the node icon:
 
 ```scss
 @import 'node_modules/@cluetec/ngcx-tree/styles/ngcx-icon-color';
+```
+
+### Prevent drop reason tooltip
+
+Import or copy the scss to style the tooltip, shown when `config.preventDropReason` is used:
+
+```scss
+@import 'node_modules/@cluetec/ngcx-tree/styles/ngcx-tooltip';
 ```
 
 ## Font Awesome

@@ -53,6 +53,7 @@ export const CustomComponent: Story = {
     },
   },
 };
+
 export const MaxThreeLayersAndMoveLeafsOnly: Story = {
   args: {
     nodes: TREE_DATA,
@@ -65,6 +66,22 @@ export const MaxThreeLayersAndMoveLeafsOnly: Story = {
       },
       allowDrag: (node: NgcxTreeNodeWrapper<NgcxTreeNode>): boolean => {
         return !node.children || node.children.length === 0;
+      },
+    },
+  },
+};
+
+export const MaxTwoLayersWithReason: Story = {
+  args: {
+    nodes: TREE_DATA,
+    config: {
+      preventDropReason: (
+        _node: NgcxTreeNodeWrapper<NgcxTreeNode>,
+        intoNode?: NgcxTreeNodeWrapper<NgcxTreeNode>
+      ): string | undefined => {
+        return !intoNode || intoNode.depth + 1 < 2
+          ? undefined
+          : 'Only two layers are allowed';
       },
     },
   },
