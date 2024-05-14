@@ -50,6 +50,7 @@ Missing features? Let me know :)
     - [findNodeById](#findnodebyid)
 - [Styling](#styling)
   - [Include Styles](#include-styles)
+  - [CSS Variables](#css-variables)
   - [Common styling](#common-styling)
     - [Dotted tree lines](#dotted-tree-lines)
     - [Selection highlighting](#selection-highlighting)
@@ -257,6 +258,20 @@ styles.scss and styles.css contains all the parts described below in one file:
 ```scss
 @import 'node_modules/@cluetec/ngcx-tree/styles/styles';
 ```
+
+## CSS Variables
+
+Css Variables may be defined to customize the Look and feel like this:
+
+```scss
+  --ngcx-tree-color-no-drop: #ff0000;
+```
+
+
+| Variable name           | Description                                                                                                                                                                 |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ngcx-tree-color-no-drop | Color which is shown at the drop box dashed border or line to indicate that drop is not possible here. You may set to transparent if you don't want the border in this case |
+
 
 ## Common styling
 

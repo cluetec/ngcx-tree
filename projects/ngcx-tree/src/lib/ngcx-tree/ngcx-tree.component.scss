@@ -73,9 +73,9 @@
 
   &.no-drop {
     cursor: no-drop;
-    border-color: rgba(255, 0, 0, 0.3) !important;
+    border-color: var(--ngcx-tree-color-no-drop, transparent) !important;
     .drop-insert-line {
-      border-color: rgba(255, 0, 0, 0.3) !important;
+      border-color: var(--ngcx-tree-color-no-drop, transparent) !important;
     }
   }
 
