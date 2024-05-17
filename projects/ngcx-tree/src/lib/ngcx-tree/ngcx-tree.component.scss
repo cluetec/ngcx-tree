@@ -109,6 +109,7 @@
     // background-color: rgba(255, 255, 0, 0.5);
   }
 
+  &.cdk-drop-list-receiving:hover .tooltip,
   &.cdk-drop-list-dragging .tooltip {
     display: block;
   }
