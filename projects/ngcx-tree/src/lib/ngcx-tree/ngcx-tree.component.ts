@@ -77,15 +77,9 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['nodes']) {
-      if (this.treeControl) {
-        // initialized already
-        this.updateTree();
-      }
-      if (this.selectedNode) {
-        const selectedNodeId = this.selectedNode.id;
-        setTimeout(() => this.treeControl.selectNodeById(selectedNodeId));
-      }
+    if (changes['nodes'] && this.treeControl) {
+      // initialized already and nodes changes
+      this.updateTree();
     }
   }
 
