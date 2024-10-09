@@ -16,9 +16,7 @@ import {
   HostListener,
   Input,
   OnChanges,
-  OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { NgcxTreeDataSource } from './ngcx-tree-data.source';
 import {
@@ -37,9 +35,7 @@ import { isParentOf } from './ngcx-tree-utils';
   standalone: true,
   imports: [CdkTreeModule, DragDropModule, NgcxTreeNodeComponent, NgIf],
 })
-export class NgcxTreeComponent<T extends NgcxTreeNode>
-  implements OnChanges, OnInit
-{
+export class NgcxTreeComponent<T extends NgcxTreeNode> implements OnChanges {
   @Input() nodes?: NgcxTreeNode[];
   @Input() config?: NgcxTreeConfig<T>;
 
@@ -72,21 +68,8 @@ export class NgcxTreeComponent<T extends NgcxTreeNode>
 
   private canceledByEsc?: boolean;
 
-  ngOnInit(): void {
+  ngOnChanges() {
     this.updateTree();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['nodes']) {
-      if (this.treeControl) {
-        // initialized already
-        this.updateTree();
-      }
-      if (this.selectedNode) {
-        const selectedNodeId = this.selectedNode.id;
-        setTimeout(() => this.treeControl.selectNodeById(selectedNodeId));
-      }
-    }
   }
 
   private updateTree() {
