@@ -272,7 +272,8 @@ export class NgcxTreeComponent<T extends NgcxTreeNode> implements OnChanges {
   ) {
     const movedNode = event.source.data;
     const target = <HTMLDivElement>event.event.target;
-    const dropZoneId = target.id ?? target.parentElement?.id;
+
+    const dropZoneId = target.id ? target.id : target.parentElement?.id;
     if (!dropZoneId) {
       // no valid drop zone
       return;
