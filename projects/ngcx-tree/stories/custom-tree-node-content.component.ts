@@ -6,10 +6,9 @@ import {
 } from '../src/lib/ngcx-tree/ngcx-tree-models';
 
 @Component({
-  selector: 'ngcx-sample-tree-node-content',
-  templateUrl: 'custom-tree-node-content.component.html',
-  standalone: true,
-  imports: [NgIf],
+    selector: 'ngcx-sample-tree-node-content',
+    templateUrl: 'custom-tree-node-content.component.html',
+    imports: [NgIf]
 })
 export class NgcxSampleTreeNodeContentComponent
   implements NgcxCustomComponent<any>

@@ -15,11 +15,10 @@ import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'ngcx-tree-node',
-  templateUrl: './ngcx-tree-node.component.html',
-  styleUrls: ['./ngcx-tree-node.component.scss'],
-  standalone: true,
-  imports: [CdkTreeModule, NgTemplateOutlet, NgIf],
+    selector: 'ngcx-tree-node',
+    templateUrl: './ngcx-tree-node.component.html',
+    styleUrls: ['./ngcx-tree-node.component.scss'],
+    imports: [CdkTreeModule, NgTemplateOutlet, NgIf]
 })
 export class NgcxTreeNodeComponent implements OnInit, OnDestroy {
   @Input() nodeWrapper!: NgcxTreeNodeWrapper<any>;

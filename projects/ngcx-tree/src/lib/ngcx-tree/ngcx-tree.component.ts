@@ -29,11 +29,10 @@ import { NgcxTreeNodeComponent } from './ngcx-tree-node/ngcx-tree-node.component
 import { isParentOf } from './ngcx-tree-utils';
 
 @Component({
-  selector: 'ngcx-tree',
-  templateUrl: 'ngcx-tree.component.html',
-  styleUrls: ['ngcx-tree.component.scss'],
-  standalone: true,
-  imports: [CdkTreeModule, DragDropModule, NgcxTreeNodeComponent, NgIf],
+    selector: 'ngcx-tree',
+    templateUrl: 'ngcx-tree.component.html',
+    styleUrls: ['ngcx-tree.component.scss'],
+    imports: [CdkTreeModule, DragDropModule, NgcxTreeNodeComponent, NgIf]
 })
 export class NgcxTreeComponent<T extends NgcxTreeNode> implements OnChanges {
   @Input() nodes?: NgcxTreeNode[];
