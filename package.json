@@ -1,6 +1,6 @@
 {
   "name": "ngcx-tree",
-  "version": "19.2.0",
+  "version": "19.2.1",
   "scripts": {
     "ng": "ng",
     "build:css": "sass projects/ngcx-tree/styles/styles.scss dist/ngcx-tree/styles/styles.css",
@@ -57,7 +57,7 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "storybook": "^8.4.7",
+    "storybook": "^8.6.4",
     "tslib": "^2.6.2",
     "typescript": "~5.8.2"
   },
