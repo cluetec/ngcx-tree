@@ -1,5 +1,6 @@
-@import 'ngcx-common';
-@import 'ngcx-doted-tree-line';
-@import 'ngcx-selection';
-@import 'ngcx-icon-color';
-@import 'ngcx-tooltip';
+@use 'sass:meta';
+@include meta.load-css('ngcx-common');
+@include meta.load-css('ngcx-doted-tree-line');
+@include meta.load-css('ngcx-selection');
+@include meta.load-css('ngcx-icon-color');
+@include meta.load-css('ngcx-tooltip');
