@@ -1,6 +1,6 @@
 {
   "name": "ngcx-tree",
-  "version": "19.0.0",
+  "version": "19.2.0",
   "scripts": {
     "ng": "ng",
     "build:css": "sass projects/ngcx-tree/styles/styles.scss dist/ngcx-tree/styles/styles.css",
@@ -21,12 +21,12 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/cdk": "^18.2.14",
+    "@angular/cdk": "^19.2.0",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
     "@angular/forms": "^19.2.0",
-    "@angular/material": "^18.2.14",
+    "@angular/material": "^19.2.0",
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "rxjs": "~7.8.1",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.0",
-    "@angular-eslint/template-parser": "^18.4.3",
+    "@angular-eslint/template-parser": "^19.2.0",
     "@angular/cli": "^19.2.0",
     "@angular/compiler-cli": "^19.2.0",
     "@chromatic-com/storybook": "^3.2.5",
@@ -42,7 +42,7 @@
     "@storybook/addon-actions": "^8.6.3",
     "@storybook/addon-essentials": "^8.6.3",
     "@storybook/angular": "^8.6.3",
-    "@storybook/blocks": "^8.4.7",
+    "@storybook/blocks": "^8.6.3",
     "@storybook/testing-library": "^0.2.2",
     "@types/jest": "^29.5.11",
     "cpx2": "^7.0.1",
