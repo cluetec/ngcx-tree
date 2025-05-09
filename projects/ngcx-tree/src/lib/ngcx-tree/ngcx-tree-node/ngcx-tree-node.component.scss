@@ -17,6 +17,7 @@
     width: 30px;
     height: 30px;
     margin-right: 5px;
+    flex-shrink: 0;
 
     > .tree-node-expand {
       color: #2587be;

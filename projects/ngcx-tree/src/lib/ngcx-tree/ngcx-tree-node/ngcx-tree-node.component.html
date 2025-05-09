@@ -13,7 +13,12 @@
       [attr.aria-label]="'Toggle ' + nodeWrapper.data.title"
       (click)="$event.preventDefault()">
       <div class="chevron" [class.rotate]="treeControl.isExpanded(nodeWrapper)">
-        <svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9">
+        <svg
+          id="a"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 9 9"
+          height="10px"
+          width="10px">
           <path
             d="m2.83.09l4.2,4.2c.05.05.09.14.09.21s-.04.15-.09.21l-4.2,4.2c-.05.05-.14.09-.21.09s-.15-.04-.21-.09l-.45-.45c-.05-.05-.09-.13-.09-.21,0-.07.04-.15.09-.21l3.54-3.54L1.97.96c-.05-.05-.09-.14-.09-.21s.04-.15.09-.21l.45-.45c.05-.05.14-.09.21-.09s.15.04.21.09Z"
             style="fill: var(--icon-color, #333); stroke-width: 0px" />
@@ -39,7 +44,7 @@
         *ngTemplateOutlet="
           template;
           context: {
-            nodeWrapper: nodeWrapper
+            nodeWrapper: nodeWrapper,
           }
         "></ng-container>
     </ng-container>
