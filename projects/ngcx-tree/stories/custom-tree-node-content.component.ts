@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   NgcxCustomComponent,
@@ -8,7 +8,7 @@ import {
 @Component({
     selector: 'ngcx-sample-tree-node-content',
     templateUrl: 'custom-tree-node-content.component.html',
-    imports: [NgIf]
+    imports: []
 })
 export class NgcxSampleTreeNodeContentComponent
   implements NgcxCustomComponent<any>
