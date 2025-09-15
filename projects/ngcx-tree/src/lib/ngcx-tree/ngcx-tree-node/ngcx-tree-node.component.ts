@@ -11,14 +11,14 @@ import {
 } from '@angular/core';
 import { NgcxTreeConfig, NgcxTreeNodeWrapper } from '../ngcx-tree-models';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'ngcx-tree-node',
     templateUrl: './ngcx-tree-node.component.html',
     styleUrls: ['./ngcx-tree-node.component.scss'],
-    imports: [CdkTreeModule, NgTemplateOutlet, NgIf]
+    imports: [CdkTreeModule, NgTemplateOutlet]
 })
 export class NgcxTreeNodeComponent implements OnInit, OnDestroy {
   @Input() nodeWrapper!: NgcxTreeNodeWrapper<any>;

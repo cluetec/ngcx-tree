@@ -9,7 +9,7 @@ import {
   NestedTreeControl,
   NestedTreeControlOptions,
 } from '@angular/cdk/tree';
-import { NgIf } from '@angular/common';
+
 import {
   Component,
   EventEmitter,
@@ -34,7 +34,7 @@ import 'zone.js';
   selector: 'ngcx-tree',
   templateUrl: 'ngcx-tree.component.html',
   styleUrls: ['ngcx-tree.component.scss'],
-  imports: [CdkTreeModule, DragDropModule, NgcxTreeNodeComponent, NgIf],
+  imports: [CdkTreeModule, DragDropModule, NgcxTreeNodeComponent],
 })
 export class NgcxTreeComponent<T extends NgcxTreeNode> implements OnChanges {
   @Input() nodes?: NgcxTreeNode[];
