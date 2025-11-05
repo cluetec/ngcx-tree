@@ -35,7 +35,7 @@
     "@angular-eslint/template-parser": "^20.4.0",
     "@angular/cli": "^20.3.5",
     "@angular/compiler-cli": "^20.3.4",
-    "@chromatic-com/storybook": "^4.1.1",
+    "@chromatic-com/storybook": "^4.1.2",
     "@fortawesome/fontawesome-free": "^7.0.1",
     "@storybook/angular": "^9.1.10",
     "@storybook/testing-library": "^0.2.2",
