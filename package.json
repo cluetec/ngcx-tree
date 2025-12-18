@@ -52,7 +52,7 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.1.1",
-    "storybook": "^9.1.6",
+    "storybook": "^9.1.17",
     "tslib": "^2.6.2",
     "typescript": "~5.9.2",
     "@storybook/addon-docs": "^9.1.10"
