@@ -21,6 +21,6 @@ jobs:
       - run: npm run build-prod:lib
       - run: npm run prepare-publish:lib
       - run: npm publish --provenance
-        working-directory: pdist/ngcx-tree
+        working-directory: dist/ngcx-tree
         env:
           NPM_CONFIG_PROVENANCE: true
