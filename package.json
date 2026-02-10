@@ -1,5 +1,5 @@
 {
-  "name": "ngcx-tree",
+  "name": "@cluetec/ngcx-tree",
   "version": "20.1.0",
   "scripts": {
     "ng": "ng",
