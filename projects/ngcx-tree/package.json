@@ -3,7 +3,14 @@
   "version": "20.1.0",
   "description": "An angular tree component with drag and drop.",
   "author": "Michael Niedermaier <mn@cluetec.de>",
-  "repository": "https://github.com/cluetec/ngcx-tree",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cluetec/ngcx-tree"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "license": "MIT",
   "private": false,
   "bugs": {
@@ -17,11 +24,13 @@
   "sideEffects": false,
   "keywords": [
     "angular",
+    "cdk",
     "component",
     "tree",
     "dnd",
     "d&d",
     "drag&drop",
-    "drag and drop"
+    "drag",
+    "drop"
   ]
 }
