@@ -15,6 +15,4 @@ jobs:
       - run: npm ci
       - run: npm run build-prod:lib
       - run: npm run prepare-publish:lib
-      - run: npm publish --access public ./dist/ngcx-tree/
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish ./dist/ngcx-tree/
