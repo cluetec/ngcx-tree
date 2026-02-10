@@ -1,6 +1,6 @@
 {
   "name": "ngcx-tree",
-  "version": "20.0.0",
+  "version": "20.1.0",
   "scripts": {
     "ng": "ng",
     "build:css": "sass projects/ngcx-tree/styles/styles.scss dist/ngcx-tree/styles/styles.css",
