@@ -1,6 +1,6 @@
 {
   "name": "@cluetec/ngcx-tree",
-  "version": "20.1.0",
+  "version": "21.0.0",
   "description": "An angular tree component with drag and drop.",
   "author": "Michael Niedermaier <mn@cluetec.de>",
   "repository": {
@@ -17,9 +17,9 @@
     "url": "https://github.com/cluetec/ngcx-tree/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^20.0.0",
-    "@angular/core": "^20.0.0",
-    "@angular/cdk": "^20.0.0"
+    "@angular/common": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/cdk": "^21.0.0"
   },
   "sideEffects": false,
   "keywords": [

@@ -13,9 +13,7 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "ngcx-tree": [
-        "dist/ngcx-tree"
-      ]
+      "ngcx-tree": ["dist/ngcx-tree"]
     },
     "declaration": false,
     "experimentalDecorators": true,
@@ -25,10 +23,8 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "skipLibCheck": true,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"],
+    "isolatedModules": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
