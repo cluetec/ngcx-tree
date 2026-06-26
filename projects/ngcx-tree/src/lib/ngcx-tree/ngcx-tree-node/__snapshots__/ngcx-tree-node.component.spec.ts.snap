@@ -7,7 +7,7 @@ exports[`NgcxTreeNodeComponent should create 1`] = `
   isSelected="false"
   ngUnsubscribe={[Function Subject]}
   nodeWrapper={[Function Object]}
-  vcRef={[Function ViewContainerRef2]}
+  vcRef={[Function R3ViewContainerRef]}
 >
   <div
     class="tree-node-content-container first last"
