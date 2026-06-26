@@ -41,7 +41,7 @@
     "@storybook/angular": "^10.4.3",
     "@types/jest": "^30.0.0",
     "cpx2": "^8.0.0",
-    "eslint": "^9.35.0",
+    "eslint": "^10.5.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-storybook": "^10.4.3",
     "jest": "^30.4.2",
