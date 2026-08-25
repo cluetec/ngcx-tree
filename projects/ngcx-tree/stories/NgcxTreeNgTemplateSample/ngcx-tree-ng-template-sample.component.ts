@@ -13,13 +13,13 @@ import {
   NgcxTreeNode,
   NgcxTreeNodeMovedEvent,
   NgcxTreeNodeWrapper,
-} from 'projects/ngcx-tree/src/public-api';
+} from '../../src/public-api';
 
 @Component({
-    selector: 'app-ngcx-tree-ng-template-sample',
-    templateUrl: './ngcx-tree-ng-template-sample.component.html',
-    styleUrls: ['./ngcx-tree-ng-template-sample.component.scss'],
-    imports: [NgcxTreeComponent]
+  selector: 'app-ngcx-tree-ng-template-sample',
+  templateUrl: './ngcx-tree-ng-template-sample.component.html',
+  styleUrls: ['./ngcx-tree-ng-template-sample.component.scss'],
+  imports: [NgcxTreeComponent],
 })
 export class NgcxTreeNgTemplateSampleComponent implements OnInit {
   @Input() nodes?: NgcxTreeNode[];
