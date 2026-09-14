@@ -28,7 +28,7 @@
     "@angular/platform-browser": "^22.1.5",
     "@angular/platform-browser-dynamic": "^22.1.5",
     "rxjs": "~7.8.2",
-    "zone.js": "~0.16.2"
+    "zone.js": "~0.16.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^22.1.7",
