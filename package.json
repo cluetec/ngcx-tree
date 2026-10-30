@@ -51,7 +51,7 @@
     "eslint": "^10.12.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-storybook": "^10.6.2",
-    "angular-eslint": "^22.5.0",
+    "angular-eslint": "^22.6.0",
     "jest": "^30.5.2",
     "jest-environment-jsdom": "^30.5.2",
     "jest-preset-angular": "^17.0.3",
